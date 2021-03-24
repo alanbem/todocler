@@ -1,0 +1,11 @@
+parameters:
+  streak.command_retry_max_attempts: 100
+  streak.redis.host: '%env(resolve:REDIS_SNAPSHOTS_HOSTNAME)%'
+  streak.redis.port: '%env(resolve:REDIS_SNAPSHOTS_PORT)%'
+  streak.redis.database: '%env(resolve:REDIS_SNAPSHOTS_DATABASE)%'
+
+services:
+  streak.dbal.postgres.event_store.connection: '@doctrine.dbal.event_store_connection'
+
+  streak.snapshotter_serializer: '@streak.igbinary.serializer'
+  streak.snapshotter: '@streak.snapshottable_aggregates.snapshotter'

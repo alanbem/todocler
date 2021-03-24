@@ -1,0 +1,70 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.4",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-redis": "*",
+        "composer/package-versions-deprecated": "1.11.99.1",
+        "doctrine/doctrine-bundle": "^2.3",
+        "doctrine/orm": "^2.8",
+        "streak/streak-bundle": "^1.0@dev",
+        "symfony/console": "5.2.*",
+        "symfony/dotenv": "5.2.*",
+        "symfony/flex": "^1.3.1",
+        "symfony/framework-bundle": "5.2.*",
+        "symfony/proxy-manager-bridge": "5.2.*",
+        "symfony/yaml": "5.2.*"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "5.2.*"
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "phpunit/phpunit": "^9.5"
+    }
+}

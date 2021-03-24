@@ -1,0 +1,8 @@
+doctrine:
+  dbal:
+    connections:
+      event_store:
+        url: '%env(resolve:EVENT_STORE_DATABASE_URL)%'
+      projections:
+        url: '%env(resolve:PROJECTIONS_DATABASE_URL)%'
+  orm: ~
