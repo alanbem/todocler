@@ -1,5 +1,7 @@
 {
     "type": "project",
+    "name": "alanbem/todocler",
+    "description": "event sourced TODO application",
     "license": "proprietary",
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -8,7 +10,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-redis": "*",
-        "composer/package-versions-deprecated": "1.11.99.1",
+        "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/orm": "^2.8",
         "streak/streak-bundle": "^1.0@dev",
