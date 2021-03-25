@@ -1908,12 +1908,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/streakphp/streak.git",
-                "reference": "959e6473c7ef115e2ceb82b7ea64a19d723d74da"
+                "reference": "fb8b76fa5adaa6c129f766dd9c6fe7ad931c812a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/streakphp/streak/zipball/959e6473c7ef115e2ceb82b7ea64a19d723d74da",
-                "reference": "959e6473c7ef115e2ceb82b7ea64a19d723d74da",
+                "url": "https://api.github.com/repos/streakphp/streak/zipball/fb8b76fa5adaa6c129f766dd9c6fe7ad931c812a",
+                "reference": "fb8b76fa5adaa6c129f766dd9c6fe7ad931c812a",
                 "shasum": ""
             },
             "require": {
@@ -1968,7 +1968,7 @@
                 "issues": "https://github.com/streakphp/streak/issues",
                 "source": "https://github.com/streakphp/streak/tree/master"
             },
-            "time": "2021-03-21T22:49:02+00:00"
+            "time": "2021-03-25T21:26:15+00:00"
         },
         {
             "name": "streak/streak-bundle",
