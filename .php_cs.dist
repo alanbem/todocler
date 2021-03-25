@@ -45,7 +45,7 @@ $config = PhpCsFixer\Config::create()
             'location' => 'after_open',
             'separate' => 'both',
             'header' => <<<HEADER
-This file is part of the TODOcler package.
+This file is part of the todocler package.
 
 (C) Alan Gabriel Bem <alan.bem@gmail.com>
 

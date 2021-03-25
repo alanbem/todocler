@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e56432a6994550e7a110f23cf88bba9",
+    "content-hash": "f0500291a406ad848f6b26747dfbaaaf",
     "packages": [
         {
             "name": "brick/math",
@@ -1908,12 +1908,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/streakphp/streak.git",
-                "reference": "959e6473c7ef115e2ceb82b7ea64a19d723d74da"
+                "reference": "fb8b76fa5adaa6c129f766dd9c6fe7ad931c812a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/streakphp/streak/zipball/959e6473c7ef115e2ceb82b7ea64a19d723d74da",
-                "reference": "959e6473c7ef115e2ceb82b7ea64a19d723d74da",
+                "url": "https://api.github.com/repos/streakphp/streak/zipball/fb8b76fa5adaa6c129f766dd9c6fe7ad931c812a",
+                "reference": "fb8b76fa5adaa6c129f766dd9c6fe7ad931c812a",
                 "shasum": ""
             },
             "require": {
@@ -1968,7 +1968,7 @@
                 "issues": "https://github.com/streakphp/streak/issues",
                 "source": "https://github.com/streakphp/streak/tree/master"
             },
-            "time": "2021-03-21T22:49:02+00:00"
+            "time": "2021-03-25T21:26:15+00:00"
         },
         {
             "name": "streak/streak-bundle",
@@ -5130,16 +5130,16 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "1.4.5",
+            "version": "1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "f28d44c286812c714741478d968104c5e604a1d4"
+                "reference": "f27e06cd9675801df441b3656569b328e04aa37c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/f28d44c286812c714741478d968104c5e604a1d4",
-                "reference": "f28d44c286812c714741478d968104c5e604a1d4",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/f27e06cd9675801df441b3656569b328e04aa37c",
+                "reference": "f27e06cd9675801df441b3656569b328e04aa37c",
                 "shasum": ""
             },
             "require": {
@@ -5147,7 +5147,8 @@
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || 6.5 - 8"
+                "phpstan/phpstan": "^0.12.55",
+                "symfony/phpunit-bridge": "^4.2 || ^5"
             },
             "type": "library",
             "autoload": {
@@ -5173,7 +5174,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/xdebug-handler/issues",
-                "source": "https://github.com/composer/xdebug-handler/tree/1.4.5"
+                "source": "https://github.com/composer/xdebug-handler/tree/1.4.6"
             },
             "funding": [
                 {
@@ -5189,7 +5190,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-13T08:04:11+00:00"
+            "time": "2021-03-25T17:01:18+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
