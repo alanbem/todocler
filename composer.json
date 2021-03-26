@@ -31,12 +31,13 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
-        }
+            "Productivity\\": "src/Productivity"
+        },
+        "files": ["src/Kernel.php"]
     },
     "autoload-dev": {
         "psr-4": {
-            "": "tests/"
+            "Productivity\\": "tests/Productivity"
         }
     },
     "replace": {
