@@ -20,7 +20,7 @@ use Streak\Domain\Entity;
  */
 class Id implements Entity\Id
 {
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {

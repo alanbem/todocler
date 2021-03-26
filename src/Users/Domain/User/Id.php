@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Domain\Checklist;
+namespace Users\Domain\User;
 
 use Streak\Domain\AggregateRoot;
 

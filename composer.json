@@ -19,7 +19,8 @@
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "5.2.*",
         "symfony/proxy-manager-bridge": "5.2.*",
-        "symfony/yaml": "5.2.*"
+        "symfony/yaml": "5.2.*",
+        "webmozart/assert": "^1.10"
     },
     "config": {
         "bin-dir": "bin",
@@ -31,13 +32,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Productivity\\": "src/Productivity"
+            "Productivity\\": "src/Productivity",
+            "Users\\": "src/Users"
         },
         "files": ["src/Kernel.php"]
     },
     "autoload-dev": {
         "psr-4": {
-            "Productivity\\": "tests/Productivity"
+            "Productivity\\": "tests/Productivity",
+            "Users\\": "tests/Users"
         }
     },
     "replace": {
