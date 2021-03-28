@@ -30,13 +30,15 @@ use Users\Domain\User;
  */
 class ProcessManagerTest extends TestCase
 {
+    private const DEFAULT_NAME = 'My first list';
+
     private CommandBus $bus;
     private Registration\ProcessManager $manager;
 
     protected function setUp() : void
     {
         $this->bus = $this->createMock(CommandBus::class);
-        $this->manager = new Registration\ProcessManager(new Registration\ProcessManager\Id(), $this->bus);
+        $this->manager = new Registration\ProcessManager(new Registration\ProcessManager\Id(), $this->bus, self::DEFAULT_NAME);
     }
 
     public function testCreatingListForFreshlyRegisteredUser()
@@ -47,7 +49,7 @@ class ProcessManagerTest extends TestCase
                 new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', new \DateTimeImmutable()),
             )
             ->then(
-                new CreateList('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b')
+                new CreateList('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b')
             )
             ->assert();
     }
@@ -68,6 +70,6 @@ class ProcessManagerTest extends TestCase
 
     public function createFactory(CommandBus $bus) : Event\Listener\Factory
     {
-        return new Registration\ProcessManager\Factory($bus);
+        return new Registration\ProcessManager\Factory($bus, self::DEFAULT_NAME);
     }
 }

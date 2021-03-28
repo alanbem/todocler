@@ -33,10 +33,17 @@ class ProcessManager implements Event\Listener, Event\Picker, Event\Filterer
         unmuteCommands as enableSideEffects;
     }
 
-    public function __construct(Registration\ProcessManager\Id $id, CommandBus $bus)
+    /**
+     * Name of the first list.
+     */
+    private string $name;
+
+    public function __construct(Registration\ProcessManager\Id $id, CommandBus $bus, string $name)
     {
         $this->identifyBy($id);
         $this->dispatchCommandsVia($bus);
+
+        $this->name = $name;
     }
 
     /**
@@ -44,7 +51,7 @@ class ProcessManager implements Event\Listener, Event\Picker, Event\Filterer
      */
     public function onUserRegistered(UserRegistered $event) : void
     {
-        $this->bus->dispatch(new CreateList($event->userId(), $event->userId()));
+        $this->bus->dispatch(new CreateList($event->userId(), $this->name, $event->userId()));
     }
 
     public function pick(EventStore $store) : Event\Envelope

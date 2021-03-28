@@ -7,3 +7,4 @@ services:
   Productivity\Application\ProcessManager\Registration\ProcessManager\Factory:
     arguments:
       - '@Streak\Application\CommandBus'
+      - '%todocler.first_list.default_name%'

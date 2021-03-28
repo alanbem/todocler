@@ -13,22 +13,24 @@ declare(strict_types=1);
 
 namespace Productivity\Application\Command;
 
+use Productivity\Domain\Checklist;
 use Streak\Application\Command;
+use Streak\Domain\AggregateRoot;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class CreateList implements Command
+class RenameList implements Command\AggregateRootCommand
 {
     private string $listId;
     private string $name;
-    private string $creatorId;
+    private string $editorId;
 
-    public function __construct(string $listId, string $name, string $creatorId)
+    public function __construct(string $listId, string $name, string $editorId)
     {
         $this->listId = $listId;
         $this->name = $name;
-        $this->creatorId = $creatorId;
+        $this->editorId = $editorId;
     }
 
     public function listId() : string
@@ -41,8 +43,13 @@ class CreateList implements Command
         return $this->name;
     }
 
-    public function creatorId() : string
+    public function editorId() : string
     {
-        return $this->creatorId;
+        return $this->editorId;
+    }
+
+    public function aggregateRootId() : AggregateRoot\Id
+    {
+        return new Checklist\Id($this->listId);
     }
 }

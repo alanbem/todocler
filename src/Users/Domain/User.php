@@ -55,7 +55,8 @@ class User implements Event\Sourced\AggregateRoot, CommandHandler
      */
     public function handleRegisterUser(Commands\RegisterUser $command) : void
     {
-        Assert::email($command->email(), 'Invalid email given.');
+        Assert::email($command->email(), 'Email is missing.');
+        Assert::notEmpty($command->password(), 'Password is missing.');
 
         $salt = $this->saltshaker->generate();
         $hash = $this->encoder->encode($command->password(), $salt);

@@ -25,10 +25,12 @@ use Streak\Domain\Exception\InvalidIdGiven;
 class Factory implements Listener\Factory
 {
     private CommandBus $bus;
+    private string $name;
 
-    public function __construct(CommandBus $bus)
+    public function __construct(CommandBus $bus, string $name)
     {
         $this->bus = $bus;
+        $this->name = $name;
     }
 
     public function create(Event\Listener\Id $id) : Event\Listener
@@ -37,7 +39,7 @@ class Factory implements Listener\Factory
             throw new InvalidIdGiven($id);
         }
 
-        return new Registration\ProcessManager($id, $this->bus);
+        return new Registration\ProcessManager($id, $this->bus, $this->name);
     }
 
     public function createFor(Event\Envelope $event) : Event\Listener

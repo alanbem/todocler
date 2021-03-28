@@ -22,6 +22,7 @@ use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
 use Streak\Domain\Event;
+use Webmozart\Assert\Assert;
 
 /**
  * `List` is a reserved word so I've used `Checklist` instead.
@@ -37,6 +38,7 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
 
     private Clock $clock;
 
+    private string $name;
     private ?string $creatorId = null;
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -62,7 +64,22 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
      */
     public function handleCreateList(Commands\CreateList $command) : void
     {
-        $this->apply(new Events\ListCreated($this->listId()->toString(), $command->creatorId(), $this->clock->now()));
+        Assert::notEmpty($command->name(), 'Name is missing.');
+        Assert::notEmpty($command->creatorId(), 'Creator is missing.');
+
+        $this->apply(new Events\ListCreated($this->listId()->toString(), $command->name(), $command->creatorId(), $this->clock->now()));
+    }
+
+    public function handleRenameList(Commands\RenameList $command) : void
+    {
+        Assert::notEmpty($command->name(), 'Name is missing.');
+        Assert::notEmpty($command->editorId(), 'Editor is missing.');
+
+        if ($this->name === $command->name()) {
+            return; // nothing to change
+        }
+
+        $this->apply(new Events\ListRenamed($this->listId()->toString(), $command->name(), $command->editorId(), $this->clock->now()));
     }
 
     /**
@@ -79,6 +96,8 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
         if (null !== $this->findTask($taskId)) {
             throw new Exceptions\TaskAlreadyExists($this->listId(), $taskId);
         }
+
+        Assert::notEmpty($command->name(), 'Name is missing.');
 
         $this->apply(new Events\TaskCreated($this->listId()->toString(), $command->taskId(), $command->name(), $command->creatorId(), $this->clock->now()));
     }
@@ -122,8 +141,17 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
      */
     private function applyListCreated(Events\ListCreated $event) : void
     {
+        $this->name = $event->name();
         $this->creatorId = $event->creatorId();
         $this->createdAt = $event->createdAt();
+    }
+
+    /**
+     * @see Checklist::handleCreateList()
+     */
+    private function applyListRenamed(Events\ListRenamed $event) : void
+    {
+        $this->name = $event->name();
     }
 
     /**

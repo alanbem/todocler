@@ -11,5 +11,8 @@
         <field name="password" column="password"/>
         <field name="salt" column="salt"/>
         <field name="registeredAt" type="datetimetz_immutable" column="registered_at" precision="6" column-definition="TIMESTAMP(6) WITH TIME ZONE NOT NULL" />
+        <indexes>
+            <index columns="username" name="search_by_username"/>
+        </indexes>
     </entity>
 </doctrine-mapping>

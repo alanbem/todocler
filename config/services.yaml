@@ -1,4 +1,7 @@
+parameters:
+  todocler.first_list.default_name: 'My first list'
+
 imports:
-    - { resource: 'services/productivity/*.yaml' }
-    - { resource: 'services/users/*.yaml' }
-    - { resource: 'services/shared/*.yaml' }
+  - { resource: 'services/productivity/*.yaml' }
+  - { resource: 'services/users/*.yaml' }
+  - { resource: 'services/shared/*.yaml' }

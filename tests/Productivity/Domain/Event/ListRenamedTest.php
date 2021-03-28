@@ -18,18 +18,18 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @covers \Productivity\Domain\Event\TaskCompleted
+ * @covers \Productivity\Domain\Event\ListRenamed
  */
-class TaskCompletedTest extends TestCase
+class ListRenamedTest extends TestCase
 {
     public function testEvent() : void
     {
-        $event = new TaskCompleted('list-1', 'task-1', 'user-1', $now = new \DateTimeImmutable());
+        $event = new ListRenamed('list-1', 'name', 'editor-1', $now = new \DateTimeImmutable());
 
         $this->assertSame('list-1', $event->listId());
-        $this->assertSame('task-1', $event->taskId());
-        $this->assertSame('user-1', $event->userId());
-        $this->assertEquals($now, $event->completedAt());
-        $this->assertNotSame($now, $event->completedAt());
+        $this->assertSame('name', $event->name());
+        $this->assertSame('editor-1', $event->editorId());
+        $this->assertEquals($now, $event->modifiedAt());
+        $this->assertNotSame($now, $event->modifiedAt());
     }
 }

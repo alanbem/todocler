@@ -18,21 +18,21 @@ use Streak\Domain;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-final class ListCreated implements Domain\Event
+final class ListRenamed implements Domain\Event
 {
     const DATE_FORMAT = 'U.u'; // microsecond precision
 
     private string $listId;
     private string $name;
-    private string $creatorId;
-    private string $createdAt;
+    private string $editorId;
+    private string $modifiedAt;
 
-    public function __construct(string $listId, string $name, string $creatorId, \DateTimeImmutable $createdAt)
+    public function __construct(string $listId, string $name, string $creatorId, \DateTimeImmutable $modifiedAt)
     {
         $this->listId = $listId;
         $this->name = $name;
-        $this->creatorId = $creatorId;
-        $this->createdAt = $createdAt->format(self::DATE_FORMAT);
+        $this->editorId = $creatorId;
+        $this->modifiedAt = $modifiedAt->format(self::DATE_FORMAT);
     }
 
     public function listId() : string
@@ -45,13 +45,13 @@ final class ListCreated implements Domain\Event
         return $this->name;
     }
 
-    public function creatorId() : string
+    public function editorId() : string
     {
-        return $this->creatorId;
+        return $this->editorId;
     }
 
-    public function createdAt() : \DateTimeImmutable
+    public function modifiedAt() : \DateTimeImmutable
     {
-        return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->createdAt);
+        return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->modifiedAt);
     }
 }

@@ -25,14 +25,14 @@ final class TaskCompleted implements Domain\Event
     private string $listId;
     private string $taskId;
     private string $userId;
-    private string $createdAt;
+    private string $completedAt;
 
-    public function __construct(string $listId, string $taskId, string $userId, \DateTimeImmutable $createdAt)
+    public function __construct(string $listId, string $taskId, string $userId, \DateTimeImmutable $completedAt)
     {
         $this->listId = $listId;
         $this->taskId = $taskId;
         $this->userId = $userId;
-        $this->createdAt = $createdAt->format(self::DATE_FORMAT);
+        $this->completedAt = $completedAt->format(self::DATE_FORMAT);
     }
 
     public function listId() : string
@@ -50,8 +50,8 @@ final class TaskCompleted implements Domain\Event
         return $this->userId;
     }
 
-    public function createdAt() : \DateTimeImmutable
+    public function completedAt() : \DateTimeImmutable
     {
-        return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->createdAt);
+        return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->completedAt);
     }
 }

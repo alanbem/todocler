@@ -46,7 +46,7 @@ class CompleteTaskTest extends TestCase
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
-                new ListCreated('list-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new ListCreated('list-1', 'My first list.', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
                 new TaskCreated('list-1', 'task-1', 'My first task', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
@@ -65,7 +65,7 @@ class CompleteTaskTest extends TestCase
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
-                new ListCreated('list-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new ListCreated('list-1', 'My first list.', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
                 new TaskCreated('list-1', 'task-1', 'My first task', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
                 new TaskCompleted('list-1', 'task-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
@@ -83,7 +83,7 @@ class CompleteTaskTest extends TestCase
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
-                new ListCreated('list-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new ListCreated('list-1', 'My first list.', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
                 new CompleteTask('list-1', 'task-1', 'user-1'),
@@ -99,7 +99,7 @@ class CompleteTaskTest extends TestCase
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
-                new ListCreated('list-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new ListCreated('list-1', 'My first list.', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
                 new TaskCreated('list-1', 'task-1', 'My first task', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
