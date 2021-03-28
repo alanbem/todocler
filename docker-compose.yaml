@@ -13,6 +13,7 @@ services:
     depends_on:
       - postgres_event_store
       - postgres_registered_users_projections
+      - mysql_lists_projections
       - redis
 
   fpm:
@@ -25,6 +26,7 @@ services:
     depends_on:
       - postgres_event_store
       - postgres_registered_users_projections
+      - mysql_lists_projections
  
   nginx:
     image: nginx:latest
@@ -67,6 +69,18 @@ services:
     ports:
       - 5434:5432
 
+  mysql_lists_projections:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${LISTS_PROJECTIONS_MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${LISTS_PROJECTIONS_MYSQL_DATABASE}
+      MYSQL_USER: ${LISTS_PROJECTIONS_MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${LISTS_PROJECTIONS_MYSQL_PASSWORD}
+    volumes:
+      - ./docker/mysql/etc/mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+    ports:
+      - 3307:3306
+      
   adminer:
     image: adminer:latest
     environment:

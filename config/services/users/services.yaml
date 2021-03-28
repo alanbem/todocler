@@ -18,3 +18,9 @@ services:
       - 'salt'
 
   Users\Domain\SaltGenerator: '@Users\Infrastructure\SaltGenerator\SimpleSaltGenerator'
+
+  Users\Infrastructure\SynchronousFacade:
+    arguments:
+      - '@Streak\Application\QueryBus'
+
+  Users\Facade: '@Users\Infrastructure\SynchronousFacade'

@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace Users\Application\Projector\RegisteredUsers;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\ORM\Tools\ToolsException;
+use Shared\Application\Projector\Doctrine;
 use Streak\Application\Query;
-use Streak\Application\QueryHandler;
 use Streak\Domain\Event;
 use Streak\Domain\EventStore;
 use Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser;
@@ -29,27 +27,20 @@ use Users\Domain\Event as Events;
  *
  * @see \Users\Application\Projector\RegisteredUsers\ProjectorTest
  */
-class Projector implements Event\Listener, Event\Listener\Resettable, Event\Picker, Event\Filterer, QueryHandler
+class Projector extends Doctrine\EntityManagerProjector implements Event\Picker
 {
-    use Event\Listener\Identifying;
-    use Event\Listener\Listening;
-    use Event\Listener\Filtering;
     use Query\Handling;
-
-    private EntityManagerInterface $manager;
 
     public function __construct(Projector\Id $id, EntityManagerInterface $manager)
     {
-        $this->identifyBy($id);
-
-        $this->manager = $manager;
+        parent::__construct($id, $manager);
     }
 
     public function onUserRegistered(Events\UserRegistered $event) : void
     {
-        $user = $this->handleFindUser(new Queries\FindUser($event->email()));
+        $registered = $this->handleIsUserRegistered(new Queries\IsUserRegistered($event->email()));
 
-        if ($user) {
+        if ($registered) {
             return; // user already exists, we could write that uuid & email to some kind of reporting table with conflicts
         }
 
@@ -65,46 +56,13 @@ class Projector implements Event\Listener, Event\Listener\Resettable, Event\Pick
         return $repository->findOneBy(['username' => $query->email()]);
     }
 
-    public function reset() : void
+    public function handleIsUserRegistered(Queries\IsUserRegistered $query) : bool
     {
-        $this->manager->beginTransaction();
-
-        $tool = new SchemaTool($this->manager);
-        $meta = $this->manager->getMetadataFactory()->getAllMetadata();
-
-        try {
-            $tool->dropSchema($meta);
-            $tool->createSchema($meta);
-            // @codeCoverageIgnoreStart
-        } catch (ToolsException $e) {
-            $this->manager->rollback();
-
-            throw $e;
-        }
-        // @codeCoverageIgnoreStop
-
-        $this->manager->commit();
+        return null !== $this->handleFindUser(new Queries\FindUser($query->email()));
     }
 
     public function pick(EventStore $store) : Event\Envelope
     {
         return $store->stream()->first(); // start listening from the first event in event store
-    }
-
-    protected function preEvent(Event $event) : void
-    {
-        $this->manager->clear();
-        $this->manager->beginTransaction();
-    }
-
-    protected function postEvent(Event $event) : void
-    {
-        $this->manager->flush();
-        $this->manager->commit();
-    }
-
-    protected function onException(\Throwable $exception) : void
-    {
-        $this->manager->rollBack();
     }
 }

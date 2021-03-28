@@ -9,3 +9,5 @@ services:
 
   streak.snapshotter_serializer: '@streak.igbinary.serializer'
   streak.snapshotter: '@streak.snapshottable_aggregates.snapshotter'
+
+  Streak\Application\QueryBus: '@streak.query_bus'

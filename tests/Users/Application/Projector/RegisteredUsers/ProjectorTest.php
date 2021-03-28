@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Users\Application\Projector\RegisteredUsers;
 use Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser;
 use Users\Application\Query\FindUser;
+use Users\Application\Query\IsUserRegistered;
 use Users\Domain\Event\UserRegistered;
 use Users\Domain\User;
 
@@ -27,6 +28,8 @@ use Users\Domain\User;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @covers \Users\Application\Projector\RegisteredUsers\Projector
+ * @covers \Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser
+ * @covers \Shared\Application\Projector\Doctrine\EntityManagerProjector
  */
 class ProjectorTest extends KernelTestCase
 {
@@ -45,24 +48,28 @@ class ProjectorTest extends KernelTestCase
     public function testProjector()
     {
         // no user
-        $user = $this->projector->handleQuery(new FindUser('alan.bem@example'));
+        $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
 
-        $this->assertNull($user);
+        $this->assertFalse($exists);
 
         // freshly registered user
         $event = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now = new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $this->projector->on($event);
 
+        $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
         $user = $this->projector->handleQuery(new FindUser('alan.bem@example.com'));
 
+        $this->assertTrue($exists);
         $this->assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
 
         // check protection for 1 in a million chance of registration of same user/email
         $event = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'alan.bem@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $this->projector->on($event);
 
+        $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
         $user = $this->projector->handleQuery(new FindUser('alan.bem@example.com'));
 
+        $this->assertTrue($exists);
         $this->assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
     }
 
