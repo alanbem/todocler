@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: true
+    public: false
+
+  Users\Interfaces\Console\Symfony\RegisterUserCommand:
+    arguments:
+      - '@Streak\Application\CommandBus'
+    tags:
+      - console.command

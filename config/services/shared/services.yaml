@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: true
+    public: false
+
+  Shared\Infrastructure\Doctrine\DBAL\Platforms\PostgreSqlPlatform:

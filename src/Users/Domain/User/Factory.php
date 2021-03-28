@@ -16,7 +16,8 @@ namespace Users\Domain\User;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
 use Streak\Domain\Exception\InvalidAggregateIdGiven;
-use Users\Domain\Encoder;
+use Users\Domain\PasswordHasher;
+use Users\Domain\SaltGenerator;
 use Users\Domain\User;
 
 /**
@@ -24,12 +25,14 @@ use Users\Domain\User;
  */
 class Factory implements AggregateRoot\Factory
 {
-    private Encoder $encoder;
+    private PasswordHasher $encoder;
+    private SaltGenerator $saltshaker;
     private Clock $clock;
 
-    public function __construct(Encoder $encoder, Clock $clock)
+    public function __construct(PasswordHasher $encoder, SaltGenerator $saltshaker, Clock $clock)
     {
         $this->encoder = $encoder;
+        $this->saltshaker = $saltshaker;
         $this->clock = $clock;
     }
 
@@ -39,6 +42,6 @@ class Factory implements AggregateRoot\Factory
             throw new InvalidAggregateIdGiven($id);
         }
 
-        return new User($id, $this->encoder, $this->clock);
+        return new User($id, $this->encoder, $this->saltshaker, $this->clock);
     }
 }

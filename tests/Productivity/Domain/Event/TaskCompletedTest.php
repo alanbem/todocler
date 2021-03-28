@@ -29,6 +29,7 @@ class TaskCompletedTest extends TestCase
         $this->assertSame('list-1', $event->listId());
         $this->assertSame('task-1', $event->taskId());
         $this->assertSame('user-1', $event->userId());
-        $this->assertSame($now, $event->createdAt());
+        $this->assertEquals($now, $event->createdAt());
+        $this->assertNotSame($now, $event->createdAt());
     }
 }

@@ -18,19 +18,23 @@ use Streak\Domain;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class UserRegistered implements Domain\Event
+final class UserRegistered implements Domain\Event
 {
+    const DATE_FORMAT = 'U.u'; // microsecond precision
+
     private string $userId;
     private string $email;
     private string $passwordHash;
-    private \DateTimeImmutable $registeredAt;
+    private string $salt;
+    private string $registeredAt;
 
-    public function __construct(string $userId, string $email, string $passwordHash, \DateTimeImmutable $registeredAt)
+    public function __construct(string $userId, string $email, string $passwordHash, string $salt, \DateTimeImmutable $registeredAt)
     {
         $this->userId = $userId;
         $this->email = $email;
         $this->passwordHash = $passwordHash;
-        $this->registeredAt = $registeredAt;
+        $this->salt = $salt;
+        $this->registeredAt = $registeredAt->format(self::DATE_FORMAT);
     }
 
     public function userId() : string
@@ -48,8 +52,13 @@ class UserRegistered implements Domain\Event
         return $this->passwordHash;
     }
 
+    public function salt() : string
+    {
+        return $this->salt;
+    }
+
     public function registeredAt() : \DateTimeImmutable
     {
-        return $this->registeredAt;
+        return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->registeredAt);
     }
 }

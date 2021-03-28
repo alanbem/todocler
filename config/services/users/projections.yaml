@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: true
+    public: false
+
+  Users\Application\Projector\RegisteredUsers\Projector\Factory:
+    arguments:
+      - '@doctrine.orm.registered_users_projection_entity_manager'

@@ -28,6 +28,7 @@ class ListCreatedTest extends TestCase
 
         $this->assertSame('list-1', $event->listId());
         $this->assertSame('creator-1', $event->creatorId());
-        $this->assertSame($now, $event->createdAt());
+        $this->assertEquals($now, $event->createdAt());
+        $this->assertNotSame($now, $event->createdAt());
     }
 }

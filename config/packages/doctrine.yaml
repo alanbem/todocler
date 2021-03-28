@@ -3,6 +3,22 @@ doctrine:
     connections:
       event_store:
         url: '%env(resolve:EVENT_STORE_DATABASE_URL)%'
-      projections:
-        url: '%env(resolve:PROJECTIONS_DATABASE_URL)%'
-  orm: ~
+      registered_users_projection:
+        url: '%env(resolve:REGISTERED_USERS_PROJECTIONS_DATABASE_URL)%'
+        platform_service: Shared\Infrastructure\Doctrine\DBAL\Platforms\PostgreSqlPlatform
+  orm:
+    auto_generate_proxy_classes: '%kernel.debug%'
+    proxy_dir: '%kernel.cache_dir%/doctrine/orm/Proxies'
+    proxy_namespace: Proxies
+    entity_managers:
+      event_store:
+        connection: event_store
+      registered_users_projection:
+        connection: registered_users_projection
+        mappings:
+          custom_mapping:
+            type: xml
+            prefix: Users\Application\Projector\RegisteredUsers\Doctrine\Entity
+            dir: "%kernel.project_dir%/src/Users/Application/Projector/RegisteredUsers/Doctrine/config"
+            alias: RegisteredUsers
+            is_bundle: false

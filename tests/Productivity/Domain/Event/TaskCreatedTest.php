@@ -30,6 +30,7 @@ class TaskCreatedTest extends TestCase
         $this->assertSame('task-1', $event->taskId());
         $this->assertSame('Task name', $event->name());
         $this->assertSame('creator-1', $event->creatorId());
-        $this->assertSame($now, $event->createdAt());
+        $this->assertEquals($now, $event->createdAt());
+        $this->assertNotSame($now, $event->createdAt());
     }
 }

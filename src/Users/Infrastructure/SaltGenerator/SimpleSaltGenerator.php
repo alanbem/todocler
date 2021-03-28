@@ -11,12 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Users\Domain;
+namespace Users\Infrastructure\SaltGenerator;
+
+use Users\Domain\SaltGenerator;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @codeCoverageIgnore
  */
-interface Encoder
+class SimpleSaltGenerator implements SaltGenerator
 {
-    public function encode(string $password) : string;
+    public function generate() : string
+    {
+        return uniqid((string) mt_rand(), true);
+    }
 }

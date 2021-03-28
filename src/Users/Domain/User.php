@@ -32,14 +32,16 @@ class User implements Event\Sourced\AggregateRoot, CommandHandler
     use Event\Sourcing;
     use Command\Handling;
 
-    private Encoder $encoder;
+    private PasswordHasher $encoder;
+    private SaltGenerator $saltshaker;
     private Clock $clock;
 
-    public function __construct(User\Id $id, Encoder $encoder, Clock $clock)
+    public function __construct(User\Id $id, PasswordHasher $encoder, SaltGenerator $saltshaker, Clock $clock)
     {
         $this->identifyBy($id);
 
         $this->encoder = $encoder;
+        $this->saltshaker = $saltshaker;
         $this->clock = $clock;
     }
 
@@ -55,9 +57,10 @@ class User implements Event\Sourced\AggregateRoot, CommandHandler
     {
         Assert::email($command->email(), 'Invalid email given.');
 
-        $hash = $this->encoder->encode($command->password());
+        $salt = $this->saltshaker->generate();
+        $hash = $this->encoder->encode($command->password(), $salt);
 
-        $this->apply(new Events\UserRegistered($this->userId()->toString(), $command->email(), $hash, $this->clock->now()));
+        $this->apply(new Events\UserRegistered($this->userId()->toString(), $command->email(), $hash, $salt, $this->clock->now()));
     }
 
     /**

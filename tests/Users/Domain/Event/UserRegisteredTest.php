@@ -24,11 +24,13 @@ class UserRegisteredTest extends TestCase
 {
     public function testEvent() : void
     {
-        $event = new UserRegistered('user-1', 'alan.bem@example.com', 'hash', $now = new \DateTimeImmutable());
+        $event = new UserRegistered('user-1', 'alan.bem@example.com', 'hash', 'salt', $now = new \DateTimeImmutable());
 
         $this->assertSame('user-1', $event->userId());
         $this->assertSame('alan.bem@example.com', $event->email());
         $this->assertSame('hash', $event->passwordHash());
-        $this->assertSame($now, $event->registeredAt());
+        $this->assertSame('salt', $event->salt());
+        $this->assertEquals($now, $event->registeredAt());
+        $this->assertNotSame($now, $event->registeredAt());
     }
 }
