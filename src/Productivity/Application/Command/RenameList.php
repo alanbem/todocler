@@ -19,6 +19,8 @@ use Streak\Domain\AggregateRoot;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Application\Command\RenameListTest
  */
 class RenameList implements Command\AggregateRootCommand
 {

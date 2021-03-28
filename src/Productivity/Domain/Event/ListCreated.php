@@ -17,6 +17,8 @@ use Streak\Domain;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Event\ListCreatedTest
  */
 final class ListCreated implements Domain\Event
 {

@@ -15,6 +15,8 @@ namespace Productivity\Domain\Exception;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Exception\UserNotPermittedTest
  */
 class UserNotPermitted extends \RuntimeException
 {

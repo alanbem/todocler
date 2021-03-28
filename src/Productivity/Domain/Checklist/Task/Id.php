@@ -17,6 +17,8 @@ use Streak\Domain\Entity;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Checklist\Task\IdTest
  */
 class Id implements Entity\Id
 {

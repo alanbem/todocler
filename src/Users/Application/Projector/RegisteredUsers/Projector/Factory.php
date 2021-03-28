@@ -20,6 +20,8 @@ use Users\Application\Projector\RegisteredUsers;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Application\Projector\RegisteredUsers\Projector\FactoryTest
  */
 class Factory implements Event\Listener\Factory
 {

@@ -26,6 +26,8 @@ use Users\Domain\Event as Events;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Application\Projector\RegisteredUsers\ProjectorTest
  */
 class Projector implements Event\Listener, Event\Listener\Resettable, Event\Picker, Event\Filterer, QueryHandler
 {

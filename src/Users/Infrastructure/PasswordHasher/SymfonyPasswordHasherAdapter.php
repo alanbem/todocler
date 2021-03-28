@@ -19,6 +19,8 @@ use Users\Domain\PasswordHasher;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Infrastructure\PasswordHasher\SymfonyPasswordHasherAdapterTest
  */
 class SymfonyPasswordHasherAdapter implements PasswordHasher
 {

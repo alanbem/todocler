@@ -18,6 +18,8 @@ use Streak\Domain\Event\Listener;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Application\Projector\RegisteredUsers\Projector\IdTest
  */
 class Id implements Listener\Id
 {

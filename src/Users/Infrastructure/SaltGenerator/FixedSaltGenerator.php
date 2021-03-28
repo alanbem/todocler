@@ -18,6 +18,8 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Infrastructure\SaltGenerator\FixedSaltGeneratorTest
  */
 class FixedSaltGenerator implements SaltGenerator
 {

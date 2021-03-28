@@ -24,6 +24,8 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Interfaces\Console\Symfony\RegisterUserCommandTest
  */
 class RegisterUserCommand extends Command
 {

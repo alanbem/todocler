@@ -17,6 +17,8 @@ use Streak\Application\Command;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Application\Command\CreateListTest
  */
 class CreateList implements Command
 {

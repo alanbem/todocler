@@ -34,3 +34,13 @@ jobs:
         with:
           percentage: "95"
           filename: "var/phpunit/clover.xml"
+  run-rector:
+    name: rector
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
+      - name: Run rector
+        run: docker-compose run --rm --no-deps php bin/rector --no-progress-bar --dry-run --ansi

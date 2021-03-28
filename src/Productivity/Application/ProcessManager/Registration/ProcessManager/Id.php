@@ -18,6 +18,8 @@ use Streak\Domain\Event\Listener;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Application\ProcessManager\Registration\ProcessManager\IdTest
  */
 class Id implements Listener\Id
 {

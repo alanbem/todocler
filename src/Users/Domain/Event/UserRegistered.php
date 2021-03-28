@@ -17,6 +17,8 @@ use Streak\Domain;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Domain\Event\UserRegisteredTest
  */
 final class UserRegistered implements Domain\Event
 {

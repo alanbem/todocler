@@ -17,6 +17,8 @@ use Streak\Domain\AggregateRoot;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Checklist\IdTest
  */
 class Id implements AggregateRoot\Id
 {

@@ -19,6 +19,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Very naive implementation of user compatible with Symfony security layer - no salt & single predefined role.
  *
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUserTest
  */
 class RegisteredUser implements UserInterface
 {

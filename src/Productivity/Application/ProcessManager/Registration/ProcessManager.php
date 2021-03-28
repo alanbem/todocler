@@ -22,6 +22,8 @@ use Users\Domain\Event\UserRegistered;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Application\ProcessManager\Registration\ProcessManagerTest
  */
 class ProcessManager implements Event\Listener, Event\Picker, Event\Filterer
 {

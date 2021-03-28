@@ -19,6 +19,8 @@ use Users\Application\Projector\RegisteredUsers;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Application\Query\FindUserTest
  */
 class FindUser implements Query\EventListenerQuery
 {

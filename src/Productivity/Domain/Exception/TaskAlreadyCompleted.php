@@ -18,6 +18,8 @@ use Productivity\Domain\Checklist\Task;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Exception\TaskAlreadyCompletedTest
  */
 class TaskAlreadyCompleted extends \RuntimeException
 {

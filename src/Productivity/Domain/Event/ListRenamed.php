@@ -17,6 +17,8 @@ use Streak\Domain;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Event\ListRenamedTest
  */
 final class ListRenamed implements Domain\Event
 {
