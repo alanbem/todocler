@@ -36,27 +36,27 @@ class Task
         $this->createdAt = $createdAt;
     }
 
-    public function list() : Checklist
+    public function getList() : Checklist
     {
         return $this->list;
     }
 
-    public function id() : string
+    public function getId() : string
     {
         return $this->id;
     }
 
-    public function name() : string
+    public function getName() : string
     {
         return $this->name;
     }
 
-    public function userId() : string
+    public function getUserId() : string
     {
         return $this->userId;
     }
 
-    public function completed() : bool
+    public function isCompleted() : bool
     {
         return $this->completed;
     }
@@ -67,12 +67,12 @@ class Task
         $this->updatedAt = $when;
     }
 
-    public function updatedAt() : \DateTimeImmutable
+    public function getUpdatedAt() : \DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function createdAt() : \DateTimeImmutable
+    public function getCreatedAt() : \DateTimeImmutable
     {
         return $this->createdAt;
     }

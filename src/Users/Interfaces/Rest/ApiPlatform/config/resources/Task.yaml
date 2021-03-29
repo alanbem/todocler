@@ -1,0 +1,7 @@
+Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
+  collectionOperations:
+    get:
+      method: get
+  itemOperations:
+    get:
+      method: get

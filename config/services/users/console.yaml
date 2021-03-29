@@ -7,5 +7,6 @@ services:
   Users\Interfaces\Console\Symfony\RegisterUserCommand:
     arguments:
       - '@Streak\Application\CommandBus'
+      - '@Streak\Application\QueryBus'
     tags:
       - console.command

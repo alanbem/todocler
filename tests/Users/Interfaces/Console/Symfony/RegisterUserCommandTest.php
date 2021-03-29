@@ -15,8 +15,10 @@ namespace Users\Interfaces\Console\Symfony;
 
 use PHPUnit\Framework\TestCase;
 use Streak\Application\CommandBus;
+use Streak\Application\QueryBus;
 use Symfony\Component\Console\Tester\CommandTester;
-use Users\Application\Command\RegisterUser;
+use Users\Application\Command as Commands;
+use Users\Application\Query as Queries;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
@@ -25,21 +27,29 @@ use Users\Application\Command\RegisterUser;
  */
 class RegisterUserCommandTest extends TestCase
 {
-    private CommandBus $bus;
+    private CommandBus $commands;
+    private QueryBus $queries;
 
     protected function setUp() : void
     {
-        $this->bus = $this->createMock(CommandBus::class);
+        $this->commands = $this->createMock(CommandBus::class);
+        $this->queries = $this->createMock(QueryBus::class);
     }
 
     public function testCommand() : void
     {
-        $this->bus
+        $this->queries
             ->expects($this->once())
             ->method('dispatch')
-            ->with(new RegisterUser('21b80428-b0b7-4dab-8a07-d008fe32fe1f', 'alan.bem@example.com', 'password'));
+            ->with(new Queries\IsUserRegistered('alan.bem@example.com'))
+            ->willReturn(false);
 
-        $command = new RegisterUserCommand($this->bus);
+        $this->commands
+            ->expects($this->once())
+            ->method('dispatch')
+            ->with(new Commands\RegisterUser('21b80428-b0b7-4dab-8a07-d008fe32fe1f', 'alan.bem@example.com', 'password'));
+
+        $command = new RegisterUserCommand($this->commands, $this->queries);
 
         $tester = new CommandTester($command);
         $tester->execute([
@@ -49,5 +59,31 @@ class RegisterUserCommandTest extends TestCase
         ]);
 
         $this->assertSame('User "alan.bem@example.com" registered successfully.'.PHP_EOL, $tester->getDisplay());
+        $this->assertSame(0, $tester->getStatusCode());
+    }
+
+    public function testCommandIfUserAlreadyRegistered() : void
+    {
+        $this->queries
+            ->expects($this->once())
+            ->method('dispatch')
+            ->with(new Queries\IsUserRegistered('alan.bem@example.com'))
+            ->willReturn(true);
+
+        $this->commands
+            ->expects($this->never())
+            ->method('dispatch');
+
+        $command = new RegisterUserCommand($this->commands, $this->queries);
+
+        $tester = new CommandTester($command);
+        $tester->execute([
+            'id' => '21b80428-b0b7-4dab-8a07-d008fe32fe1f',
+            'email' => 'alan.bem@example.com',
+            'password' => 'password',
+        ]);
+
+        $this->assertSame('User with given email is already registered.'.PHP_EOL, $tester->getDisplay());
+        $this->assertSame(1, $tester->getStatusCode());
     }
 }

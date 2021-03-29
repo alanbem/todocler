@@ -1,0 +1,20 @@
+services:
+  productivity.filters.filter_by_authenticated_user:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Doctrine\Orm\Filter\AuthenticatedUserFilter
+    arguments:
+      - '@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface'
+      - '@Productivity\UsersFacade'
+    tags:
+      - api_platform.filter
+
+  productivity.filters.order_by_created_at:
+    class: ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter
+    arguments:
+      - '@Doctrine\Common\Persistence\ManagerRegistry'
+      - '@Symfony\Component\HttpFoundation\RequestStack'
+      - order
+      - '@Psr\Log\LoggerInterface'
+      - { createdAt: asc }
+      - '@api_platform.name_converter'
+    tags:
+      - api_platform.filter

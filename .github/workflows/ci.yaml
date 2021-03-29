@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run php-cs-fixer
-        run: docker-compose run --rm --no-deps php bin/php-cs-fixer fix --diff --dry-run --ansi
+        run: docker-compose run --rm --no-deps php bin/php-cs-fixer fix --diff --dry-run --ansi --config=.php_cs.dist
   run-phpunit:
     name: phpunit
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run phpunit
-        run: docker-compose run --rm php xphp bin/phpunit --color=always
+        run: docker-compose run --rm php xphp bin/phpunit --color=always --configuration=phpunit.xml.dist
       - name: Check coverage
         uses: johanvanhelden/gha-clover-test-coverage-check@v1
         with:

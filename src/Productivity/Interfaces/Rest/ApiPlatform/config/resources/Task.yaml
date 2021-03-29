@@ -1,0 +1,16 @@
+Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
+  attributes:
+    pagination_items_per_page: 25
+    filters:
+      - productivity.filters.filter_by_authenticated_user
+      - productivity.filters.order_by_created_at
+  collectionOperations:
+    get:
+      method: get
+      normalization_context:
+        groups: [ 'tasks.browse' ]
+  itemOperations:
+    get:
+      method: get
+      normalization_context:
+        groups: [ 'tasks.read' ]

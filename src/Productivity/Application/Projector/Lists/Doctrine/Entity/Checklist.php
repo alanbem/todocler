@@ -40,17 +40,17 @@ class Checklist
         $this->createdAt = $createdAt;
     }
 
-    public function id() : string
+    public function getId() : string
     {
         return $this->id;
     }
 
-    public function name() : string
+    public function getName() : string
     {
         return $this->name;
     }
 
-    public function userId() : string
+    public function getUserId() : string
     {
         return $this->userId;
     }
@@ -69,17 +69,17 @@ class Checklist
     /**
      * @return Task[]
      */
-    public function tasks() : iterable
+    public function getTasks() : iterable
     {
         return $this->tasks;
     }
 
-    public function updatedAt() : \DateTimeImmutable
+    public function getUpdatedAt() : \DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function createdAt() : \DateTimeImmutable
+    public function getCreatedAt() : \DateTimeImmutable
     {
         return $this->createdAt;
     }

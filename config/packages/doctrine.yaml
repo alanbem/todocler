@@ -1,5 +1,6 @@
 doctrine:
   dbal:
+    default_connection: lists_projection
     connections:
       event_store:
         url: '%env(resolve:EVENT_STORE_DATABASE_URL)%'

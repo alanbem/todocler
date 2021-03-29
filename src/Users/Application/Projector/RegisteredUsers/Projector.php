@@ -16,6 +16,7 @@ namespace Users\Application\Projector\RegisteredUsers;
 use Doctrine\ORM\EntityManagerInterface;
 use Shared\Application\Projector\Doctrine;
 use Streak\Application\Query;
+use Streak\Application\QueryHandler;
 use Streak\Domain\Event;
 use Streak\Domain\EventStore;
 use Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser;
@@ -27,7 +28,7 @@ use Users\Domain\Event as Events;
  *
  * @see \Users\Application\Projector\RegisteredUsers\ProjectorTest
  */
-class Projector extends Doctrine\EntityManagerProjector implements Event\Picker
+class Projector extends Doctrine\EntityManagerProjector implements Event\Picker, QueryHandler
 {
     use Query\Handling;
 

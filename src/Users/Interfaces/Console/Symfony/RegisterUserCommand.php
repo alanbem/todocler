@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Users\Interfaces\Console\Symfony;
 
 use Streak\Application\CommandBus;
+use Streak\Application\QueryBus;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Users\Application\Command\RegisterUser;
+use Users\Application\Command as Commands;
+use Users\Application\Query as Queries;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,13 +31,15 @@ use Webmozart\Assert\Assert;
  */
 class RegisterUserCommand extends Command
 {
-    private CommandBus $bus;
+    private CommandBus $commands;
+    private QueryBus $queries;
 
-    public function __construct(CommandBus $bus)
+    public function __construct(CommandBus $commands, QueryBus $queries)
     {
-        $this->bus = $bus;
+        $this->commands = $commands;
+        $this->queries = $queries;
 
-        parent::__construct('todocler:users:register-user');
+        parent::__construct('app:users:register-user');
     }
 
     protected function configure()
@@ -58,9 +62,17 @@ class RegisterUserCommand extends Command
         Assert::email($email, 'Invalid email given.');
         Assert::notEmpty($password, 'Invalid password given.');
 
-        $this->bus->dispatch(new RegisterUser($userId, $email, $password));
+        $registered = $this->queries->dispatch(new Queries\IsUserRegistered($email));
 
-        $output->writeln(sprintf('User "%s" registered successfully.', $email));
+        if (true === $registered) {
+            $output->writeln('<error>User with given email is already registered.</error>');
+
+            return 1;
+        }
+
+        $this->commands->dispatch(new Commands\RegisterUser($userId, $email, $password));
+
+        $output->writeln(sprintf('<info>User "%s" registered successfully.</info>', $email));
 
         return 0;
     }

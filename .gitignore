@@ -1,6 +1,7 @@
 /.idea/
 /bin/
 !/bin/console
+/build.local.sh
 
 ###> symfony/framework-bundle ###
 /.env.local

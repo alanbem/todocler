@@ -28,17 +28,17 @@ class ChecklistTest extends TestCase
     {
         $list = new Checklist('f45a75db-670c-4116-bf97-b8cd07eb09d0', 'List #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $updated = new \DateTimeImmutable(), $created = new \DateTimeImmutable());
 
-        $this->assertSame('f45a75db-670c-4116-bf97-b8cd07eb09d0', $list->id());
-        $this->assertSame('List #1', $list->name());
-        $this->assertSame('4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $list->userId());
-        $this->assertSame($updated, $list->updatedAt());
-        $this->assertSame($created, $list->createdAt());
+        $this->assertSame('f45a75db-670c-4116-bf97-b8cd07eb09d0', $list->getId());
+        $this->assertSame('List #1', $list->getName());
+        $this->assertSame('4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $list->getUserId());
+        $this->assertSame($updated, $list->getUpdatedAt());
+        $this->assertSame($created, $list->getCreatedAt());
 
-        $this->assertEmpty($list->tasks());
+        $this->assertEmpty($list->getTasks());
 
         $list->addTask('1d3db856-d874-4bc5-a41e-4268007bf6cd', 'Task #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $updated = new \DateTimeImmutable(), $created = new \DateTimeImmutable());
 
-        $this->assertCount(1, $list->tasks());
-        $this->assertEquals(new Task($list, '1d3db856-d874-4bc5-a41e-4268007bf6cd', 'Task #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $updated, $created), $list->tasks()[0]);
+        $this->assertCount(1, $list->getTasks());
+        $this->assertEquals(new Task($list, '1d3db856-d874-4bc5-a41e-4268007bf6cd', 'Task #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $updated, $created), $list->getTasks()[0]);
     }
 }

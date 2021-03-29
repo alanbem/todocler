@@ -1,0 +1,22 @@
+Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
+  shortName: 'List'
+  attributes:
+    pagination_items_per_page: 25
+    filters:
+      - productivity.filters.filter_by_authenticated_user
+      - productivity.filters.order_by_created_at
+  collectionOperations:
+    get:
+      method: get
+      normalization_context:
+        groups: [ 'lists.browse' ]
+  itemOperations:
+    get:
+      method: get
+      normalization_context:
+        groups: [ 'lists.read' ]
+  properties:
+    tasks:
+      subresource:
+        resourceClass: Productivity\Application\Projector\Lists\Doctrine\Entity\Task
+        collection: false
