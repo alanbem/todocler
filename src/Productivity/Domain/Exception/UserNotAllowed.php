@@ -16,9 +16,9 @@ namespace Productivity\Domain\Exception;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Productivity\Domain\Exception\UserNotPermittedTest
+ * @see \Productivity\Domain\Exception\UserNotAllowedTest
  */
-class UserNotPermitted extends \RuntimeException
+class UserNotAllowed extends \RuntimeException
 {
     private string $userId;
 
@@ -26,7 +26,7 @@ class UserNotPermitted extends \RuntimeException
     {
         $this->userId = $userId;
 
-        $message = sprintf('User "%s" not permitted.', $this->userId);
+        $message = sprintf('User "%s" is not allowed.', $this->userId);
 
         parent::__construct($message);
     }

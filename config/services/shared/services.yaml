@@ -4,4 +4,6 @@ services:
     autoconfigure: true
     public: false
 
-  Shared\Infrastructure\Doctrine\DBAL\Platforms\PostgreSqlPlatform:
+  Shared\Infrastructure\Doctrine\DBAL\Platforms\PostgreSqlPlatform: ~
+
+  Shared\Infrastructure\Doctrine\DBAL\Platforms\MySQLPlatform: ~

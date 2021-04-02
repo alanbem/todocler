@@ -28,6 +28,13 @@ use Webmozart\Assert\Assert;
  * `List` is a reserved word so I've used `Checklist` instead.
  *
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Application\Command\CreateListTest
+ * @see \Productivity\Application\Command\RenameListTest
+ * @see \Productivity\Application\Command\RemoveListTest
+ * @see \Productivity\Application\Command\CreateTaskTest
+ * @see \Productivity\Application\Command\CompleteTaskTest
+ * @see \Productivity\Application\Command\RemoveTaskTest
  */
 class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
 {
@@ -39,8 +46,9 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
     private Clock $clock;
 
     private string $name;
-    private ?string $creatorId = null;
-    private ?\DateTimeImmutable $createdAt = null;
+    private string $creatorId;
+    private \DateTimeImmutable $createdAt;
+    private bool $removed = false;
 
     /**
      * @var Task[]
@@ -54,9 +62,9 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
         $this->clock = $clock;
     }
 
-    public function listId() : Checklist\Id
+    public function listId() : string
     {
-        return $this->aggregateRootId();
+        return $this->aggregateRootId()->toString();
     }
 
     /**
@@ -64,22 +72,51 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
      */
     public function handleCreateList(Commands\CreateList $command) : void
     {
+        Assert::notEmpty($command->creatorId(), 'User id is missing.');
         Assert::notEmpty($command->name(), 'Name is missing.');
-        Assert::notEmpty($command->creatorId(), 'Creator is missing.');
 
-        $this->apply(new Events\ListCreated($this->listId()->toString(), $command->name(), $command->creatorId(), $this->clock->now()));
+        $this->apply(new Events\ListCreated($this->listId(), $command->name(), $command->creatorId(), $this->clock->now()));
     }
 
+    /**
+     * @see Checklist::applyListRenamed()
+     */
     public function handleRenameList(Commands\RenameList $command) : void
     {
+        Assert::notEmpty($command->editorId(), 'User id is missing.');
         Assert::notEmpty($command->name(), 'Name is missing.');
-        Assert::notEmpty($command->editorId(), 'Editor is missing.');
+
+        if ($this->creatorId !== $command->editorId()) {
+            throw new Exceptions\UserNotAllowed($command->editorId());
+        }
+
+        if (true === $this->removed) {
+            throw new Exceptions\ListNotFound($this->listId());
+        }
 
         if ($this->name === $command->name()) {
             return; // nothing to change
         }
 
-        $this->apply(new Events\ListRenamed($this->listId()->toString(), $command->name(), $command->editorId(), $this->clock->now()));
+        $this->apply(new Events\ListRenamed($this->listId(), $command->name(), $command->editorId(), $this->clock->now()));
+    }
+
+    /**
+     * @see Checklist::applyListRemoved()
+     */
+    public function handleRemoveList(Commands\RemoveList $command) : void
+    {
+        Assert::notEmpty($command->removerId(), 'User id is missing.');
+
+        if ($this->creatorId !== $command->removerId()) {
+            throw new Exceptions\UserNotAllowed($command->removerId());
+        }
+
+        if (true === $this->removed) {
+            throw new Exceptions\ListNotFound($this->listId());
+        }
+
+        $this->apply(new Events\ListRemoved($this->listId(), $command->removerId(), $this->clock->now()));
     }
 
     /**
@@ -87,19 +124,25 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
      */
     public function handleCreateTask(Commands\CreateTask $command) : void
     {
+        Assert::notEmpty($command->creatorId(), 'User id is missing.');
+
         if ($this->creatorId !== $command->creatorId()) {
-            throw new Exceptions\UserNotPermitted($command->creatorId());
+            throw new Exceptions\UserNotAllowed($command->creatorId());
+        }
+
+        if (true === $this->removed) {
+            throw new Exceptions\ListNotFound($this->listId());
         }
 
         $taskId = new Task\Id($command->taskId());
 
         if (null !== $this->findTask($taskId)) {
-            throw new Exceptions\TaskAlreadyExists($this->listId(), $taskId);
+            throw new Exceptions\TaskAlreadyExists($this->listId(), $command->taskId());
         }
 
         Assert::notEmpty($command->name(), 'Name is missing.');
 
-        $this->apply(new Events\TaskCreated($this->listId()->toString(), $command->taskId(), $command->name(), $command->creatorId(), $this->clock->now()));
+        $this->apply(new Events\TaskCreated($this->listId(), $command->taskId(), $command->name(), $command->creatorId(), $this->clock->now()));
     }
 
     /**
@@ -107,22 +150,53 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
      */
     public function handleCompleteTask(Commands\CompleteTask $command) : void
     {
+        Assert::notEmpty($command->userId(), 'User id is missing.');
+
         if ($this->creatorId !== $command->userId()) {
-            throw new Exceptions\UserNotPermitted($command->userId());
+            throw new Exceptions\UserNotAllowed($command->userId());
+        }
+
+        if (true === $this->removed) {
+            throw new Exceptions\ListNotFound($this->listId());
         }
 
         $taskId = new Task\Id($command->taskId());
         $task = $this->findTask($taskId);
 
         if (null === $task) {
-            throw new Exceptions\TaskNotFound($this->listId(), $taskId);
+            throw new Exceptions\TaskNotFound($this->listId(), $command->taskId());
         }
 
         if (true === $task->completed()) {
-            throw new Exceptions\TaskAlreadyCompleted($this->listId(), $taskId);
+            throw new Exceptions\TaskAlreadyCompleted($this->listId(), $command->taskId());
         }
 
-        $this->apply(new Events\TaskCompleted($this->listId()->toString(), $command->taskId(), $command->userId(), $this->clock->now()));
+        $this->apply(new Events\TaskCompleted($this->listId(), $command->taskId(), $command->userId(), $this->clock->now()));
+    }
+
+    /**
+     * @see Checklist::applyTaskRemoved()
+     */
+    public function handleRemoveTask(Commands\RemoveTask $command) : void
+    {
+        Assert::notEmpty($command->removerId(), 'User id is missing.');
+
+        if ($this->creatorId !== $command->removerId()) {
+            throw new Exceptions\UserNotAllowed($command->removerId());
+        }
+
+        if (true === $this->removed) {
+            throw new Exceptions\ListNotFound($this->listId());
+        }
+
+        $taskId = new Task\Id($command->taskId());
+        $task = $this->findTask($taskId);
+
+        if (null === $task) {
+            throw new Exceptions\TaskNotFound($this->listId(), $command->taskId());
+        }
+
+        $this->apply(new Events\TaskRemoved($this->listId(), $command->taskId(), $command->removerId(), $this->clock->now()));
     }
 
     private function findTask(Task\Id $id) : ?Task
@@ -144,6 +218,14 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
         $this->name = $event->name();
         $this->creatorId = $event->creatorId();
         $this->createdAt = $event->createdAt();
+    }
+
+    /**
+     * @see Checklist::handleRemoveList()
+     */
+    private function applyListRemoved(Events\ListRemoved $event) : void
+    {
+        $this->removed = true;
     }
 
     /**
@@ -169,5 +251,20 @@ class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
     {
         $task = $this->findTask(new Task\Id($event->taskId()));
         $task->complete();
+    }
+
+    /**
+     * @see Checklist::handleRemoveTask()
+     */
+    private function applyTaskRemoved(Events\TaskRemoved $event) : void
+    {
+        $id = new Task\Id($event->taskId());
+
+        foreach ($this->tasks as $position => $task) {
+            if ($task->id()->equals($id)) {
+                unset($this->tasks[$position]);
+                break;
+            }
+        }
     }
 }

@@ -9,8 +9,8 @@
         </id>
         <field name="userId" type="guid" column="user_id"/>
         <field name="name" column="name"/>
-        <field name="updatedAt" type="datetimetz_immutable" column="updated_at" precision="6"/>
-        <field name="createdAt" type="datetimetz_immutable" column="created_at" precision="6"/>
+        <field name="updatedAt" type="datetimetz_immutable" column="updated_at" precision="6" column-definition="DATETIME(6) NOT NULL COMMENT '(DC2Type:datetimetz_immutable)'"/>
+        <field name="createdAt" type="datetimetz_immutable" column="created_at" precision="6" column-definition="DATETIME(6) NOT NULL COMMENT '(DC2Type:datetimetz_immutable)'"/>
         <one-to-many field="tasks" target-entity="Productivity\Application\Projector\Lists\Doctrine\Entity\Task" mapped-by="list">
             <cascade>
                 <cascade-persist />

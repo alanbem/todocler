@@ -3,17 +3,22 @@ api_platform:
     paths:
       - '%kernel.project_dir%/src/Productivity/Interfaces/Rest/ApiPlatform/config/resources'
   formats:
-    jsonapi:  ['application/vnd.api+json']
-    jsonhal:  ['application/hal+json']
     json:     ['application/json']
-  #    jsonld:   ['application/ld+json']
-#    xml:      ['application/xml', 'text/xml']
-#    yaml:     ['application/x-yaml']
-#    csv:      ['text/csv']
-#    html:     ['text/html']
+    jsonapi:  ['application/vnd.api+json']
+    jsonld:   ['application/ld+json']
   patch_formats:
-    json: [ 'application/merge-patch+json' ]
+    json:    ['application/merge-patch+json']
+    jsonapi: ['application/vnd.api+json']
+    jsonld: [ 'application/ld+json' ]
+  error_formats:
+    jsonapi: ['application/vnd.api+json']
   swagger:
     versions: [ 3 ]
   enable_swagger_ui: false
   enable_re_doc: false
+  exception_to_status:
+    Productivity\Domain\Exception\ListNotFound: 404
+    Productivity\Domain\Exception\TaskAlreadyCompleted: 400
+    Productivity\Domain\Exception\TaskAlreadyExists: 400
+    Productivity\Domain\Exception\TaskNotFound: 404
+    Productivity\Domain\Exception\UserNotAllowed: 400

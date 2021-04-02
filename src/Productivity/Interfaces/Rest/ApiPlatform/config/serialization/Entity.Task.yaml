@@ -1,4 +1,4 @@
-Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
+Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
   attributes:
     id:
       groups:
@@ -16,13 +16,17 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
         - 'tasks.read'
     updatedAt:
       groups:
-        - 'lists.browse'
-        - 'lists.read'
+        - 'tasks.browse'
+        - 'tasks.read'
     createdAt:
       groups:
-        - 'lists.browse'
-        - 'lists.read'
-    tasks:
+        - 'tasks.browse'
+        - 'tasks.read'
+    completed:
       groups:
-        - 'lists.browse'
-        - 'lists.read'
+        - 'tasks.browse'
+        - 'tasks.read'
+    list:
+      groups:
+        - 'tasks.browse'
+        - 'tasks.read'

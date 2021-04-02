@@ -22,12 +22,11 @@ use Streak\Domain\Exception;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class CreateListHandler implements CommandHandler
+class ListHandler implements CommandHandler
 {
     use Command\Handling;
 
     private AggregateRoot\Factory $factory;
-
     private AggregateRoot\Repository $repository;
 
     public function __construct(AggregateRoot\Factory $factory, AggregateRoot\Repository $repository)

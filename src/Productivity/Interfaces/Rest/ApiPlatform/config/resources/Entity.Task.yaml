@@ -1,0 +1,53 @@
+Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
+  attributes:
+    order:
+      createdAt: asc
+    pagination_items_per_page: 25
+    filters:
+      - productivity.filters.filter_by_authenticated_user
+      - productivity.filters.order_by_created_at
+  collectionOperations:
+    get:
+      method: GET
+      normalization_context:
+        groups: [ 'tasks.browse' ]
+      openapi_context:
+        summary: Retrieves the list of tasks
+    post:
+      method: POST
+      status: 202
+      messenger: input
+      input: Productivity\Interfaces\Rest\ApiPlatform\DTO\CreateTask
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      serialize: true
+      normalization_context:
+        groups: [ 'tasks.create' ]
+      openapi_context:
+        summary: Create new list
+  itemOperations:
+    get:
+      method: GET
+      normalization_context:
+        groups: [ 'tasks.read' ]
+      openapi_context:
+        summary: Retrieves the task
+    complete:
+      method: PATCH
+      path: /tasks/{id}/complete
+      status: 202
+      messenger: input
+      input: Productivity\Interfaces\Rest\ApiPlatform\DTO\CompleteTask
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      serialize: true
+      normalization_context:
+        groups: [ 'tasks.complete' ]
+      openapi_context:
+        summary: Completes the task

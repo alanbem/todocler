@@ -62,7 +62,12 @@ class RegisterUserCommand extends Command
         Assert::email($email, 'Invalid email given.');
         Assert::notEmpty($password, 'Invalid password given.');
 
-        $registered = $this->queries->dispatch(new Queries\IsUserRegistered($email));
+        try {
+            $registered = $this->queries->dispatch(new Queries\IsUserRegistered($email));
+        } catch (\Throwable $e) {
+            // possibly projection does not exists yet
+            $registered = false;
+        }
 
         if (true === $registered) {
             $output->writeln('<error>User with given email is already registered.</error>');

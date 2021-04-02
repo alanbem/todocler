@@ -9,6 +9,7 @@ doctrine:
         platform_service: Shared\Infrastructure\Doctrine\DBAL\Platforms\PostgreSqlPlatform
       lists_projection:
         url: '%env(resolve:LISTS_PROJECTIONS_DATABASE_URL)%'
+        platform_service: Shared\Infrastructure\Doctrine\DBAL\Platforms\MySQLPlatform
 
   orm:
     auto_generate_proxy_classes: '%kernel.debug%'

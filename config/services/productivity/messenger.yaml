@@ -1,0 +1,18 @@
+services:
+  Productivity\Interfaces\Rest\ApiPlatform\Messenger\Handler\CommandDispatchingHandler:
+    arguments:
+      - '@Streak\Application\CommandBus'
+    tags:
+      - messenger.message_handler
+
+  messenger.middleware.dto_to_list_command_transformation:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CommandsForListsTransformerMiddleware
+    arguments:
+      - '@Symfony\Component\Security\Core\Security'
+      - '@Productivity\UsersFacade'
+
+  messenger.middleware.dto_to_task_command_transformation:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CommandsForTasksTransformerMiddleware
+    arguments:
+      - '@Symfony\Component\Security\Core\Security'
+      - '@Productivity\UsersFacade'

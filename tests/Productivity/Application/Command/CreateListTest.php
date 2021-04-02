@@ -26,7 +26,7 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @covers \Productivity\Application\Command\CreateList
- * @covers \Productivity\Application\Command\CreateListHandler
+ * @covers \Productivity\Application\Command\ListHandler
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
@@ -82,6 +82,6 @@ class CreateListTest extends TestCase
 
     protected function createHandler(AggregateRoot\Factory $factory, AggregateRoot\Repository $repository) : CommandHandler
     {
-        return new CreateListHandler($factory, $repository);
+        return new ListHandler($factory, $repository);
     }
 }

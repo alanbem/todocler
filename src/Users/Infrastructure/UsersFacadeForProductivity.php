@@ -35,13 +35,23 @@ class UsersFacadeForProductivity implements Productivity\UsersFacade
 
     public function isUserRegistered(string $email) : bool
     {
-        return $this->bus->dispatch(new IsUserRegistered($email));
+        try {
+            return $this->bus->dispatch(new IsUserRegistered($email));
+        } catch (\Throwable $e) {
+            // projection does not exist yet
+            return false;
+        }
     }
 
     public function findRegisteredUser($email) : ?object
     {
-        /** @var ?RegisteredUser $user */
-        $user = $this->bus->dispatch(new FindUser($email));
+        try {
+            /** @var ?RegisteredUser $user */
+            $user = $this->bus->dispatch(new FindUser($email));
+        } catch (\Throwable $e) {
+            // projection does not exists yet
+            return null;
+        }
 
         if (null === $user) {
             return null;

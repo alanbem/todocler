@@ -1,0 +1,65 @@
+Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
+  shortName: 'List'
+  attributes:
+    order:
+      createdAt: desc
+      tasks.createdAt: desc
+    pagination_items_per_page: 25
+    filters:
+      - productivity.filters.filter_by_authenticated_user
+      - productivity.filters.order_by_created_at
+  collectionOperations:
+    get:
+      method: GET
+      normalization_context:
+        groups: [ 'lists.browse' ]
+      openapi_context:
+        summary: Retrieves the list of lists
+    post:
+      method: POST
+      status: 202
+      messenger: input
+      input: Productivity\Interfaces\Rest\ApiPlatform\DTO\CreateList
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      serialize: true
+      normalization_context:
+        groups: [ 'lists.create' ]
+      openapi_context:
+        summary: Create new list
+  itemOperations:
+    get:
+      method: GET
+      normalization_context:
+        groups: [ 'lists.read' ]
+      openapi_context:
+        summary: Retrieves the list
+    rename:
+      method: PATCH
+      status: 202
+      messenger: input
+      input: Productivity\Interfaces\Rest\ApiPlatform\DTO\RenameList
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      serialize: true
+      openapi_context:
+        summary: Renames the list
+  subresourceOperations:
+    # this is weird & broken - this section should be named "api_lists_tasks_get_subresource"
+    # @see https://github.com/api-platform/core/pull/4004
+    # @see https://github.com/api-platform/core/issues/4046#issuecomment-777442507
+    tasks_get_subresource:
+      openapi_context:
+        summary: Retrieves the tasks belonging to the given list
+  properties:
+    tasks:
+      subresource:
+        resourceClass: Productivity\Application\Projector\Lists\Doctrine\Entity\Task
+        collection: false
+

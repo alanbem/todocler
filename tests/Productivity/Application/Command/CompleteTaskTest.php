@@ -15,11 +15,13 @@ namespace Productivity\Application\Command;
 
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
+use Productivity\Domain\Event\ListRemoved;
 use Productivity\Domain\Event\TaskCompleted;
 use Productivity\Domain\Event\TaskCreated;
+use Productivity\Domain\Exception\ListNotFound;
 use Productivity\Domain\Exception\TaskAlreadyCompleted;
 use Productivity\Domain\Exception\TaskNotFound;
-use Productivity\Domain\Exception\UserNotPermitted;
+use Productivity\Domain\Exception\UserNotAllowed;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
 use Streak\Infrastructure\FixedClock;
@@ -59,9 +61,7 @@ class CompleteTaskTest extends TestCase
 
     public function testCompletingAlreadyCompletedTask() : void
     {
-        $exception = new TaskAlreadyCompleted(new Checklist\Id('list-1'), new Checklist\Task\Id('task-1'));
-
-        $this->expectExceptionObject($exception);
+        $this->expectExceptionObject(new TaskAlreadyCompleted('list-1', 'task-1'));
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
@@ -77,9 +77,7 @@ class CompleteTaskTest extends TestCase
 
     public function testCompletingNonExistentTask() : void
     {
-        $exception = new TaskNotFound(new Checklist\Id('list-1'), new Checklist\Task\Id('task-1'));
-
-        $this->expectExceptionObject($exception);
+        $this->expectExceptionObject(new TaskNotFound('list-1', 'task-1'));
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
@@ -93,9 +91,7 @@ class CompleteTaskTest extends TestCase
 
     public function testCompletingTaskByWrongUser() : void
     {
-        $exception = new UserNotPermitted('user-2');
-
-        $this->expectExceptionObject($exception);
+        $this->expectExceptionObject(new UserNotAllowed('user-2'));
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
@@ -104,6 +100,22 @@ class CompleteTaskTest extends TestCase
             )
             ->when(
                 new CompleteTask('list-1', 'task-1', 'user-2'),
+            )
+            ->then();
+    }
+
+    public function testCompletingTaskOnRemovedList() : void
+    {
+        $this->expectExceptionObject(new ListNotFound('list-1'));
+        $this
+            ->for(new Checklist\Id('list-1'))
+            ->given(
+                new ListCreated('list-1', 'My first list.', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new TaskCreated('list-1', 'task-1', 'My first task', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new ListRemoved('list-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+            )
+            ->when(
+                new CompleteTask('list-1', 'task-1', 'user-1'),
             )
             ->then();
     }

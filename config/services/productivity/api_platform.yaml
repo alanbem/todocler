@@ -1,11 +1,12 @@
 services:
   productivity.filters.filter_by_authenticated_user:
-    class: Productivity\Interfaces\Rest\ApiPlatform\Doctrine\Orm\Filter\AuthenticatedUserFilter
+    class: Productivity\Interfaces\Rest\ApiPlatform\Doctrine\Orm\Extension\AuthenticatedUserExtension
     arguments:
-      - '@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface'
+      - '@Symfony\Component\Security\Core\Security'
       - '@Productivity\UsersFacade'
     tags:
-      - api_platform.filter
+      - api_platform.doctrine.orm.query_extension.collection
+      - api_platform.doctrine.orm.query_extension.item
 
   productivity.filters.order_by_created_at:
     class: ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter

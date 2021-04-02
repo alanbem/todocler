@@ -18,15 +18,15 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @covers \Productivity\Domain\Exception\UserNotPermitted
+ * @covers \Productivity\Domain\Exception\UserNotAllowed
  */
-class UserNotPermittedTest extends TestCase
+class UserNotAllowedTest extends TestCase
 {
     public function testException() : void
     {
-        $exception = new UserNotPermitted('user-1');
+        $exception = new UserNotAllowed('user-1');
 
-        $this->assertSame('User "user-1" not permitted.', $exception->getMessage());
+        $this->assertSame('User "user-1" is not allowed.', $exception->getMessage());
         $this->assertSame('user-1', $exception->userId());
     }
 }

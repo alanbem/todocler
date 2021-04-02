@@ -10,8 +10,8 @@
         <field name="userId" type="guid" column="user_id"/>
         <field name="name" column="name"/>
         <field name="completed" type="boolean" column="is_completed"/>
-        <field name="updatedAt" type="datetimetz_immutable" column="updated_at" precision="6"/>
-        <field name="createdAt" type="datetimetz_immutable" column="created_at" precision="6"/>
+        <field name="updatedAt" type="datetimetz_immutable" column="updated_at" precision="6" column-definition="DATETIME(6) NOT NULL COMMENT '(DC2Type:datetimetz_immutable)'"/>
+        <field name="createdAt" type="datetimetz_immutable" column="created_at" precision="6" column-definition="DATETIME(6) NOT NULL COMMENT '(DC2Type:datetimetz_immutable)'"/>
         <many-to-one field="list" target-entity="Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist" inversed-by="tasks">
             <join-column name="list_id" nullable="false"/>
         </many-to-one>

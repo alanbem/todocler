@@ -6,6 +6,7 @@ services:
     working_dir: /var/www/project
     volumes:
       - .:/var/www/project
+      - ./docker/php/etc/php/7.4/cli/php.ini:/etc/php/7.4/cli/php.ini
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       COMPOSER_NO_INTERACTION: 1
@@ -21,6 +22,7 @@ services:
     working_dir: /var/www/project
     volumes:
       - .:/var/www/project
+      - ./docker/fpm/etc/php/7.4/cli/php.ini:/etc/php/7.4/cli/php.ini
       - ./docker/fpm/etc/php/7.4/fpm/pool.d/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
       - ./docker/fpm/etc/php/7.4/fpm/pool.d/z-overrides.conf:/etc/php/7.4/fpm/pool.d/z-overrides.conf
     depends_on:
@@ -80,10 +82,15 @@ services:
       - ./docker/mysql/etc/mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
     ports:
       - 3307:3306
-      
-  adminer:
-    image: adminer:latest
-    environment:
-      ADMINER_DEFAULT_SERVER: postgres_event_store
-    ports:
-      - 8081:8080
+
+  supervisord:
+    build:
+      context: .
+      dockerfile: docker/supervisord/Dockerfile
+    privileged: true
+    depends_on:
+      - fpm
+    volumes:
+      - .:/var/www/project
+      - ./supervisord.conf:/etc/supervisord.conf
+      - /var/run/docker.sock:/var/run/docker.sock

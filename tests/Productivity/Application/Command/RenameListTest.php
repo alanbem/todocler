@@ -15,7 +15,10 @@ namespace Productivity\Application\Command;
 
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
+use Productivity\Domain\Event\ListRemoved;
 use Productivity\Domain\Event\ListRenamed;
+use Productivity\Domain\Exception\ListNotFound;
+use Productivity\Domain\Exception\UserNotAllowed;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
 use Streak\Infrastructure\FixedClock;
@@ -58,6 +61,35 @@ class RenameListTest extends TestCase
             ->for(new Checklist\Id('list-1'))
             ->given(
                 new ListCreated('list-1', 'name', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+            )
+            ->when(
+                new RenameList('list-1', 'name', 'user-1'),
+            )
+            ->then();
+    }
+
+    public function testRenamingListWithWrongUser() : void
+    {
+        $this->expectExceptionObject(new UserNotAllowed('user-2'));
+        $this
+            ->for(new Checklist\Id('list-1'))
+            ->given(
+                new ListCreated('list-1', 'name', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+            )
+            ->when(
+                new RenameList('list-1', 'new name', 'user-2'),
+            )
+            ->then();
+    }
+
+    public function testRenamingListOnRemovedList() : void
+    {
+        $this->expectExceptionObject(new ListNotFound('list-1'));
+        $this
+            ->for(new Checklist\Id('list-1'))
+            ->given(
+                new ListCreated('list-1', 'name', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new ListRemoved('list-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
                 new RenameList('list-1', 'name', 'user-1'),

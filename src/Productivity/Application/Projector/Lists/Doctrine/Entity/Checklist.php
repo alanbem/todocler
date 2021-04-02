@@ -71,7 +71,7 @@ class Checklist
      */
     public function getTasks() : iterable
     {
-        return $this->tasks;
+        return $this->tasks->getValues();
     }
 
     public function getUpdatedAt() : \DateTimeImmutable
