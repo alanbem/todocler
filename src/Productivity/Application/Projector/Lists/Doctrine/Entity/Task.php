@@ -15,6 +15,8 @@ namespace Productivity\Application\Projector\Lists\Doctrine\Entity;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @noRector \Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector
  */
 class Task
 {

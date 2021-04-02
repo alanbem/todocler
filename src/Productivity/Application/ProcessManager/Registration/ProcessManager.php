@@ -25,14 +25,14 @@ use Users\Domain\Event\UserRegistered;
  *
  * @see \Productivity\Application\ProcessManager\Registration\ProcessManagerTest
  */
-class ProcessManager implements Event\Listener, Event\Picker, Event\Filterer
+final class ProcessManager implements Event\Listener, Event\Picker, Event\Filterer
 {
     use Event\Listener\Identifying;
     use Event\Listener\Listening;
     use Event\Listener\Filtering;
     use Event\Listener\Commanding {
-        muteCommands as disableSideEffects;
-        unmuteCommands as enableSideEffects;
+        Event\Listener\Commanding::muteCommands as disableSideEffects;
+        Event\Listener\Commanding::unmuteCommands as enableSideEffects;
     }
 
     /**

@@ -27,7 +27,7 @@ use Users\Domain\User;
  *
  * @covers \Users\Application\Projector\RegisteredUsers\Projector\Factory
  */
-class FactoryTest extends TestCase
+final class FactoryTest extends TestCase
 {
     private EntityManagerInterface $manager;
 

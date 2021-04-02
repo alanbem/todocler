@@ -23,7 +23,7 @@ use Users\Application\Projector\RegisteredUsers;
  *
  * @see \Users\Application\Projector\RegisteredUsers\Projector\FactoryTest
  */
-class Factory implements Event\Listener\Factory
+final class Factory implements Event\Listener\Factory
 {
     private EntityManagerInterface $manager;
 

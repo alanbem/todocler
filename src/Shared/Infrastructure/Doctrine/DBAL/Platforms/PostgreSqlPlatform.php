@@ -20,7 +20,7 @@ use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
  *
  * @codeCoverageIgnore
  */
-class PostgreSqlPlatform extends PostgreSQL100Platform
+final class PostgreSqlPlatform extends PostgreSQL100Platform
 {
     public function getDateTimeTzFormatString()
     {

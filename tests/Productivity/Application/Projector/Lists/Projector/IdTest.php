@@ -21,7 +21,7 @@ use Productivity\Application\Projector\Lists\Projector;
  *
  * @covers \Productivity\Application\Projector\Lists\Projector\Id
  */
-class IdTest extends TestCase
+final class IdTest extends TestCase
 {
     public function testId() : void
     {

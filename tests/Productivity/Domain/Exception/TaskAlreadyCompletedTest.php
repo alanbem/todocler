@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Exception\TaskAlreadyCompleted
  */
-class TaskAlreadyCompletedTest extends TestCase
+final class TaskAlreadyCompletedTest extends TestCase
 {
     public function testException() : void
     {

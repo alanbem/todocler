@@ -26,7 +26,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
  *
  * @see \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RenameListTransformingMiddlewareTest
  */
-class RenameListTransformingMiddleware extends TransformingMiddleware
+final class RenameListTransformingMiddleware extends TransformingMiddleware
 {
     public function handle(Envelope $envelope, StackInterface $stack) : Envelope
     {

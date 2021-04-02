@@ -28,7 +28,7 @@ use Users\Domain\User;
  *
  * @covers \Productivity\Application\ProcessManager\Registration\ProcessManager
  */
-class ProcessManagerTest extends TestCase
+final class ProcessManagerTest extends TestCase
 {
     private const DEFAULT_NAME = 'My first list';
 

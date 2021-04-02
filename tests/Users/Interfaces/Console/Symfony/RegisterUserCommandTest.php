@@ -25,7 +25,7 @@ use Users\Application\Query as Queries;
  *
  * @covers \Users\Interfaces\Console\Symfony\RegisterUserCommand
  */
-class RegisterUserCommandTest extends TestCase
+final class RegisterUserCommandTest extends TestCase
 {
     private CommandBus $commands;
     private QueryBus $queries;

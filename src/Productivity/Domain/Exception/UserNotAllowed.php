@@ -18,7 +18,7 @@ namespace Productivity\Domain\Exception;
  *
  * @see \Productivity\Domain\Exception\UserNotAllowedTest
  */
-class UserNotAllowed extends \RuntimeException
+final class UserNotAllowed extends \RuntimeException
 {
     private string $userId;
 

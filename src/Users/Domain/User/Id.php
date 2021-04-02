@@ -20,7 +20,7 @@ use Streak\Domain\AggregateRoot;
  *
  * @see \Users\Domain\User\IdTest
  */
-class Id implements AggregateRoot\Id
+final class Id implements AggregateRoot\Id
 {
     private string $value;
 

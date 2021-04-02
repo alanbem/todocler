@@ -25,7 +25,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
  *
  * @see \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateListTransformingMiddlewareTest
  */
-class CreateListTransformingMiddleware extends TransformingMiddleware
+final class CreateListTransformingMiddleware extends TransformingMiddleware
 {
     public function handle(Envelope $envelope, StackInterface $stack) : Envelope
     {

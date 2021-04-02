@@ -22,7 +22,7 @@ use Users\Domain\User;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class RegisterUserHandler implements CommandHandler
+final class RegisterUserHandler implements CommandHandler
 {
     use Command\Handling;
 

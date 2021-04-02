@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Users\Domain\Event\UserRegistered
  */
-class UserRegisteredTest extends TestCase
+final class UserRegisteredTest extends TestCase
 {
     public function testEvent() : void
     {

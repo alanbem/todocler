@@ -26,7 +26,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
  *
  * @see \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RemoveTaskTransformingMiddlewareTest
  */
-class RemoveTaskTransformingMiddleware extends TransformingMiddleware
+final class RemoveTaskTransformingMiddleware extends TransformingMiddleware
 {
     public function handle(Envelope $envelope, StackInterface $stack) : Envelope
     {

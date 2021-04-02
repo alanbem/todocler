@@ -21,7 +21,7 @@ use Streak\Domain;
  *
  * @covers \Users\Domain\User\Id
  */
-class IdTest extends TestCase
+final class IdTest extends TestCase
 {
     public function testToString() : void
     {

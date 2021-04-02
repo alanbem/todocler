@@ -27,7 +27,7 @@ use Streak\Domain\Exception\InvalidIdGiven;
  *
  * @covers \Productivity\Application\ProcessManager\Registration\ProcessManager\Factory
  */
-class FactoryTest extends TestCase
+final class FactoryTest extends TestCase
 {
     private CommandBus $bus;
 

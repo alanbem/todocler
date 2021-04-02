@@ -24,7 +24,7 @@ use Users\Application\Query\IsUserRegistered;
  *
  * @see \Users\Infrastructure\UsersFacadeForProductivityTest
  */
-class UsersFacadeForProductivity implements Productivity\UsersFacade
+final class UsersFacadeForProductivity implements Productivity\UsersFacade
 {
     private QueryBus $bus;
 

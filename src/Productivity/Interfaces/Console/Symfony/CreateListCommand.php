@@ -28,7 +28,7 @@ use Webmozart\Assert\Assert;
  *
  * @see \Productivity\Interfaces\Console\Symfony\CreateListCommandTest
  */
-class CreateListCommand extends Command
+final class CreateListCommand extends Command
 {
     private CommandBus $bus;
     private UsersFacade $users;

@@ -31,7 +31,7 @@ use Users\Domain\User;
  * @covers \Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser
  * @covers \Shared\Application\Projector\Doctrine\EntityManagerProjector
  */
-class ProjectorTest extends KernelTestCase
+final class ProjectorTest extends KernelTestCase
 {
     private RegisteredUsers\Projector $projector;
 

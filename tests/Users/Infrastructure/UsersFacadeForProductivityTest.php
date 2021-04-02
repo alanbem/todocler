@@ -23,7 +23,7 @@ use Users\Application\Query as Queries;
  *
  * @covers \Users\Infrastructure\UsersFacadeForProductivity
  */
-class UsersFacadeForProductivityTest extends TestCase
+final class UsersFacadeForProductivityTest extends TestCase
 {
     private QueryBus $bus;
 

@@ -22,7 +22,7 @@ use Streak\Domain\AggregateRoot;
  *
  * @see \Productivity\Application\Command\RemoveListTest
  */
-class RemoveList implements Command\AggregateRootCommand
+final class RemoveList implements Command\AggregateRootCommand
 {
     private string $listId;
     private string $removerId;

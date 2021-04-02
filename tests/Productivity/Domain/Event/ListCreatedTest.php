@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Event\ListCreated
  */
-class ListCreatedTest extends TestCase
+final class ListCreatedTest extends TestCase
 {
     public function testEvent() : void
     {

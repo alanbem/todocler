@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Exception\TaskAlreadyExists
  */
-class TaskAlreadyExistsTest extends TestCase
+final class TaskAlreadyExistsTest extends TestCase
 {
     public function testException() : void
     {

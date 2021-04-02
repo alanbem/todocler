@@ -32,7 +32,7 @@ use Users\Infrastructure\SaltGenerator\FixedSaltGenerator;
  * @covers \Users\Application\Command\RegisterUserHandler
  * @covers \Users\Domain\User
  */
-class RegisterUserTest extends TestCase
+final class RegisterUserTest extends TestCase
 {
     private PasswordHasher $encoder;
     private SaltGenerator $saltshaker;

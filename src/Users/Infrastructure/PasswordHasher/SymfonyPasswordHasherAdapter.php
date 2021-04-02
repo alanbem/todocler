@@ -22,7 +22,7 @@ use Users\Domain\PasswordHasher;
  *
  * @see \Users\Infrastructure\PasswordHasher\SymfonyPasswordHasherAdapterTest
  */
-class SymfonyPasswordHasherAdapter implements PasswordHasher
+final class SymfonyPasswordHasherAdapter implements PasswordHasher
 {
     private PasswordEncoderInterface $encoder;
 

@@ -21,7 +21,7 @@ use Streak\Domain\Event\Listener;
  *
  * @see \Productivity\Application\ProcessManager\Registration\ProcessManager\IdTest
  */
-class Id implements Listener\Id
+final class Id implements Listener\Id
 {
     private const ID = '00000000-0000-0000-0000-000000000000';
 

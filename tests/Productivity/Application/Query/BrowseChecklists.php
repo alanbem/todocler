@@ -20,7 +20,7 @@ use Streak\Domain\Event\Listener;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class BrowseChecklists implements Query\EventListenerQuery
+final class BrowseChecklists implements Query\EventListenerQuery
 {
     private ?string $ownerId;
 

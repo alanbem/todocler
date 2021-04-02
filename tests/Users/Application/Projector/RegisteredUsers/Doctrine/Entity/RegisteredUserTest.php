@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser
  */
-class RegisteredUserTest extends TestCase
+final class RegisteredUserTest extends TestCase
 {
     public function testUser() : void
     {

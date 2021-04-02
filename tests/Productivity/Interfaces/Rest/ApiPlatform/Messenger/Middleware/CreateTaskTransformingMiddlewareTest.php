@@ -27,7 +27,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateTaskTransformingMiddleware
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\TransformingMiddleware
  */
-class CreateTaskTransformingMiddlewareTest extends TestCase
+final class CreateTaskTransformingMiddlewareTest extends TestCase
 {
     private StackInterface $stack;
     private MiddlewareInterface $next;

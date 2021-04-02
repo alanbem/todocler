@@ -29,7 +29,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RenameListTransformingMiddleware
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\TransformingMiddleware
  */
-class RenameListTransformingMiddlewareTest extends TestCase
+final class RenameListTransformingMiddlewareTest extends TestCase
 {
     private StackInterface $stack;
     private MiddlewareInterface $next;

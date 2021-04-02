@@ -24,7 +24,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
  *
  * @see \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Handler\CommandDispatchingHandlerTest
  */
-class CommandDispatchingHandler implements MessageHandlerInterface
+final class CommandDispatchingHandler implements MessageHandlerInterface
 {
     private CommandBus $bus;
 

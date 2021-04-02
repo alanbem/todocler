@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @see \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RegisteredUserMiddlewareTest
  */
-class RegisteredUserMiddleware implements MiddlewareInterface
+final class RegisteredUserMiddleware implements MiddlewareInterface
 {
     private Security $security;
     private UsersFacade $users;

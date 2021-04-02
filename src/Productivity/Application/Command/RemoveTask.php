@@ -22,7 +22,7 @@ use Streak\Domain\AggregateRoot;
  *
  * @see \Productivity\Application\Command\RemoveTaskTest
  */
-class RemoveTask implements Command\AggregateRootCommand
+final class RemoveTask implements Command\AggregateRootCommand
 {
     private string $taskId;
     private string $listId;

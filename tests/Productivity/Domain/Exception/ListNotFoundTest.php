@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Exception\ListNotFound
  */
-class ListNotFoundTest extends TestCase
+final class ListNotFoundTest extends TestCase
 {
     public function testException() : void
     {

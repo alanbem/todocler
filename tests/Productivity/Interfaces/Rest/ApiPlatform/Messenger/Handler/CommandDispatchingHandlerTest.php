@@ -22,7 +22,7 @@ use Streak\Application\CommandBus;
  *
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Handler\CommandDispatchingHandler
  */
-class CommandDispatchingHandlerTest extends TestCase
+final class CommandDispatchingHandlerTest extends TestCase
 {
     private CommandBus $bus;
     private Command $command;

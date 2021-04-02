@@ -18,7 +18,7 @@ namespace Productivity\Domain\Exception;
  *
  * @see \Productivity\Domain\Exception\TaskAlreadyCompletedTest
  */
-class TaskAlreadyCompleted extends \RuntimeException
+final class TaskAlreadyCompleted extends \RuntimeException
 {
     private string $listId;
     private string $taskId;

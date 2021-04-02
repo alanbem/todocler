@@ -18,7 +18,7 @@ namespace Productivity\Domain\Exception;
  *
  * @see \Productivity\Domain\Exception\TaskAlreadyExistsTest
  */
-class TaskAlreadyExists extends \RuntimeException
+final class TaskAlreadyExists extends \RuntimeException
 {
     private string $listId;
     private string $taskId;

@@ -22,7 +22,7 @@ use Streak\Domain\Exception;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class ListHandler implements CommandHandler
+final class ListHandler implements CommandHandler
 {
     use Command\Handling;
 

@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Exception\UserNotAllowed
  */
-class UserNotAllowedTest extends TestCase
+final class UserNotAllowedTest extends TestCase
 {
     public function testException() : void
     {

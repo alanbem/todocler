@@ -28,7 +28,7 @@ use Users\Domain\Event as Events;
  *
  * @see \Users\Application\Projector\RegisteredUsers\ProjectorTest
  */
-class Projector extends Doctrine\EntityManagerProjector implements Event\Picker, QueryHandler
+final class Projector extends Doctrine\EntityManagerProjector implements Event\Picker, QueryHandler
 {
     use Query\Handling;
 

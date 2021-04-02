@@ -20,7 +20,7 @@ use Users\Domain\SaltGenerator;
  *
  * @codeCoverageIgnore
  */
-class SimpleSaltGenerator implements SaltGenerator
+final class SimpleSaltGenerator implements SaltGenerator
 {
     public function generate() : string
     {

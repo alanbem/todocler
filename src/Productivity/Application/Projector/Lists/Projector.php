@@ -29,7 +29,7 @@ use Streak\Domain\EventStore;
  *
  * @see \Productivity\Application\Projector\Lists\ProjectorTest
  */
-class Projector extends Doctrine\EntityManagerProjector implements Event\Picker, QueryHandler
+final class Projector extends Doctrine\EntityManagerProjector implements Event\Picker, QueryHandler
 {
     use Query\Handling;
 

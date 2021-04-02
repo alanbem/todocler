@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Event\TaskCompleted
  */
-class TaskCompletedTest extends TestCase
+final class TaskCompletedTest extends TestCase
 {
     public function testEvent() : void
     {

@@ -17,6 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @noRector \Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector
  */
 class Checklist
 {

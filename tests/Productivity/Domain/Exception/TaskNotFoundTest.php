@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Exception\TaskNotFound
  */
-class TaskNotFoundTest extends TestCase
+final class TaskNotFoundTest extends TestCase
 {
     public function testException() : void
     {

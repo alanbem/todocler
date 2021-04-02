@@ -26,7 +26,7 @@ use Users\Domain\User;
  *
  * @covers \Users\Domain\User\Factory
  */
-class FactoryTest extends TestCase
+final class FactoryTest extends TestCase
 {
     private PasswordHasher $encoder;
     private SaltGenerator $saltshaker;

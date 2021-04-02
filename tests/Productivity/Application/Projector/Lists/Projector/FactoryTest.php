@@ -27,7 +27,7 @@ use Streak\Domain\Exception\InvalidIdGiven;
  *
  * @covers \Productivity\Application\Projector\Lists\Projector\Factory
  */
-class FactoryTest extends TestCase
+final class FactoryTest extends TestCase
 {
     private EntityManagerInterface $manager;
 

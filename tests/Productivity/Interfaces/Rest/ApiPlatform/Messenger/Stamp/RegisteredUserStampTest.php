@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Stamp\RegisteredUserStamp
  */
-class RegisteredUserStampTest extends TestCase
+final class RegisteredUserStampTest extends TestCase
 {
     public function testStamp() : void
     {

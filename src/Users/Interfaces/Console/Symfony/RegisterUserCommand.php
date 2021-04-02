@@ -29,7 +29,7 @@ use Webmozart\Assert\Assert;
  *
  * @see \Users\Interfaces\Console\Symfony\RegisterUserCommandTest
  */
-class RegisterUserCommand extends Command
+final class RegisterUserCommand extends Command
 {
     private CommandBus $commands;
     private QueryBus $queries;

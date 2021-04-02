@@ -28,7 +28,7 @@ use Webmozart\Assert\Assert;
  *
  * @see \Productivity\Interfaces\Console\Symfony\CreateTaskCommandTest
  */
-class CreateTaskCommand extends Command
+final class CreateTaskCommand extends Command
 {
     private CommandBus $bus;
     private UsersFacade $users;

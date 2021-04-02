@@ -22,7 +22,7 @@ use Streak\Domain\AggregateRoot;
  *
  * @see \Productivity\Application\Command\CreateTaskTest
  */
-class CreateTask implements Command\AggregateRootCommand
+final class CreateTask implements Command\AggregateRootCommand
 {
     private string $listId;
     private string $taskId;

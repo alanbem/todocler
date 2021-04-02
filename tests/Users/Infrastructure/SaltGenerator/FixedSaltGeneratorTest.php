@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Users\Infrastructure\SaltGenerator\FixedSaltGenerator
  */
-class FixedSaltGeneratorTest extends TestCase
+final class FixedSaltGeneratorTest extends TestCase
 {
     public function testGenerator() : void
     {

@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RegisteredUserMiddleware
  */
-class RegisteredUserMiddlewareTest extends TestCase
+final class RegisteredUserMiddlewareTest extends TestCase
 {
     private Security $security;
     private UserInterface $user;

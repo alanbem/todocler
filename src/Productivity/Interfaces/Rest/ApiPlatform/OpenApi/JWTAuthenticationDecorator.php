@@ -23,8 +23,9 @@ use ApiPlatform\Core\OpenApi\OpenApi;
  * @see   https://api-platform.com/docs/core/jwt/
  *
  * @codeCoverageIgnore
+ * @noRector \Rector\Privatization\Rector\Class_\RepeatedLiteralToClassConstantRector
  */
-class JWTAuthenticationDecorator implements OpenApiFactoryInterface
+final class JWTAuthenticationDecorator implements OpenApiFactoryInterface
 {
     private OpenApiFactoryInterface $decorated;
     private string $path;

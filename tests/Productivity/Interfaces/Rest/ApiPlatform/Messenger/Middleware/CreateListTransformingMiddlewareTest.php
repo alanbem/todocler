@@ -29,7 +29,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateListTransformingMiddleware
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\TransformingMiddleware
  */
-class CreateListTransformingMiddlewareTest extends TestCase
+final class CreateListTransformingMiddlewareTest extends TestCase
 {
     private StackInterface $stack;
     private MiddlewareInterface $next;

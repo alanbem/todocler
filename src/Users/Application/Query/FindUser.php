@@ -22,7 +22,7 @@ use Users\Application\Projector\RegisteredUsers;
  *
  * @see \Users\Application\Query\FindUserTest
  */
-class FindUser implements Query\EventListenerQuery
+final class FindUser implements Query\EventListenerQuery
 {
     private string $email;
 

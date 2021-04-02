@@ -24,7 +24,7 @@ use Streak\Domain\Exception\InvalidAggregateIdGiven;
  *
  * @covers \Productivity\Domain\Checklist\Factory
  */
-class FactoryTest extends TestCase
+final class FactoryTest extends TestCase
 {
     private Clock $clock;
 

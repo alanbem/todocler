@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
  *
  * @covers \Users\Infrastructure\PasswordHasher\SymfonyPasswordHasherAdapter
  */
-class SymfonyPasswordHasherAdapterTest extends TestCase
+final class SymfonyPasswordHasherAdapterTest extends TestCase
 {
     private EncoderFactoryInterface $factory;
     private PasswordEncoderInterface $encoder;

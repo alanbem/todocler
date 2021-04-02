@@ -21,7 +21,7 @@ use Users\Application\Projector\RegisteredUsers\Projector;
  *
  * @covers \Users\Application\Query\IsUserRegistered
  */
-class IsUserRegisteredTest extends TestCase
+final class IsUserRegisteredTest extends TestCase
 {
     public function testQuery() : void
     {

@@ -35,7 +35,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * @covers \Productivity\Application\Projector\Lists\Doctrine\Entity\Task
  * @covers \Shared\Application\Projector\Doctrine\EntityManagerProjector
  */
-class ProjectorTest extends KernelTestCase
+final class ProjectorTest extends KernelTestCase
 {
     private Lists\Projector $projector;
 

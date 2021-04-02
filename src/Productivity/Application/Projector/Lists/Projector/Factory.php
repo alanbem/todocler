@@ -23,7 +23,7 @@ use Streak\Domain\Exception\InvalidIdGiven;
  *
  * @see \Productivity\Application\Projector\Lists\Projector\FactoryTest
  */
-class Factory implements Event\Listener\Factory
+final class Factory implements Event\Listener\Factory
 {
     private EntityManagerInterface $manager;
 

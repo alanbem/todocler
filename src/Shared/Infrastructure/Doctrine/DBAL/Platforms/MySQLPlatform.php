@@ -20,7 +20,7 @@ use Doctrine\DBAL\Platforms\MySQL57Platform;
  *
  * @codeCoverageIgnore
  */
-class MySQLPlatform extends MySQL57Platform
+final class MySQLPlatform extends MySQL57Platform
 {
     public function getDateTimeTzFormatString()
     {

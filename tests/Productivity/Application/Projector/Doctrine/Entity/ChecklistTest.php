@@ -22,7 +22,7 @@ use Productivity\Application\Projector\Lists\Doctrine\Entity\Task;
  *
  * @covers \Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist
  */
-class ChecklistTest extends TestCase
+final class ChecklistTest extends TestCase
 {
     public function testList()
     {

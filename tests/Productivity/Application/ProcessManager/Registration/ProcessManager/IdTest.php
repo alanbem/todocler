@@ -21,7 +21,7 @@ use Productivity\Application\ProcessManager\Registration\ProcessManager;
  *
  * @covers \Productivity\Application\ProcessManager\Registration\ProcessManager\Id
  */
-class IdTest extends TestCase
+final class IdTest extends TestCase
 {
     public function testId() : void
     {

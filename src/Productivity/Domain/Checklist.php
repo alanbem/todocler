@@ -36,7 +36,7 @@ use Webmozart\Assert\Assert;
  * @see \Productivity\Application\Command\CompleteTaskTest
  * @see \Productivity\Application\Command\RemoveTaskTest
  */
-class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
+final class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
 {
     use Event\Sourced\AggregateRoot\Identification;
     use AggregateRoot\Comparison;

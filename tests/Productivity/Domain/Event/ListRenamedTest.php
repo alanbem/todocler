@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Event\ListRenamed
  */
-class ListRenamedTest extends TestCase
+final class ListRenamedTest extends TestCase
 {
     public function testEvent() : void
     {

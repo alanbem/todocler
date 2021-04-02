@@ -20,7 +20,7 @@ use Streak\Domain\Entity;
  *
  * @see \Productivity\Domain\Checklist\Task\IdTest
  */
-class Id implements Entity\Id
+final class Id implements Entity\Id
 {
     private string $value;
 

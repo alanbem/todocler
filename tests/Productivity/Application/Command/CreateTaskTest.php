@@ -32,7 +32,7 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
-class CreateTaskTest extends TestCase
+final class CreateTaskTest extends TestCase
 {
     private Clock $clock;
 

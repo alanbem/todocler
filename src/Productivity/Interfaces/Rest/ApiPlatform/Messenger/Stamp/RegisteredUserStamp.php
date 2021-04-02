@@ -20,7 +20,7 @@ use Symfony\Component\Messenger\Stamp\StampInterface;
  *
  * @see \Productivity\Interfaces\Rest\ApiPlatform\Messenger\Stamp\RegisteredUserStampTest
  */
-class RegisteredUserStamp implements StampInterface
+final class RegisteredUserStamp implements StampInterface
 {
     private object $user;
 

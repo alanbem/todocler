@@ -25,7 +25,7 @@ use Users\Domain\User;
  *
  * @see \Users\Domain\User\FactoryTest
  */
-class Factory implements AggregateRoot\Factory
+final class Factory implements AggregateRoot\Factory
 {
     private PasswordHasher $encoder;
     private SaltGenerator $saltshaker;

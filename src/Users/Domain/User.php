@@ -25,7 +25,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class User implements Event\Sourced\AggregateRoot, CommandHandler
+final class User implements Event\Sourced\AggregateRoot, CommandHandler
 {
     use Event\Sourced\AggregateRoot\Identification;
     use AggregateRoot\Comparison;
@@ -45,9 +45,9 @@ class User implements Event\Sourced\AggregateRoot, CommandHandler
         $this->clock = $clock;
     }
 
-    public function userId() : User\Id
+    public function userId() : string
     {
-        return $this->aggregateRootId();
+        return $this->aggregateRootId()->toString();
     }
 
     /**
@@ -61,7 +61,7 @@ class User implements Event\Sourced\AggregateRoot, CommandHandler
         $salt = $this->saltshaker->generate();
         $hash = $this->encoder->encode($command->password(), $salt);
 
-        $this->apply(new Events\UserRegistered($this->userId()->toString(), $command->email(), $hash, $salt, $this->clock->now()));
+        $this->apply(new Events\UserRegistered($this->userId(), $command->email(), $hash, $salt, $this->clock->now()));
     }
 
     /**

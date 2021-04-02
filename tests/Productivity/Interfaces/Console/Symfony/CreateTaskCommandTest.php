@@ -23,7 +23,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  * @covers \Productivity\Interfaces\Console\Symfony\CreateTaskCommand
  */
-class CreateTaskCommandTest extends TestCase
+final class CreateTaskCommandTest extends TestCase
 {
     private CommandBus $commands;
     private UsersFacade $facade;

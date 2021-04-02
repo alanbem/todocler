@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @covers \Productivity\Interfaces\Rest\ApiPlatform\Doctrine\Orm\Extension\AuthenticatedUserExtension
  */
-class AuthenticatedUserExtensionTest extends TestCase
+final class AuthenticatedUserExtensionTest extends TestCase
 {
     private Security $security;
     private UserInterface $user;
@@ -275,11 +275,11 @@ class AuthenticatedUserExtensionTest extends TestCase
 
 namespace Productivity\Interfaces\Rest\ApiPlatform\Doctrine\Orm\Extension\AuthenticatedUserExtensionTest;
 
-class ResourceWithUserIdAttribute
+final class ResourceWithUserIdAttribute
 {
     private string $userId;
 }
 
-class ResourceWithoutUserIdAttribute
+final class ResourceWithoutUserIdAttribute
 {
 }

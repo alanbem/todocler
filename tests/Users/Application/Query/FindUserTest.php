@@ -21,7 +21,7 @@ use Users\Application\Projector\RegisteredUsers\Projector;
  *
  * @covers \Users\Application\Query\FindUser
  */
-class FindUserTest extends TestCase
+final class FindUserTest extends TestCase
 {
     public function testQuery() : void
     {

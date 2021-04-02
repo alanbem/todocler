@@ -31,7 +31,7 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
-class RenameListTest extends TestCase
+final class RenameListTest extends TestCase
 {
     private Clock $clock;
 

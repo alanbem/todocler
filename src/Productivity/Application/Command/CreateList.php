@@ -20,7 +20,7 @@ use Streak\Application\Command;
  *
  * @see \Productivity\Application\Command\CreateListTest
  */
-class CreateList implements Command
+final class CreateList implements Command
 {
     private string $listId;
     private string $name;

@@ -22,7 +22,7 @@ use Productivity\Application\Projector\Lists\Doctrine\Entity\Task;
  *
  * @covers \Productivity\Application\Projector\Lists\Doctrine\Entity\Task
  */
-class TaskTest extends TestCase
+final class TaskTest extends TestCase
 {
     public function testTask()
     {

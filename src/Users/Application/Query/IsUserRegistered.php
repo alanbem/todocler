@@ -22,7 +22,7 @@ use Users\Application\Projector\RegisteredUsers;
  *
  * @see \Users\Application\Query\IsUserRegisteredTest
  */
-class IsUserRegistered implements Query\EventListenerQuery
+final class IsUserRegistered implements Query\EventListenerQuery
 {
     private string $email;
 

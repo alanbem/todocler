@@ -18,7 +18,7 @@ namespace Productivity\Domain\Exception;
  *
  * @see \Productivity\Domain\Exception\ListNotFoundTest
  */
-class ListNotFound extends \RuntimeException
+final class ListNotFound extends \RuntimeException
 {
     private string $listId;
 

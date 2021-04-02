@@ -34,7 +34,7 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
-class CompleteTaskTest extends TestCase
+final class CompleteTaskTest extends TestCase
 {
     private Clock $clock;
 

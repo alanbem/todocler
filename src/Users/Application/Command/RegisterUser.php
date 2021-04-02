@@ -20,7 +20,7 @@ use Streak\Application\Command;
  *
  * @see \Users\Application\Command\RegisterUserTest
  */
-class RegisterUser implements Command
+final class RegisterUser implements Command
 {
     private string $userId;
     private string $email;

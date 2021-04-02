@@ -18,7 +18,7 @@ namespace Productivity\Domain\Exception;
  *
  * @see \Productivity\Domain\Exception\TaskNotFoundTest
  */
-class TaskNotFound extends \RuntimeException
+final class TaskNotFound extends \RuntimeException
 {
     private string $listId;
     private string $taskId;

@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
  *
  * @see \Users\Infrastructure\SaltGenerator\FixedSaltGeneratorTest
  */
-class FixedSaltGenerator implements SaltGenerator
+final class FixedSaltGenerator implements SaltGenerator
 {
     private string $salt;
 

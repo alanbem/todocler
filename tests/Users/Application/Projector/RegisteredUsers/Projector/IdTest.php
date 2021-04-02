@@ -21,7 +21,7 @@ use Users\Application\Projector\RegisteredUsers\Projector;
  *
  * @covers \Users\Application\Projector\RegisteredUsers\Projector\Id
  */
-class IdTest extends TestCase
+final class IdTest extends TestCase
 {
     public function testId() : void
     {

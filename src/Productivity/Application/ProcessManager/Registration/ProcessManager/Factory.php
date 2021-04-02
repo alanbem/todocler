@@ -24,7 +24,7 @@ use Streak\Domain\Exception\InvalidIdGiven;
  *
  * @see \Productivity\Application\ProcessManager\Registration\ProcessManager\FactoryTest
  */
-class Factory implements Listener\Factory
+final class Factory implements Listener\Factory
 {
     private CommandBus $bus;
     private string $name;

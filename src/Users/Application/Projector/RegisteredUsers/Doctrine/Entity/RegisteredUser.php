@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @see \Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUserTest
  */
-class RegisteredUser implements UserInterface
+final class RegisteredUser implements UserInterface
 {
     private string $id;
     private string $username;

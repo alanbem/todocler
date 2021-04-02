@@ -22,7 +22,7 @@ use Streak\Domain\AggregateRoot;
  *
  * @see \Productivity\Application\Command\RenameListTest
  */
-class RenameList implements Command\AggregateRootCommand
+final class RenameList implements Command\AggregateRootCommand
 {
     private string $listId;
     private string $name;
