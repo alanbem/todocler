@@ -4,8 +4,10 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
       createdAt: asc
     pagination_items_per_page: 25
     filters:
-      - productivity.filters.filter_by_authenticated_user
       - productivity.filters.order_by_created_at
+      - productivity.filters.filter_by_completed
+      - productivity.filters.filter_by_created_at
+      - productivity.filters.filter_by_list_id
   collectionOperations:
     get:
       method: GET
@@ -36,7 +38,7 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
       openapi_context:
         summary: Retrieves the task
     complete:
-      method: PATCH
+      method: POST
       path: /tasks/{id}/complete
       status: 202
       messenger: input
@@ -51,3 +53,20 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
         groups: [ 'tasks.complete' ]
       openapi_context:
         summary: Completes the task
+    delete:
+      method: DELETE
+      status: 202
+      messenger: input
+      # input option is not working with DELETE - api platform sends resource object with delete-stamp instead
+      input: Productivity\Interfaces\Rest\ApiPlatform\DTO\RemoveTask
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      serialize: true
+      normalization_context:
+        groups: [ 'tasks.delete' ]
+      openapi_context:
+        summary: Removes the task
+

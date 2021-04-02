@@ -19,3 +19,46 @@ services:
       - '@api_platform.name_converter'
     tags:
       - api_platform.filter
+
+  productivity.filters.filter_by_completed:
+    class: ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter
+    arguments:
+      - '@Doctrine\Common\Persistence\ManagerRegistry'
+      - '@Symfony\Component\HttpFoundation\RequestStack'
+      - '@Psr\Log\LoggerInterface'
+      - { completed: ~ }
+      - '@api_platform.name_converter'
+    tags:
+      - api_platform.filter
+
+  productivity.filters.filter_by_created_at:
+    class: ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter
+    arguments:
+      - '@Doctrine\Common\Persistence\ManagerRegistry'
+      - '@Symfony\Component\HttpFoundation\RequestStack'
+      - '@Psr\Log\LoggerInterface'
+      - { createdAt: ~ }
+      - '@api_platform.name_converter'
+    tags:
+      - api_platform.filter
+
+  productivity.filters.filter_by_list_id:
+    class: ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter
+    arguments:
+      - '@Doctrine\Common\Persistence\ManagerRegistry'
+      - '@Symfony\Component\HttpFoundation\RequestStack'
+      - '@api_platform.iri_converter'
+      - '@api_platform.property_accessor'
+      - '@Psr\Log\LoggerInterface'
+      - { list.id: ~ }
+      - '@api_platform.identifiers_extractor'
+      - '@api_platform.name_converter'
+    tags:
+      - api_platform.filter
+
+  productivity.openapi.decorator:
+    class: Productivity\Interfaces\Rest\ApiPlatform\OpenApi\JWTAuthenticationDecorator
+    arguments:
+      - '@productivity.openapi.decorator.inner'
+      - '/auth/token'
+    decorates: 'api_platform.openapi.factory'

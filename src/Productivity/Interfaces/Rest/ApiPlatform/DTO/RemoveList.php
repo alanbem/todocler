@@ -16,7 +16,6 @@ namespace Productivity\Interfaces\Rest\ApiPlatform\DTO;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-final class RenameList
+final class RemoveList
 {
-    public string $name = '';
 }

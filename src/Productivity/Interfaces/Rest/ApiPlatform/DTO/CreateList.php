@@ -16,7 +16,7 @@ namespace Productivity\Interfaces\Rest\ApiPlatform\DTO;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class CreateList
+final class CreateList
 {
     public string $listId;
     public string $name;

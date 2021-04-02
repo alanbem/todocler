@@ -1,19 +1,27 @@
 api_platform:
+  title: 'TODOcler API'
+  description: 'Over-engineered TODO application.'
+  doctrine:
+    enabled: true
   mapping:
     paths:
       - '%kernel.project_dir%/src/Productivity/Interfaces/Rest/ApiPlatform/config/resources'
   formats:
     json:     ['application/json']
-    jsonapi:  ['application/vnd.api+json']
     jsonld:   ['application/ld+json']
+    jsonapi:  ['application/vnd.api+json']
   patch_formats:
     json:    ['application/merge-patch+json']
+    jsonld:  [ 'application/ld+json' ]
     jsonapi: ['application/vnd.api+json']
-    jsonld: [ 'application/ld+json' ]
   error_formats:
     jsonapi: ['application/vnd.api+json']
   swagger:
     versions: [ 3 ]
+    api_keys:
+      apiKey:
+        name: Authorization
+        type: header
   enable_swagger_ui: false
   enable_re_doc: false
   exception_to_status:
@@ -22,3 +30,4 @@ api_platform:
     Productivity\Domain\Exception\TaskAlreadyExists: 400
     Productivity\Domain\Exception\TaskNotFound: 404
     Productivity\Domain\Exception\UserNotAllowed: 400
+    Productivity\Application\Command\CreateListTest: 400

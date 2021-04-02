@@ -14,11 +14,20 @@ security:
     api:
       pattern: ^/api
       stateless: true
+      anonymous: true
       provider: registered_users
-      http_basic:
-        realm: ToDocler API
+      guard:
+        authenticators:
+          - lexik_jwt_authentication.jwt_token_authenticator
     main:
-      security: false
+      anonymous: true
+      json_login:
+        check_path: /auth/token
+        username_path: email
+        password_path: password
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
   access_control:
+    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

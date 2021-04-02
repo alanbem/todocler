@@ -52,6 +52,14 @@ class Projector extends Doctrine\EntityManagerProjector implements Event\Picker,
         $list->rename($event->name(), $event->modifiedAt());
     }
 
+    public function onListRemoved(Events\ListRemoved $event) : void
+    {
+        /** @var Entity\Checklist $list */
+        $list = $this->manager->getRepository(Entity\Checklist::class)->find($event->listId());
+
+        $this->manager->remove($list);
+    }
+
     public function onTaskCreated(Events\TaskCreated $event) : void
     {
         /** @var Entity\Checklist $list */
@@ -64,6 +72,14 @@ class Projector extends Doctrine\EntityManagerProjector implements Event\Picker,
         /** @var Entity\Task $list */
         $task = $this->manager->getRepository(Entity\Task::class)->find($event->taskId());
         $task->complete($event->completedAt());
+    }
+
+    public function onTaskRemoved(Events\TaskRemoved $event) : void
+    {
+        /** @var Entity\Task $list */
+        $task = $this->manager->getRepository(Entity\Task::class)->find($event->taskId());
+
+        $this->manager->remove($task);
     }
 
     /**

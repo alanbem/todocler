@@ -59,6 +59,8 @@ HEADER
         PhpCsFixer\Finder::create()
             ->exclude('var')
             ->in(__DIR__)
+            ->exclude('config')
+            ->in(__DIR__)
     );
 
 return $config;

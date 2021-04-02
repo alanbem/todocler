@@ -6,6 +6,7 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
         - 'lists.read'
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'
     userId:
       ignore: ~
     name:
@@ -14,19 +15,24 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
         - 'lists.read'
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'
     updatedAt:
       groups:
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'
     createdAt:
       groups:
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'
     completed:
       groups:
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'
     list:
       groups:
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'

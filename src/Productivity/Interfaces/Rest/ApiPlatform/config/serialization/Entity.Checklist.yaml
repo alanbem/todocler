@@ -6,6 +6,7 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
         - 'lists.read'
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'
     userId:
       ignore: ~
     name:
@@ -14,6 +15,7 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
         - 'lists.read'
         - 'tasks.browse'
         - 'tasks.read'
+        - 'lists.tasks.browse'
     updatedAt:
       groups:
         - 'lists.browse'

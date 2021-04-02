@@ -16,7 +16,7 @@ namespace Productivity\Interfaces\Rest\ApiPlatform\DTO;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class CreateTask
+final class CreateTask
 {
     public string $taskId;
     public string $listId;

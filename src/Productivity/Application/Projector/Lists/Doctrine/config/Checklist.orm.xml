@@ -14,6 +14,7 @@
         <one-to-many field="tasks" target-entity="Productivity\Application\Projector\Lists\Doctrine\Entity\Task" mapped-by="list">
             <cascade>
                 <cascade-persist />
+                <cascade-remove />
             </cascade>
         </one-to-many>
         <indexes>

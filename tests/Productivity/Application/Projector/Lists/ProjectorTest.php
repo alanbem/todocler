@@ -18,9 +18,11 @@ use Productivity\Application\Projector\Lists;
 use Productivity\Application\Query as Queries;
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
+use Productivity\Domain\Event\ListRemoved;
 use Productivity\Domain\Event\ListRenamed;
 use Productivity\Domain\Event\TaskCompleted;
 use Productivity\Domain\Event\TaskCreated;
+use Productivity\Domain\Event\TaskRemoved;
 use Streak\Domain\Event\Envelope;
 use Streak\Infrastructure\EventStore\InMemoryEventStore;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -55,10 +57,10 @@ class ProjectorTest extends KernelTestCase
         $this->assertEmpty($lists);
         $this->assertEmpty($tasks);
 
-        $event = Envelope::new(new ListCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', $created = new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
+        $event = Envelope::new(new ListCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
         $this->projector->on($event);
 
-        $event = Envelope::new(new ListRenamed('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'List #1', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', $updated = new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 2);
+        $event = Envelope::new(new ListRenamed('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'List #1', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 2);
         $this->projector->on($event);
 
         $event = Envelope::new(new TaskCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '10a6fea1-6f39-4a65-bfa2-4d84b34a277a', 'List #1 - Task #1', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 3);
@@ -73,10 +75,10 @@ class ProjectorTest extends KernelTestCase
         $event = Envelope::new(new TaskCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '77aa67fd-4b63-4545-b650-46f691f22000', 'List #1 - Task #3', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 6);
         $this->projector->on($event);
 
-        $event = Envelope::new(new ListCreated('39763bae-d28d-41a3-b360-758a10fcad27', 'My first list', '39763bae-d28d-41a3-b360-758a10fcad27', $created = new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 1);
+        $event = Envelope::new(new ListCreated('39763bae-d28d-41a3-b360-758a10fcad27', 'My first list', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 1);
         $this->projector->on($event);
 
-        $event = Envelope::new(new ListRenamed('39763bae-d28d-41a3-b360-758a10fcad27', 'List #2', '39763bae-d28d-41a3-b360-758a10fcad27', $updated = new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 2);
+        $event = Envelope::new(new ListRenamed('39763bae-d28d-41a3-b360-758a10fcad27', 'List #2', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 2);
         $this->projector->on($event);
 
         $event = Envelope::new(new TaskCreated('39763bae-d28d-41a3-b360-758a10fcad27', '63665679-a039-4349-b535-f50f35859b3b', 'List #2 - Task #1', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 3);
@@ -88,7 +90,7 @@ class ProjectorTest extends KernelTestCase
         $event = Envelope::new(new TaskCreated('39763bae-d28d-41a3-b360-758a10fcad27', 'abc72ff4-0892-4b9f-b247-d1cf9781313b', 'List #2 - Task #3', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 5);
         $this->projector->on($event);
 
-        $event = Envelope::new(new ListCreated('214d95cc-9c91-4b31-ba3f-60c31cbac370', 'List #3', '39763bae-d28d-41a3-b360-758a10fcad27', $created = new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 1);
+        $event = Envelope::new(new ListCreated('214d95cc-9c91-4b31-ba3f-60c31cbac370', 'List #3', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 1);
         $this->projector->on($event);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
@@ -108,6 +110,105 @@ class ProjectorTest extends KernelTestCase
 
         $this->assertCount(2, $lists);
         $this->assertCount(3, $tasks);
+
+        $event = Envelope::new(new TaskRemoved('39763bae-d28d-41a3-b360-758a10fcad27', '63665679-a039-4349-b535-f50f35859b3b', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 5);
+        $this->projector->on($event);
+
+        $event = Envelope::new(new TaskRemoved('39763bae-d28d-41a3-b360-758a10fcad27', '71ee2742-30f1-4400-86ba-0ea1076e31e7', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 5);
+        $this->projector->on($event);
+
+        $event = Envelope::new(new TaskRemoved('39763bae-d28d-41a3-b360-758a10fcad27', 'abc72ff4-0892-4b9f-b247-d1cf9781313b', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 5);
+        $this->projector->on($event);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
+
+        $this->assertCount(3, $lists);
+        $this->assertCount(3, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+
+        $this->assertCount(1, $lists);
+        $this->assertCount(3, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
+
+        $this->assertCount(2, $lists);
+        $this->assertCount(0, $tasks);
+
+        $event = Envelope::new(new TaskRemoved('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '10a6fea1-6f39-4a65-bfa2-4d84b34a277a', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 3);
+        $this->projector->on($event);
+
+        $event = Envelope::new(new TaskRemoved('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '60492a0b-912d-4873-8c08-653b70398a13', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 5);
+        $this->projector->on($event);
+
+        $event = Envelope::new(new TaskRemoved('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '77aa67fd-4b63-4545-b650-46f691f22000', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 6);
+        $this->projector->on($event);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
+
+        $this->assertCount(3, $lists);
+        $this->assertCount(0, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+
+        $this->assertCount(1, $lists);
+        $this->assertCount(0, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
+
+        $this->assertCount(2, $lists);
+        $this->assertCount(0, $tasks);
+
+        $event = Envelope::new(new ListRemoved('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
+        $this->projector->on($event);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
+
+        $this->assertCount(2, $lists);
+        $this->assertCount(0, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+
+        $this->assertCount(0, $lists);
+        $this->assertCount(0, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
+
+        $this->assertCount(2, $lists);
+        $this->assertCount(0, $tasks);
+
+        $event = Envelope::new(new ListRemoved('39763bae-d28d-41a3-b360-758a10fcad27', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 1);
+        $this->projector->on($event);
+
+        $event = Envelope::new(new ListRemoved('214d95cc-9c91-4b31-ba3f-60c31cbac370', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 1);
+        $this->projector->on($event);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
+
+        $this->assertCount(0, $lists);
+        $this->assertCount(0, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+
+        $this->assertCount(0, $lists);
+        $this->assertCount(0, $tasks);
+
+        $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
+        $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
+
+        $this->assertCount(0, $lists);
+        $this->assertCount(0, $tasks);
     }
 
     public function testPickingFirstEvent()
