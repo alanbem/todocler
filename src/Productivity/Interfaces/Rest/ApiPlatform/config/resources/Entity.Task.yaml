@@ -26,8 +26,6 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
       validate: true
       write: true
       serialize: true
-      normalization_context:
-        groups: [ 'tasks.create' ]
       openapi_context:
         summary: Create new list
   itemOperations:
@@ -40,6 +38,7 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
     complete:
       method: POST
       path: /tasks/{id}/complete
+      controller: api_platform.action.placeholder
       status: 202
       messenger: input
       input: Productivity\Interfaces\Rest\ApiPlatform\DTO\CompleteTask
@@ -49,8 +48,6 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
       validate: true
       write: true
       serialize: true
-      normalization_context:
-        groups: [ 'tasks.complete' ]
       openapi_context:
         summary: Completes the task
     delete:
@@ -65,8 +62,6 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
       validate: true
       write: true
       serialize: true
-      normalization_context:
-        groups: [ 'tasks.delete' ]
       openapi_context:
         summary: Removes the task
 

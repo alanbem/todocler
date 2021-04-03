@@ -11,26 +11,26 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
+use Productivity\Domain\Checklist;
 use Streak\Application\Command;
+use Streak\Domain\AggregateRoot;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Productivity\Application\Command\CreateListTest
+ * @see \Productivity\Domain\Command\RemoveListTest
  */
-final class CreateList implements Command
+final class RemoveList implements Command\AggregateRootCommand
 {
     private string $listId;
-    private string $name;
-    private string $creatorId;
+    private string $removerId;
 
-    public function __construct(string $listId, string $name, string $creatorId)
+    public function __construct(string $listId, string $removerId)
     {
         $this->listId = $listId;
-        $this->name = $name;
-        $this->creatorId = $creatorId;
+        $this->removerId = $removerId;
     }
 
     public function listId() : string
@@ -38,13 +38,13 @@ final class CreateList implements Command
         return $this->listId;
     }
 
-    public function name() : string
+    public function removerId() : string
     {
-        return $this->name;
+        return $this->removerId;
     }
 
-    public function creatorId() : string
+    public function aggregateRootId() : AggregateRoot\Id
     {
-        return $this->creatorId;
+        return new Checklist\Id($this->listId);
     }
 }

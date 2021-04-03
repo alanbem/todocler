@@ -26,20 +26,20 @@ final class RegisteredUserTest extends TestCase
     {
         $user = new RegisteredUser('c4b6d1ee-f7f3-4a41-9cae-cae4e29403e6', 'alan.bem@example.com', 'password', 'salt', $now = new \DateTimeImmutable());
 
-        $this->assertSame('c4b6d1ee-f7f3-4a41-9cae-cae4e29403e6', $user->getId());
-        $this->assertSame('alan.bem@example.com', $user->getUsername());
-        $this->assertSame('password', $user->getPassword());
-        $this->assertSame('salt', $user->getSalt());
-        $this->assertSame([], $user->getRoles());
-        $this->assertSame($now, $user->getRegisteredAt());
+        self::assertSame('c4b6d1ee-f7f3-4a41-9cae-cae4e29403e6', $user->getId());
+        self::assertSame('alan.bem@example.com', $user->getUsername());
+        self::assertSame('password', $user->getPassword());
+        self::assertSame('salt', $user->getSalt());
+        self::assertSame([], $user->getRoles());
+        self::assertSame($now, $user->getRegisteredAt());
 
         $user->eraseCredentials();
 
-        $this->assertSame('c4b6d1ee-f7f3-4a41-9cae-cae4e29403e6', $user->getId());
-        $this->assertSame('alan.bem@example.com', $user->getUsername());
-        $this->assertSame('', $user->getPassword());
-        $this->assertSame('', $user->getSalt());
-        $this->assertSame([], $user->getRoles());
-        $this->assertSame($now, $user->getRegisteredAt());
+        self::assertSame('c4b6d1ee-f7f3-4a41-9cae-cae4e29403e6', $user->getId());
+        self::assertSame('alan.bem@example.com', $user->getUsername());
+        self::assertSame('', $user->getPassword());
+        self::assertSame('', $user->getSalt());
+        self::assertSame([], $user->getRoles());
+        self::assertSame($now, $user->getRegisteredAt());
     }
 }

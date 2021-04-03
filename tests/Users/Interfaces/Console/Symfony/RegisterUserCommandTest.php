@@ -17,8 +17,8 @@ use PHPUnit\Framework\TestCase;
 use Streak\Application\CommandBus;
 use Streak\Application\QueryBus;
 use Symfony\Component\Console\Tester\CommandTester;
-use Users\Application\Command as Commands;
 use Users\Application\Query as Queries;
+use Users\Domain\Command as Commands;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
@@ -39,13 +39,13 @@ final class RegisterUserCommandTest extends TestCase
     public function testCommand() : void
     {
         $this->queries
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(new Queries\IsUserRegistered('alan.bem@example.com'))
             ->willReturn(false);
 
         $this->commands
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(new Commands\RegisterUser('21b80428-b0b7-4dab-8a07-d008fe32fe1f', 'alan.bem@example.com', 'password'));
 
@@ -58,20 +58,20 @@ final class RegisterUserCommandTest extends TestCase
             'password' => 'password',
         ]);
 
-        $this->assertSame('User "alan.bem@example.com" registered successfully.'.PHP_EOL, $tester->getDisplay());
-        $this->assertSame(0, $tester->getStatusCode());
+        self::assertSame('User "alan.bem@example.com" registered successfully.'.PHP_EOL, $tester->getDisplay());
+        self::assertSame(0, $tester->getStatusCode());
     }
 
     public function testCommandWhenQueryFails() : void
     {
         $this->queries
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(new Queries\IsUserRegistered('alan.bem@example.com'))
             ->willThrowException(new \RuntimeException('test'));
 
         $this->commands
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(new Commands\RegisterUser('21b80428-b0b7-4dab-8a07-d008fe32fe1f', 'alan.bem@example.com', 'password'));
 
@@ -84,20 +84,20 @@ final class RegisterUserCommandTest extends TestCase
             'password' => 'password',
         ]);
 
-        $this->assertSame('User "alan.bem@example.com" registered successfully.'.PHP_EOL, $tester->getDisplay());
-        $this->assertSame(0, $tester->getStatusCode());
+        self::assertSame('User "alan.bem@example.com" registered successfully.'.PHP_EOL, $tester->getDisplay());
+        self::assertSame(0, $tester->getStatusCode());
     }
 
     public function testCommandIfUserAlreadyRegistered() : void
     {
         $this->queries
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(new Queries\IsUserRegistered('alan.bem@example.com'))
             ->willReturn(true);
 
         $this->commands
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('dispatch');
 
         $command = new RegisterUserCommand($this->commands, $this->queries);
@@ -109,7 +109,7 @@ final class RegisterUserCommandTest extends TestCase
             'password' => 'password',
         ]);
 
-        $this->assertSame('User with given email is already registered.'.PHP_EOL, $tester->getDisplay());
-        $this->assertSame(1, $tester->getStatusCode());
+        self::assertSame('User with given email is already registered.'.PHP_EOL, $tester->getDisplay());
+        self::assertSame(1, $tester->getStatusCode());
     }
 }

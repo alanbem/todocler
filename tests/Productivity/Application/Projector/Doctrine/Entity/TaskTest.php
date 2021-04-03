@@ -29,18 +29,18 @@ final class TaskTest extends TestCase
         $list = new Checklist('f45a75db-670c-4116-bf97-b8cd07eb09d0', 'List #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', new \DateTimeImmutable(), new \DateTimeImmutable());
         $task = new Task($list, '1d3db856-d874-4bc5-a41e-4268007bf6cd', 'Task #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $updated = new \DateTimeImmutable(), $created = new \DateTimeImmutable());
 
-        $this->assertSame($list, $task->getList());
-        $this->assertSame('1d3db856-d874-4bc5-a41e-4268007bf6cd', $task->getId());
-        $this->assertSame('Task #1', $task->getName());
-        $this->assertSame('4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $task->getUserId());
-        $this->assertSame($updated, $task->getUpdatedAt());
-        $this->assertSame($created, $task->getCreatedAt());
+        self::assertSame($list, $task->getList());
+        self::assertSame('1d3db856-d874-4bc5-a41e-4268007bf6cd', $task->getId());
+        self::assertSame('Task #1', $task->getName());
+        self::assertSame('4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $task->getUserId());
+        self::assertSame($updated, $task->getUpdatedAt());
+        self::assertSame($created, $task->getCreatedAt());
 
-        $this->assertFalse($task->isCompleted());
+        self::assertFalse($task->isCompleted());
 
         $task->complete($updated = new \DateTimeImmutable());
 
-        $this->assertTrue($task->isCompleted());
-        $this->assertSame($updated, $task->getUpdatedAt());
+        self::assertTrue($task->isCompleted());
+        self::assertSame($updated, $task->getUpdatedAt());
     }
 }

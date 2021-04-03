@@ -40,7 +40,7 @@ final class FactoryTest extends TestCase
 
         $aggregate = $factory->create($id);
 
-        $this->assertEquals(new Checklist($id, $this->clock), $aggregate);
+        self::assertEquals(new Checklist($id, $this->clock), $aggregate);
     }
 
     public function testWrongId()

@@ -50,7 +50,7 @@ final class ProjectorTest extends KernelTestCase
         // no user
         $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
 
-        $this->assertFalse($exists);
+        self::assertFalse($exists);
 
         // freshly registered user
         $event = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now = new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
@@ -59,8 +59,8 @@ final class ProjectorTest extends KernelTestCase
         $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
         $user = $this->projector->handleQuery(new FindUser('alan.bem@example.com'));
 
-        $this->assertTrue($exists);
-        $this->assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
+        self::assertTrue($exists);
+        self::assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
 
         // check protection for 1 in a million chance of registration of same user/email
         $event = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'alan.bem@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
@@ -69,8 +69,8 @@ final class ProjectorTest extends KernelTestCase
         $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
         $user = $this->projector->handleQuery(new FindUser('alan.bem@example.com'));
 
-        $this->assertTrue($exists);
-        $this->assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
+        self::assertTrue($exists);
+        self::assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
     }
 
     public function testPickingFirstEvent()
@@ -84,6 +84,6 @@ final class ProjectorTest extends KernelTestCase
         $store->add($event1, $event2, $event3, $event4);
         $picked = $this->projector->pick($store);
 
-        $this->assertTrue($picked->equals($event1));
+        self::assertTrue($picked->equals($event1));
     }
 }

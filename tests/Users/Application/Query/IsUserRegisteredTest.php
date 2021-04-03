@@ -27,7 +27,7 @@ final class IsUserRegisteredTest extends TestCase
     {
         $query = new IsUserRegistered('alan.bem@example.com');
 
-        $this->assertSame('alan.bem@example.com', $query->email());
-        $this->assertEquals(new Projector\Id(), $query->listenerId());
+        self::assertSame('alan.bem@example.com', $query->email());
+        self::assertEquals(new Projector\Id(), $query->listenerId());
     }
 }

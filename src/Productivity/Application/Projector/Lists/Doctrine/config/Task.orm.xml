@@ -4,6 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
     <entity name="Productivity\Application\Projector\Lists\Doctrine\Entity\Task" table="tasks">
+        <id name="list" association-key="true" />
         <id name="id" type="guid" column="id">
             <generator strategy="NONE"/>
         </id>

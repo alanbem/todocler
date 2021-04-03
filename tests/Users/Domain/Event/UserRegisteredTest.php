@@ -26,11 +26,11 @@ final class UserRegisteredTest extends TestCase
     {
         $event = new UserRegistered('user-1', 'alan.bem@example.com', 'hash', 'salt', $now = new \DateTimeImmutable());
 
-        $this->assertSame('user-1', $event->userId());
-        $this->assertSame('alan.bem@example.com', $event->email());
-        $this->assertSame('hash', $event->passwordHash());
-        $this->assertSame('salt', $event->salt());
-        $this->assertEquals($now, $event->registeredAt());
-        $this->assertNotSame($now, $event->registeredAt());
+        self::assertSame('user-1', $event->userId());
+        self::assertSame('alan.bem@example.com', $event->email());
+        self::assertSame('hash', $event->passwordHash());
+        self::assertSame('salt', $event->salt());
+        self::assertEquals($now, $event->registeredAt());
+        self::assertNotSame($now, $event->registeredAt());
     }
 }

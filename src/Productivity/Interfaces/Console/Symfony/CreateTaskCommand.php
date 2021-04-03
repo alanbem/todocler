@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Productivity\Interfaces\Console\Symfony;
 
-use Productivity\Application\Command\CreateTask;
+use Productivity\Domain\Command\CreateTask;
 use Productivity\UsersFacade;
 use Streak\Application\CommandBus;
 use Symfony\Component\Console\Command\Command;

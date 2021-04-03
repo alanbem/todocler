@@ -26,8 +26,8 @@ final class TaskNotFoundTest extends TestCase
     {
         $exception = new TaskNotFound('list-1', 'task-1');
 
-        $this->assertSame('Task "task-1" not found.', $exception->getMessage());
-        $this->assertSame('list-1', $exception->listId());
-        $this->assertSame('task-1', $exception->taskId());
+        self::assertSame('Task "task-1" not found.', $exception->getMessage());
+        self::assertSame('list-1', $exception->listId());
+        self::assertSame('task-1', $exception->taskId());
     }
 }

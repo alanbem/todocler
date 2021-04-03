@@ -27,11 +27,11 @@ final class FixedSaltGeneratorTest extends TestCase
         $generator = new FixedSaltGenerator('fixed-salt-1');
         $salt = $generator->generate();
 
-        $this->assertSame('fixed-salt-1', $salt);
+        self::assertSame('fixed-salt-1', $salt);
 
         $generator = new FixedSaltGenerator('fixed-salt-2');
         $salt = $generator->generate();
 
-        $this->assertSame('fixed-salt-2', $salt);
+        self::assertSame('fixed-salt-2', $salt);
     }
 }

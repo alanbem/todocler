@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
 use Productivity\Domain\Checklist;
 use Streak\Application\Command;
@@ -20,7 +20,7 @@ use Streak\Domain\AggregateRoot;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Productivity\Application\Command\RenameListTest
+ * @see \Productivity\Domain\Command\RenameListTest
  */
 final class RenameList implements Command\AggregateRootCommand
 {

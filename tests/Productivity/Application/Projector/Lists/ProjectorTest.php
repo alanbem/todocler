@@ -54,8 +54,8 @@ final class ProjectorTest extends KernelTestCase
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
 
-        $this->assertEmpty($lists);
-        $this->assertEmpty($tasks);
+        self::assertEmpty($lists);
+        self::assertEmpty($tasks);
 
         $event = Envelope::new(new ListCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
         $this->projector->on($event);
@@ -96,20 +96,20 @@ final class ProjectorTest extends KernelTestCase
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
 
-        $this->assertCount(3, $lists);
-        $this->assertCount(6, $tasks);
+        self::assertCount(3, $lists);
+        self::assertCount(6, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
 
-        $this->assertCount(1, $lists);
-        $this->assertCount(3, $tasks);
+        self::assertCount(1, $lists);
+        self::assertCount(3, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
 
-        $this->assertCount(2, $lists);
-        $this->assertCount(3, $tasks);
+        self::assertCount(2, $lists);
+        self::assertCount(3, $tasks);
 
         $event = Envelope::new(new TaskRemoved('39763bae-d28d-41a3-b360-758a10fcad27', '63665679-a039-4349-b535-f50f35859b3b', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 5);
         $this->projector->on($event);
@@ -123,20 +123,20 @@ final class ProjectorTest extends KernelTestCase
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
 
-        $this->assertCount(3, $lists);
-        $this->assertCount(3, $tasks);
+        self::assertCount(3, $lists);
+        self::assertCount(3, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
 
-        $this->assertCount(1, $lists);
-        $this->assertCount(3, $tasks);
+        self::assertCount(1, $lists);
+        self::assertCount(3, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
 
-        $this->assertCount(2, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(2, $lists);
+        self::assertCount(0, $tasks);
 
         $event = Envelope::new(new TaskRemoved('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '10a6fea1-6f39-4a65-bfa2-4d84b34a277a', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 3);
         $this->projector->on($event);
@@ -150,20 +150,20 @@ final class ProjectorTest extends KernelTestCase
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
 
-        $this->assertCount(3, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(3, $lists);
+        self::assertCount(0, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
 
-        $this->assertCount(1, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(1, $lists);
+        self::assertCount(0, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
 
-        $this->assertCount(2, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(2, $lists);
+        self::assertCount(0, $tasks);
 
         $event = Envelope::new(new ListRemoved('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
         $this->projector->on($event);
@@ -171,20 +171,20 @@ final class ProjectorTest extends KernelTestCase
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
 
-        $this->assertCount(2, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(2, $lists);
+        self::assertCount(0, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
 
-        $this->assertCount(0, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(0, $lists);
+        self::assertCount(0, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
 
-        $this->assertCount(2, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(2, $lists);
+        self::assertCount(0, $tasks);
 
         $event = Envelope::new(new ListRemoved('39763bae-d28d-41a3-b360-758a10fcad27', '39763bae-d28d-41a3-b360-758a10fcad27', new \DateTimeImmutable()), new Checklist\Id('39763bae-d28d-41a3-b360-758a10fcad27'), 1);
         $this->projector->on($event);
@@ -195,20 +195,20 @@ final class ProjectorTest extends KernelTestCase
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists());
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks());
 
-        $this->assertCount(0, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(0, $lists);
+        self::assertCount(0, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
 
-        $this->assertCount(0, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(0, $lists);
+        self::assertCount(0, $tasks);
 
         $lists = $this->projector->handleQuery(new Queries\BrowseChecklists('39763bae-d28d-41a3-b360-758a10fcad27'));
         $tasks = $this->projector->handleQuery(new Queries\BrowseTasks('39763bae-d28d-41a3-b360-758a10fcad27'));
 
-        $this->assertCount(0, $lists);
-        $this->assertCount(0, $tasks);
+        self::assertCount(0, $lists);
+        self::assertCount(0, $tasks);
     }
 
     public function testPickingFirstEvent()
@@ -222,6 +222,6 @@ final class ProjectorTest extends KernelTestCase
         $store->add($event1, $event2, $event3, $event4);
         $picked = $this->projector->pick($store);
 
-        $this->assertTrue($picked->equals($event1));
+        self::assertTrue($picked->equals($event1));
     }
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Productivity\Application\Command;
 
 use Productivity\Domain\Checklist;
+use Productivity\Domain\Command\CreateList;
 use Streak\Application\Command;
 use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;

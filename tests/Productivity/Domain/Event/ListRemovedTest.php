@@ -26,9 +26,9 @@ final class ListRemovedTest extends TestCase
     {
         $event = new ListRemoved('list-1', 'user-1', $now = new \DateTimeImmutable());
 
-        $this->assertSame('list-1', $event->listId());
-        $this->assertSame('user-1', $event->removerId());
-        $this->assertEquals($now, $event->removedAt());
-        $this->assertNotSame($now, $event->removedAt());
+        self::assertSame('list-1', $event->listId());
+        self::assertSame('user-1', $event->removerId());
+        self::assertEquals($now, $event->removedAt());
+        self::assertNotSame($now, $event->removedAt());
     }
 }

@@ -26,10 +26,10 @@ final class ListRenamedTest extends TestCase
     {
         $event = new ListRenamed('list-1', 'name', 'editor-1', $now = new \DateTimeImmutable());
 
-        $this->assertSame('list-1', $event->listId());
-        $this->assertSame('name', $event->name());
-        $this->assertSame('editor-1', $event->editorId());
-        $this->assertEquals($now, $event->modifiedAt());
-        $this->assertNotSame($now, $event->modifiedAt());
+        self::assertSame('list-1', $event->listId());
+        self::assertSame('name', $event->name());
+        self::assertSame('editor-1', $event->editorId());
+        self::assertEquals($now, $event->modifiedAt());
+        self::assertNotSame($now, $event->modifiedAt());
     }
 }

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware;
 
 use PHPUnit\Framework\TestCase;
-use Productivity\Application\Command as Commands;
+use Productivity\Domain\Command as Commands;
 use Productivity\Interfaces\Rest\ApiPlatform\DTO as DTOs;
 use Productivity\Interfaces\Rest\ApiPlatform\Messenger\Stamp\RegisteredUserStamp;
 use Symfony\Component\Messenger\Envelope;
@@ -38,14 +38,14 @@ final class CreateTaskTransformingMiddlewareTest extends TestCase
         $this->next = $this->createMock(MiddlewareInterface::class);
 
         $this->stack
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('next')
             ->willReturn($this->next);
 
         $this->next
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('handle')
-            ->with($this->isInstanceOf(Envelope::class), $this->stack)
+            ->with(self::isInstanceOf(Envelope::class), $this->stack)
             ->willReturnCallback(fn (Envelope $envelope, StackInterface $stack) => $envelope);
     }
 
@@ -65,7 +65,7 @@ final class CreateTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testMiddlewareWithWrongMessage() : void
@@ -79,7 +79,7 @@ final class CreateTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 
     public function testMiddlewareWithoutRegisteredUser() : void
@@ -95,6 +95,6 @@ final class CreateTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 }

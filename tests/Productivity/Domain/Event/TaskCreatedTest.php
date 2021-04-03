@@ -26,11 +26,11 @@ final class TaskCreatedTest extends TestCase
     {
         $event = new TaskCreated('list-1', 'task-1', 'Task name', 'creator-1', $now = new \DateTimeImmutable());
 
-        $this->assertSame('list-1', $event->listId());
-        $this->assertSame('task-1', $event->taskId());
-        $this->assertSame('Task name', $event->name());
-        $this->assertSame('creator-1', $event->creatorId());
-        $this->assertEquals($now, $event->createdAt());
-        $this->assertNotSame($now, $event->createdAt());
+        self::assertSame('list-1', $event->listId());
+        self::assertSame('task-1', $event->taskId());
+        self::assertSame('Task name', $event->name());
+        self::assertSame('creator-1', $event->creatorId());
+        self::assertEquals($now, $event->createdAt());
+        self::assertNotSame($now, $event->createdAt());
     }
 }

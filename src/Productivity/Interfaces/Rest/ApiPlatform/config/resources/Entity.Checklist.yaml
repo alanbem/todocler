@@ -26,8 +26,6 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
       validate: true
       write: true
       serialize: true
-      normalization_context:
-        groups: [ 'lists.create' ]
       openapi_context:
         summary: Create new list
   itemOperations:
@@ -61,8 +59,5 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist:
       deserialize: true
       validate: true
       write: true
-      serialize: true
-      normalization_context:
-        groups: [ 'lists.delete' ]
       openapi_context:
         summary: Removes the list

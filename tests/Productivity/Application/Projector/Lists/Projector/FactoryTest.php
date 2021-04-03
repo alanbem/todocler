@@ -43,7 +43,7 @@ final class FactoryTest extends TestCase
 
         $aggregate = $factory->create($id);
 
-        $this->assertEquals(new Projector($id, $this->manager), $aggregate);
+        self::assertEquals(new Projector($id, $this->manager), $aggregate);
     }
 
     public function testWrongId()
@@ -63,6 +63,6 @@ final class FactoryTest extends TestCase
 
         $projector = $factory->createFor($event);
 
-        $this->assertEquals(new Projector(new Projector\Id(), $this->manager), $projector);
+        self::assertEquals(new Projector(new Projector\Id(), $this->manager), $projector);
     }
 }

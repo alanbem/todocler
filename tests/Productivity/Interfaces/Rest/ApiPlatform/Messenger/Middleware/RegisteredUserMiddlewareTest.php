@@ -44,14 +44,14 @@ final class RegisteredUserMiddlewareTest extends TestCase
         $this->next = $this->createMock(MiddlewareInterface::class);
 
         $this->stack
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('next')
             ->willReturn($this->next);
 
         $this->next
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('handle')
-            ->with($this->isInstanceOf(Envelope::class), $this->stack)
+            ->with(self::isInstanceOf(Envelope::class), $this->stack)
             ->willReturnCallback(fn (Envelope $envelope, StackInterface $stack) => $envelope);
     }
 
@@ -61,18 +61,18 @@ final class RegisteredUserMiddlewareTest extends TestCase
         $envelope = Envelope::wrap(new \stdClass());
 
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($this->user);
 
         $this->user
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn('john.doe@example.com');
 
         $user = (object) ['id' => '6b244a62-0e1a-45ec-ac01-eb0f805432d9', 'john.doe@example.com'];
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('john.doe@example.com')
             ->willReturn($user);
@@ -81,7 +81,7 @@ final class RegisteredUserMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testMiddlewareWhenUserNotAuthenticated() : void
@@ -90,21 +90,21 @@ final class RegisteredUserMiddlewareTest extends TestCase
         $envelope = Envelope::wrap(new \stdClass());
 
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn(null);
 
         $this->user
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $this->facade
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 
     public function testMiddlewareWhenUserNotRegistered() : void
@@ -113,23 +113,23 @@ final class RegisteredUserMiddlewareTest extends TestCase
         $envelope = Envelope::wrap(new \stdClass());
 
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($this->user);
 
         $this->user
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn('john.doe@example.com');
 
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('john.doe@example.com')
             ->willReturn(null);
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 }

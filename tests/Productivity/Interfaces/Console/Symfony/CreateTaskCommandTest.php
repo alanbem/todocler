@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Productivity\Interfaces\Console\Symfony;
 
 use PHPStan\Testing\TestCase;
-use Productivity\Application\Command as Commands;
+use Productivity\Domain\Command as Commands;
 use Productivity\UsersFacade;
 use Streak\Application\CommandBus;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -37,13 +37,13 @@ final class CreateTaskCommandTest extends TestCase
     public function testCommand() : void
     {
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('alan.bem@example.com')
             ->willReturn((object) ['id' => '9e28254d-5ab2-418c-b848-d2f06d301e02', 'email' => 'alan.bem@example.com']);
 
         $this->commands
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(new Commands\CreateTask('21b80428-b0b7-4dab-8a07-d008fe32fe1f', 'd95a3219-b15b-480a-835d-d15c0d9414b2', 'Task name', '9e28254d-5ab2-418c-b848-d2f06d301e02'));
 
@@ -57,7 +57,7 @@ final class CreateTaskCommandTest extends TestCase
             'email' => 'alan.bem@example.com',
         ]);
 
-        $this->assertSame('Task "Task name" created successfully for "alan.bem@example.com".'.PHP_EOL, $tester->getDisplay());
+        self::assertSame('Task "Task name" created successfully for "alan.bem@example.com".'.PHP_EOL, $tester->getDisplay());
     }
 
     public function testCommandIfUserNotRegistered() : void
@@ -65,13 +65,13 @@ final class CreateTaskCommandTest extends TestCase
         $this->expectExceptionMessage('User with given email not found.');
 
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('alan.bem@example.com')
             ->willReturn(null);
 
         $this->commands
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('dispatch');
 
         $command = new CreateTaskCommand($this->commands, $this->facade);

@@ -26,7 +26,7 @@ final class UserNotAllowedTest extends TestCase
     {
         $exception = new UserNotAllowed('user-1');
 
-        $this->assertSame('User "user-1" is not allowed.', $exception->getMessage());
-        $this->assertSame('user-1', $exception->userId());
+        self::assertSame('User "user-1" is not allowed.', $exception->getMessage());
+        self::assertSame('user-1', $exception->userId());
     }
 }

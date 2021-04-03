@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Users\Application\Command;
+namespace Users\Domain\Command;
 
 use Streak\Application\Command;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Users\Application\Command\RegisterUserTest
+ * @see \Users\Domain\Command\RegisterUserTest
  */
 final class RegisterUser implements Command
 {

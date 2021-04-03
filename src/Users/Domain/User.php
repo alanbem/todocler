@@ -18,7 +18,7 @@ use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
 use Streak\Domain\Event;
-use Users\Application\Command as Commands;
+use Users\Domain\Command as Commands;
 use Users\Domain\Event as Events;
 use Webmozart\Assert\Assert;
 

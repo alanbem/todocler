@@ -26,10 +26,10 @@ final class ListCreatedTest extends TestCase
     {
         $event = new ListCreated('list-1', 'name', 'creator-1', $now = new \DateTimeImmutable());
 
-        $this->assertSame('list-1', $event->listId());
-        $this->assertSame('name', $event->name());
-        $this->assertSame('creator-1', $event->creatorId());
-        $this->assertEquals($now, $event->createdAt());
-        $this->assertNotSame($now, $event->createdAt());
+        self::assertSame('list-1', $event->listId());
+        self::assertSame('name', $event->name());
+        self::assertSame('creator-1', $event->creatorId());
+        self::assertEquals($now, $event->createdAt());
+        self::assertNotSame($now, $event->createdAt());
     }
 }

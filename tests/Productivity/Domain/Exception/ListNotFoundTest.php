@@ -26,7 +26,7 @@ final class ListNotFoundTest extends TestCase
     {
         $exception = new ListNotFound('list-1');
 
-        $this->assertSame('List "list-1" not found.', $exception->getMessage());
-        $this->assertSame('list-1', $exception->listId());
+        self::assertSame('List "list-1" not found.', $exception->getMessage());
+        self::assertSame('list-1', $exception->listId());
     }
 }

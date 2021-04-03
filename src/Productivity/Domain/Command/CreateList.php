@@ -11,28 +11,24 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
-use Productivity\Domain\Checklist;
 use Streak\Application\Command;
-use Streak\Domain\AggregateRoot;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Productivity\Application\Command\CreateTaskTest
+ * @see \Productivity\Domain\Command\CreateListTest
  */
-final class CreateTask implements Command\AggregateRootCommand
+final class CreateList implements Command
 {
     private string $listId;
-    private string $taskId;
     private string $name;
     private string $creatorId;
 
-    public function __construct(string $listId, string $taskId, string $name, string $creatorId)
+    public function __construct(string $listId, string $name, string $creatorId)
     {
         $this->listId = $listId;
-        $this->taskId = $taskId;
         $this->name = $name;
         $this->creatorId = $creatorId;
     }
@@ -40,11 +36,6 @@ final class CreateTask implements Command\AggregateRootCommand
     public function listId() : string
     {
         return $this->listId;
-    }
-
-    public function taskId() : string
-    {
-        return $this->taskId;
     }
 
     public function name() : string
@@ -55,10 +46,5 @@ final class CreateTask implements Command\AggregateRootCommand
     public function creatorId() : string
     {
         return $this->creatorId;
-    }
-
-    public function aggregateRootId() : AggregateRoot\Id
-    {
-        return new Checklist\Id($this->listId);
     }
 }

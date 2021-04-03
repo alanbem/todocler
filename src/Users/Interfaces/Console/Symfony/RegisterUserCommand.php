@@ -20,8 +20,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Users\Application\Command as Commands;
 use Users\Application\Query as Queries;
+use Users\Domain\Command as Commands;
 use Webmozart\Assert\Assert;
 
 /**

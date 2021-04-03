@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware;
 
 use ApiPlatform\Core\Bridge\Symfony\Messenger\RemoveStamp;
-use Productivity\Application\Command;
 use Productivity\Application\Projector\Lists\Doctrine\Entity;
+use Productivity\Domain\Command;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\StackInterface;
 

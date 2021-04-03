@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware;
 
-use Productivity\Application\Command;
+use Productivity\Domain\Command;
 use Productivity\Interfaces\Rest\ApiPlatform\DTO;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\StackInterface;

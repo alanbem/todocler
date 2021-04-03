@@ -46,7 +46,7 @@ final class FactoryTest extends TestCase
 
         $aggregate = $factory->create($id);
 
-        $this->assertEquals(new User($id, $this->encoder, $this->saltshaker, $this->clock), $aggregate);
+        self::assertEquals(new User($id, $this->encoder, $this->saltshaker, $this->clock), $aggregate);
     }
 
     public function testWrongId()

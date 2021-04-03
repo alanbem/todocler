@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
@@ -29,7 +29,7 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @covers \Productivity\Application\Command\RemoveTask
+ * @covers \Productivity\Domain\Command\RemoveTask
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
@@ -42,7 +42,7 @@ final class RemoveTaskTest extends TestCase
         $this->clock = new FixedClock(new \DateTimeImmutable('2021-03-25 17:49:00'));
     }
 
-    public function testCompletingTask() : void
+    public function testRemovingTask() : void
     {
         $this
             ->for(new Checklist\Id('list-1'))
@@ -58,7 +58,7 @@ final class RemoveTaskTest extends TestCase
             );
     }
 
-    public function testCompletingAlreadyRemovedTask() : void
+    public function testRemovingAlreadyRemovedTask() : void
     {
         $this->expectExceptionObject(new TaskNotFound('list-1', 'task-1'));
         $this
@@ -74,7 +74,7 @@ final class RemoveTaskTest extends TestCase
             ->then();
     }
 
-    public function testCompletingNonExistentTask() : void
+    public function testRemovingNonExistentTask() : void
     {
         $this->expectExceptionObject(new TaskNotFound('list-1', 'task-1'));
         $this
@@ -88,7 +88,7 @@ final class RemoveTaskTest extends TestCase
             ->then();
     }
 
-    public function testCompletingTaskByWrongUser() : void
+    public function testRemovingTaskByWrongUser() : void
     {
         $this->expectExceptionObject(new UserNotAllowed('user-2'));
         $this
@@ -103,7 +103,7 @@ final class RemoveTaskTest extends TestCase
             ->then();
     }
 
-    public function testCompletingTaskOnRemovedList() : void
+    public function testRemovingTaskOnRemovedList() : void
     {
         $this->expectExceptionObject(new ListNotFound('list-1'));
         $this
@@ -123,9 +123,9 @@ final class RemoveTaskTest extends TestCase
     {
         $command = new RemoveTask('list-1', 'task-1', 'user-1');
 
-        $this->assertSame('list-1', $command->listId());
-        $this->assertSame('task-1', $command->taskId());
-        $this->assertSame('user-1', $command->removerId());
+        self::assertSame('list-1', $command->listId());
+        self::assertSame('task-1', $command->taskId());
+        self::assertSame('user-1', $command->removerId());
     }
 
     protected function createFactory() : AggregateRoot\Factory

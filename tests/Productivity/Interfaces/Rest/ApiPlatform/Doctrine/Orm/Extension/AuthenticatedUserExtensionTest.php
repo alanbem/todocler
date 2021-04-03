@@ -49,17 +49,17 @@ final class AuthenticatedUserExtensionTest extends TestCase
     public function testApplyingToCollection() : void
     {
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($this->user);
 
         $this->user
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn('john.doe@example.com');
 
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('john.doe@example.com')
             ->willReturn((object) ['id' => '6b244a62-0e1a-45ec-ac01-eb0f805432d9', 'john.doe@example.com']);
@@ -73,27 +73,27 @@ final class AuthenticatedUserExtensionTest extends TestCase
         $expected->andWhere('ikmngdmx.userId = :authenticatedUser');
         $expected->setParameter('authenticatedUser', '6b244a62-0e1a-45ec-ac01-eb0f805432d9');
 
-        $this->assertNotEquals($expected, $builder);
+        self::assertNotEquals($expected, $builder);
 
         $extension->applyToCollection($builder, $this->nameGenerator, ResourceWithUserIdAttribute::class, null);
 
-        $this->assertEquals($expected, $builder);
+        self::assertEquals($expected, $builder);
     }
 
     public function testApplyingToItem() : void
     {
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($this->user);
 
         $this->user
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn('john.doe@example.com');
 
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('john.doe@example.com')
             ->willReturn((object) ['id' => '6b244a62-0e1a-45ec-ac01-eb0f805432d9', 'john.doe@example.com']);
@@ -107,26 +107,26 @@ final class AuthenticatedUserExtensionTest extends TestCase
         $expected->andWhere('ikmngdmx.userId = :authenticatedUser');
         $expected->setParameter('authenticatedUser', '6b244a62-0e1a-45ec-ac01-eb0f805432d9');
 
-        $this->assertNotEquals($expected, $builder);
+        self::assertNotEquals($expected, $builder);
 
         $extension->applyToItem($builder, $this->nameGenerator, ResourceWithUserIdAttribute::class, [], '', []);
 
-        $this->assertEquals($expected, $builder);
+        self::assertEquals($expected, $builder);
     }
 
     public function testApplyingToCollectionOfResourcesWithoutUserIdAttribute() : void
     {
         $this->security
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $this->user
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $this->facade
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $extension = new AuthenticatedUserExtension($this->security, $this->facade);
 
@@ -137,22 +137,22 @@ final class AuthenticatedUserExtensionTest extends TestCase
 
         $extension->applyToCollection($builder, $this->nameGenerator, ResourceWithoutUserIdAttribute::class, null);
 
-        $this->assertEquals($expected, $builder);
+        self::assertEquals($expected, $builder);
     }
 
     public function testApplyingToResourceWithoutUserIdAttribute() : void
     {
         $this->security
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $this->user
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $this->facade
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $extension = new AuthenticatedUserExtension($this->security, $this->facade);
 
@@ -163,7 +163,7 @@ final class AuthenticatedUserExtensionTest extends TestCase
 
         $extension->applyToItem($builder, $this->nameGenerator, ResourceWithoutUserIdAttribute::class, [], '', []);
 
-        $this->assertEquals($expected, $builder);
+        self::assertEquals($expected, $builder);
     }
 
     public function testApplyingToCollectionWhenUserNotAuthenticated() : void
@@ -171,17 +171,17 @@ final class AuthenticatedUserExtensionTest extends TestCase
         $this->expectExceptionObject(new AccessDeniedException());
 
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn(null);
 
         $this->user
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $this->facade
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $extension = new AuthenticatedUserExtension($this->security, $this->facade);
 
@@ -196,17 +196,17 @@ final class AuthenticatedUserExtensionTest extends TestCase
         $this->expectExceptionObject(new AccessDeniedException());
 
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn(null);
 
         $this->user
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $this->facade
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $extension = new AuthenticatedUserExtension($this->security, $this->facade);
 
@@ -221,17 +221,17 @@ final class AuthenticatedUserExtensionTest extends TestCase
         $this->expectExceptionObject(new AccessDeniedException());
 
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($this->user);
 
         $this->user
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn('john.doe@example.com');
 
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('john.doe@example.com')
             ->willReturn(null);
@@ -249,17 +249,17 @@ final class AuthenticatedUserExtensionTest extends TestCase
         $this->expectExceptionObject(new AccessDeniedException());
 
         $this->security
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($this->user);
 
         $this->user
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn('john.doe@example.com');
 
         $this->facade
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRegisteredUser')
             ->with('john.doe@example.com')
             ->willReturn(null);

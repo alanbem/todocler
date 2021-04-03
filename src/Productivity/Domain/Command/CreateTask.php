@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
 use Productivity\Domain\Checklist;
 use Streak\Application\Command;
@@ -20,19 +20,21 @@ use Streak\Domain\AggregateRoot;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Productivity\Application\Command\RemoveTaskTest
+ * @see \Productivity\Domain\Command\CreateTaskTest
  */
-final class RemoveTask implements Command\AggregateRootCommand
+final class CreateTask implements Command\AggregateRootCommand
 {
-    private string $taskId;
     private string $listId;
-    private string $removerId;
+    private string $taskId;
+    private string $name;
+    private string $creatorId;
 
-    public function __construct(string $listId, string $taskId, string $removerId)
+    public function __construct(string $listId, string $taskId, string $name, string $creatorId)
     {
         $this->listId = $listId;
         $this->taskId = $taskId;
-        $this->removerId = $removerId;
+        $this->name = $name;
+        $this->creatorId = $creatorId;
     }
 
     public function listId() : string
@@ -45,9 +47,14 @@ final class RemoveTask implements Command\AggregateRootCommand
         return $this->taskId;
     }
 
-    public function removerId() : string
+    public function name() : string
     {
-        return $this->removerId;
+        return $this->name;
+    }
+
+    public function creatorId() : string
+    {
+        return $this->creatorId;
     }
 
     public function aggregateRootId() : AggregateRoot\Id

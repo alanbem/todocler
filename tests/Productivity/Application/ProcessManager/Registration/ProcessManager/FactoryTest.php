@@ -43,7 +43,7 @@ final class FactoryTest extends TestCase
 
         $aggregate = $factory->create($id);
 
-        $this->assertEquals(new ProcessManager($id, $this->bus, 'name'), $aggregate);
+        self::assertEquals(new ProcessManager($id, $this->bus, 'name'), $aggregate);
     }
 
     public function testWrongId()
@@ -63,6 +63,6 @@ final class FactoryTest extends TestCase
 
         $projector = $factory->createFor($event);
 
-        $this->assertEquals(new ProcessManager(new ProcessManager\Id(), $this->bus, 'name'), $projector);
+        self::assertEquals(new ProcessManager(new ProcessManager\Id(), $this->bus, 'name'), $projector);
     }
 }

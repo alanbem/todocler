@@ -29,6 +29,6 @@ final class RegisteredUserStampTest extends TestCase
 
         $actual = $stamp->user();
 
-        $this->assertSame($user, $actual);
+        self::assertSame($user, $actual);
     }
 }

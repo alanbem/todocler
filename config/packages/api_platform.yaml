@@ -7,15 +7,14 @@ api_platform:
     paths:
       - '%kernel.project_dir%/src/Productivity/Interfaces/Rest/ApiPlatform/config/resources'
   formats:
-    json:     ['application/json']
-    jsonld:   ['application/ld+json']
-    jsonapi:  ['application/vnd.api+json']
+    # enabled formats with hyperlinks
+    jsonld:  ['application/ld+json']
+    jsonhal: ['application/hal+json']
   patch_formats:
-    json:    ['application/merge-patch+json']
-    jsonld:  [ 'application/ld+json' ]
     jsonapi: ['application/vnd.api+json']
   error_formats:
-    jsonapi: ['application/vnd.api+json']
+    jsonld:  ['application/ld+json']
+    jsonhal: ['application/hal+json']
   swagger:
     versions: [ 3 ]
     api_keys:

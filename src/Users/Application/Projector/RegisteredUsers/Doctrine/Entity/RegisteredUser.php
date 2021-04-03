@@ -21,8 +21,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUserTest
+ *
+ * @noRector \Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector
  */
-final class RegisteredUser implements UserInterface
+class RegisteredUser implements UserInterface
 {
     private string $id;
     private string $username;

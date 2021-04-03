@@ -17,6 +17,7 @@ use Streak\Application\Command;
 use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Exception;
+use Users\Domain\Command\RegisterUser;
 use Users\Domain\User;
 
 /**

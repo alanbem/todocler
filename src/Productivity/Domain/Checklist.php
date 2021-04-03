@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Productivity\Domain;
 
-use Productivity\Application\Command as Commands;
 use Productivity\Domain\Checklist\Task;
+use Productivity\Domain\Command as Commands;
 use Productivity\Domain\Event as Events;
 use Productivity\Domain\Exception as Exceptions;
 use Streak\Application\Command;
@@ -29,12 +29,12 @@ use Webmozart\Assert\Assert;
  *
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Productivity\Application\Command\CreateListTest
- * @see \Productivity\Application\Command\RenameListTest
- * @see \Productivity\Application\Command\RemoveListTest
- * @see \Productivity\Application\Command\CreateTaskTest
- * @see \Productivity\Application\Command\CompleteTaskTest
- * @see \Productivity\Application\Command\RemoveTaskTest
+ * @see \Productivity\Domain\Command\CreateListTest
+ * @see \Productivity\Domain\Command\RenameListTest
+ * @see \Productivity\Domain\Command\RemoveListTest
+ * @see \Productivity\Domain\Command\CreateTaskTest
+ * @see \Productivity\Domain\Command\CompleteTaskTest
+ * @see \Productivity\Domain\Command\RemoveTaskTest
  */
 final class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
 {

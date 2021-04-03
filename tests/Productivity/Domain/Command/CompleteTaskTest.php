@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
@@ -30,7 +30,7 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @covers \Productivity\Application\Command\CompleteTask
+ * @covers \Productivity\Domain\Command\CompleteTask
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
@@ -124,9 +124,9 @@ final class CompleteTaskTest extends TestCase
     {
         $command = new CompleteTask('list-1', 'task-1', 'user-1');
 
-        $this->assertSame('list-1', $command->listId());
-        $this->assertSame('task-1', $command->taskId());
-        $this->assertSame('user-1', $command->userId());
+        self::assertSame('list-1', $command->listId());
+        self::assertSame('task-1', $command->taskId());
+        self::assertSame('user-1', $command->userId());
     }
 
     protected function createFactory() : AggregateRoot\Factory

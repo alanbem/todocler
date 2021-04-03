@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Users\Application\Command;
+namespace Users\Domain\Command;
 
 use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
@@ -19,6 +19,7 @@ use Streak\Domain\Clock;
 use Streak\Domain\Exception\AggregateAlreadyExists;
 use Streak\Infrastructure\FixedClock;
 use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
+use Users\Application\Command\RegisterUserHandler;
 use Users\Domain\Event\UserRegistered;
 use Users\Domain\PasswordHasher;
 use Users\Domain\SaltGenerator;
@@ -28,7 +29,7 @@ use Users\Infrastructure\SaltGenerator\FixedSaltGenerator;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @covers \Users\Application\Command\RegisterUser
+ * @covers \Users\Domain\Command\RegisterUser
  * @covers \Users\Application\Command\RegisterUserHandler
  * @covers \Users\Domain\User
  */
@@ -48,7 +49,7 @@ final class RegisterUserTest extends TestCase
     public function testRegisteringUser() : void
     {
         $this->encoder
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('encode')
             ->with('password')
             ->willReturn('hash');
@@ -70,8 +71,8 @@ final class RegisterUserTest extends TestCase
         $this->expectExceptionMessage('Aggregate "Users\Domain\User#user-1" already exists.');
 
         $this->encoder
-            ->expects($this->never())
-            ->method($this->anything())
+            ->expects(self::never())
+            ->method(self::anything())
         ;
 
         $this
@@ -89,9 +90,9 @@ final class RegisterUserTest extends TestCase
     {
         $command = new RegisterUser('user-1', 'alan.bem@example.com', 'password');
 
-        $this->assertSame('user-1', $command->userId());
-        $this->assertSame('alan.bem@example.com', $command->email());
-        $this->assertSame('password', $command->password());
+        self::assertSame('user-1', $command->userId());
+        self::assertSame('alan.bem@example.com', $command->email());
+        self::assertSame('password', $command->password());
     }
 
     protected function createFactory() : AggregateRoot\Factory

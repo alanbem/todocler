@@ -36,7 +36,7 @@ final class SymfonyPasswordHasherAdapterTest extends TestCase
     public function testAdapter() : void
     {
         $this->factory
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getEncoder')
             ->with('FQCN')
             ->willReturn($this->encoder)
@@ -45,7 +45,7 @@ final class SymfonyPasswordHasherAdapterTest extends TestCase
         $adapter = new SymfonyPasswordHasherAdapter($this->factory, 'FQCN');
 
         $this->encoder
-            ->expects($this->exactly(2))
+            ->expects(self::exactly(2))
             ->method('encodePassword')
             ->withConsecutive(
                 ['password-1', 'salt-1'],
@@ -57,9 +57,9 @@ final class SymfonyPasswordHasherAdapterTest extends TestCase
             );
 
         $hash = $adapter->encode('password-1', 'salt-1');
-        $this->assertSame('hash-1', $hash);
+        self::assertSame('hash-1', $hash);
 
         $hash = $adapter->encode('password-2', 'salt-2');
-        $this->assertSame('hash-2', $hash);
+        self::assertSame('hash-2', $hash);
     }
 }

@@ -11,14 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
 use Productivity\Domain\Event\ListRemoved;
-use Productivity\Domain\Event\TaskCreated;
+use Productivity\Domain\Event\ListRenamed;
 use Productivity\Domain\Exception\ListNotFound;
-use Productivity\Domain\Exception\TaskAlreadyExists;
 use Productivity\Domain\Exception\UserNotAllowed;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
@@ -28,11 +27,11 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @covers \Productivity\Application\Command\CreateTask
+ * @covers \Productivity\Domain\Command\RenameList
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
-final class CreateTaskTest extends TestCase
+final class RenameListTest extends TestCase
 {
     private Clock $clock;
 
@@ -41,7 +40,7 @@ final class CreateTaskTest extends TestCase
         $this->clock = new FixedClock(new \DateTimeImmutable('2021-03-25 17:49:00'));
     }
 
-    public function testCreatingTask() : void
+    public function testRenamingList() : void
     {
         $this
             ->for(new Checklist\Id('list-1'))
@@ -49,48 +48,43 @@ final class CreateTaskTest extends TestCase
                 new ListCreated('list-1', 'name', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
-                new CreateTask('list-1', 'task-1', 'My first task', 'user-1'),
+                new RenameList('list-1', 'new name', 'user-1'),
             )
             ->then(
-                new TaskCreated('list-1', 'task-1', 'My first task', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
+                new ListRenamed('list-1', 'new name', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             );
     }
 
-    public function testCreatingAlreadyExistingTask() : void
+    public function testRenamingListWithTheSameName() : void
     {
-        $this->expectExceptionObject(new TaskAlreadyExists('list-1', 'task-1'));
-
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
                 new ListCreated('list-1', 'name', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
-                new TaskCreated('list-1', 'task-1', 'My first task', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
-                new CreateTask('list-1', 'task-1', 'My first task', 'user-1'),
+                new RenameList('list-1', 'name', 'user-1'),
             )
             ->then();
     }
 
-    public function testCreatingTaskByWrongUser() : void
+    public function testRenamingListWithWrongUser() : void
     {
         $this->expectExceptionObject(new UserNotAllowed('user-2'));
-
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
                 new ListCreated('list-1', 'name', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
-                new CreateTask('list-1', 'task-1', 'My first task', 'user-2'),
+                new RenameList('list-1', 'new name', 'user-2'),
             )
             ->then();
     }
 
-    public function testCreatingTaskOnRemovedList() : void
+    public function testRenamingListOnRemovedList() : void
     {
         $this->expectExceptionObject(new ListNotFound('list-1'));
-
         $this
             ->for(new Checklist\Id('list-1'))
             ->given(
@@ -98,19 +92,18 @@ final class CreateTaskTest extends TestCase
                 new ListRemoved('list-1', 'user-1', new \DateTimeImmutable('2021-03-25 17:49:00')),
             )
             ->when(
-                new CreateTask('list-1', 'task-1', 'My first task', 'user-1'),
+                new RenameList('list-1', 'name', 'user-1'),
             )
             ->then();
     }
 
     public function testCommand() : void
     {
-        $command = new CreateTask('list-1', 'task-1', 'My first task', 'user-1');
+        $command = new RenameList('list-1', 'name', 'user-1');
 
-        $this->assertSame('list-1', $command->listId());
-        $this->assertSame('task-1', $command->taskId());
-        $this->assertSame('user-1', $command->creatorId());
-        $this->assertSame('My first task', $command->name());
+        self::assertSame('list-1', $command->listId());
+        self::assertSame('name', $command->name());
+        self::assertSame('user-1', $command->editorId());
     }
 
     protected function createFactory() : AggregateRoot\Factory

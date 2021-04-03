@@ -27,7 +27,7 @@ final class FindUserTest extends TestCase
     {
         $query = new FindUser('alan.bem@example.com');
 
-        $this->assertSame('alan.bem@example.com', $query->email());
-        $this->assertEquals(new Projector\Id(), $query->listenerId());
+        self::assertSame('alan.bem@example.com', $query->email());
+        self::assertEquals(new Projector\Id(), $query->listenerId());
     }
 }

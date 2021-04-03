@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Productivity\Interfaces\Console\Symfony;
 
-use Productivity\Application\Command as Commands;
+use Productivity\Domain\Command as Commands;
 use Productivity\UsersFacade;
 use Streak\Application\CommandBus;
 use Symfony\Component\Console\Command\Command;

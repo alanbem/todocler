@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Productivity\Application\ProcessManager\Registration;
 
-use Productivity\Application\Command\CreateList;
 use Productivity\Application\ProcessManager\Registration;
+use Productivity\Domain\Command\CreateList;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\EventStore;

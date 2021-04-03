@@ -15,7 +15,6 @@ namespace Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware;
 
 use ApiPlatform\Core\Bridge\Symfony\Messenger\ContextStamp;
 use PHPUnit\Framework\TestCase;
-use Productivity\Application\Command as Commands;
 use Productivity\Application\Projector\Lists\Doctrine\Entity as Entities;
 use Productivity\Interfaces\Rest\ApiPlatform\DTO as DTOs;
 use Productivity\Interfaces\Rest\ApiPlatform\Messenger\Stamp\RegisteredUserStamp;
@@ -40,14 +39,14 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
         $this->next = $this->createMock(MiddlewareInterface::class);
 
         $this->stack
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('next')
             ->willReturn($this->next);
 
         $this->next
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('handle')
-            ->with($this->isInstanceOf(Envelope::class), $this->stack)
+            ->with(self::isInstanceOf(Envelope::class), $this->stack)
             ->willReturnCallback(fn (Envelope $envelope, StackInterface $stack) => $envelope);
     }
 
@@ -62,12 +61,12 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
         $envelope = $envelope->with(new RegisteredUserStamp((object) ['id' => '6b244a62-0e1a-45ec-ac01-eb0f805432d9', 'john.doe@example.com']));
         $envelope = $envelope->with(new ContextStamp($context));
 
-        $command = new Commands\CompleteTask('62fafb74-f550-4780-a527-37cb0b1e08ae', '8b89a300-a95b-40af-b235-87ddf9e47309', '6b244a62-0e1a-45ec-ac01-eb0f805432d9');
+        $command = new \Productivity\Domain\Command\CompleteTask('62fafb74-f550-4780-a527-37cb0b1e08ae', '8b89a300-a95b-40af-b235-87ddf9e47309', '6b244a62-0e1a-45ec-ac01-eb0f805432d9');
         $expected = Envelope::wrap($command);
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testMiddlewareWithWrongMessage() : void
@@ -83,7 +82,7 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 
     public function testMiddlewareWithoutContext() : void
@@ -97,7 +96,7 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 
     public function testMiddlewareWithWrongContext() : void
@@ -113,7 +112,7 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 
     public function testMiddlewareWithWrongResource() : void
@@ -129,7 +128,7 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 
     public function testMiddlewareWithoutResource() : void
@@ -145,7 +144,7 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 
     public function testMiddlewareWithoutRegisteredUser() : void
@@ -160,6 +159,6 @@ final class CompleteTaskTransformingMiddlewareTest extends TestCase
 
         $actual = $middleware->handle($envelope, $this->stack);
 
-        $this->assertSame($envelope, $actual);
+        self::assertSame($envelope, $actual);
     }
 }

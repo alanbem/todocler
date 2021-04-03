@@ -26,8 +26,8 @@ final class TaskAlreadyCompletedTest extends TestCase
     {
         $exception = new TaskAlreadyCompleted('list-1', 'task-1');
 
-        $this->assertSame('Task "task-1" already completed.', $exception->getMessage());
-        $this->assertSame('list-1', $exception->listId());
-        $this->assertSame('task-1', $exception->taskId());
+        self::assertSame('Task "task-1" already completed.', $exception->getMessage());
+        self::assertSame('list-1', $exception->listId());
+        self::assertSame('task-1', $exception->taskId());
     }
 }

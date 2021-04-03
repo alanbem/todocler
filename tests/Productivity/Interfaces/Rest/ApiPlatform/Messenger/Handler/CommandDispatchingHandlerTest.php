@@ -36,7 +36,7 @@ final class CommandDispatchingHandlerTest extends TestCase
     public function testHandler() : void
     {
         $this->bus
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with($this->command);
 

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Productivity\Application\Command;
+namespace Productivity\Domain\Command;
 
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
@@ -26,7 +26,7 @@ use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @covers \Productivity\Application\Command\RemoveList
+ * @covers \Productivity\Domain\Command\RemoveList
  * @covers \Productivity\Domain\Checklist
  * @covers \Productivity\Domain\Checklist\Task
  */
@@ -39,7 +39,7 @@ final class RemoveListTest extends TestCase
         $this->clock = new FixedClock(new \DateTimeImmutable('2021-03-25 17:49:00'));
     }
 
-    public function testCreatingList() : void
+    public function testRemovingList() : void
     {
         $this
             ->for(new Checklist\Id('list-1'))
@@ -87,8 +87,8 @@ final class RemoveListTest extends TestCase
     {
         $command = new RemoveList('list-1', 'user-1');
 
-        $this->assertSame('list-1', $command->listId());
-        $this->assertSame('user-1', $command->removerId());
+        self::assertSame('list-1', $command->listId());
+        self::assertSame('user-1', $command->removerId());
     }
 
     protected function createFactory() : AggregateRoot\Factory

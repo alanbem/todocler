@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Productivity\Application\ProcessManager\Registration;
 
-use Productivity\Application\Command\CreateList;
 use Productivity\Application\ProcessManager\Registration;
+use Productivity\Domain\Command\CreateList;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\Event\Envelope;
@@ -65,7 +65,7 @@ final class ProcessManagerTest extends TestCase
         $store->add($event1, $event2, $event3, $event4);
         $picked = $this->manager->pick($store);
 
-        $this->assertTrue($picked->equals($event1));
+        self::assertTrue($picked->equals($event1));
     }
 
     public function createFactory(CommandBus $bus) : Event\Listener\Factory

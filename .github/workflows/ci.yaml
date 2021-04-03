@@ -44,3 +44,13 @@ jobs:
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run rector
         run: docker-compose run --rm --no-deps php bin/rector --no-progress-bar --dry-run --ansi
+  run-deptrac:
+    name: deptrac
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
+      - name: Run deptrac
+        run: docker-compose run --rm --no-deps php bin/deptrac --formatter=console --no-progress --no-interaction
