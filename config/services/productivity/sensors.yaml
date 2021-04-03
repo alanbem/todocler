@@ -1,0 +1,25 @@
+services:
+
+  productivity.users_events.sensor.factory:
+    class: Productivity\Application\Sensor\UsersEvents\Sensor\Factory
+
+  productivity.users_events.transactional.sensor.factory:
+    class: Streak\Infrastructure\Sensor\Factory\TransactionalFactory
+    arguments:
+      - '@productivity.users_events.transactional.sensor.factory.inner'
+      - '@Streak\Infrastructure\UnitOfWork'
+    decorates: productivity.users_events.sensor.factory
+
+  productivity.users_events.sensor.rabbitmq_consumer:
+    class: Streak\Infrastructure\RabbitMQ\SensorConsumer
+    arguments:
+      - '@productivity.users_events.sensor.factory'
+
+  productivity.users_events.transactional.sensor.rabbitmq_consumer:
+    class: Streak\Infrastructure\RabbitMQ\TransactionalSensorConsumer
+    arguments:
+      - '@productivity.users_events.transactional.sensor.rabbitmq_consumer.inner'
+      - '@Streak\Infrastructure\UnitOfWork'
+    decorates: productivity.users_events.sensor.rabbitmq_consumer
+
+  Productivity\Application\Sensor\UsersEvents\Sensor\Factory: '@productivity.users_events.sensor.factory'

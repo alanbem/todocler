@@ -53,4 +53,4 @@ jobs:
       - name: Install dependencies
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run deptrac
-        run: docker-compose run --rm --no-deps php bin/deptrac --formatter=console --no-progress --no-interaction
+        run: docker-compose run --rm --no-deps php bin/deptrac --formatter=github-actions --no-progress --no-interaction

@@ -5,9 +5,7 @@
 >
     <entity name="Productivity\Application\Projector\Lists\Doctrine\Entity\Task" table="tasks">
         <id name="list" association-key="true" />
-        <id name="id" type="guid" column="id">
-            <generator strategy="NONE"/>
-        </id>
+        <id name="id" type="guid" column="id" />
         <field name="userId" type="guid" column="user_id"/>
         <field name="name" column="name"/>
         <field name="completed" type="boolean" column="is_completed"/>

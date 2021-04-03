@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Productivity\Application\ProcessManager\Registration;
 
+use Productivity\Application\Event as Events;
 use Productivity\Application\ProcessManager\Registration;
 use Productivity\Domain\Command\CreateList;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\EventStore;
-use Users\Domain\Event\UserRegistered;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
@@ -51,7 +51,7 @@ final class ProcessManager implements Event\Listener, Event\Picker, Event\Filter
     /**
      * Creates first list for newly registered user.
      */
-    public function onUserRegistered(UserRegistered $event) : void
+    public function onUserRegistered(Events\UserRegistered $event) : void
     {
         $this->bus->dispatch(new CreateList($event->userId(), $this->name, $event->userId()));
     }

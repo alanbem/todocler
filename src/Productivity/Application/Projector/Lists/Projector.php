@@ -69,15 +69,15 @@ final class Projector extends Doctrine\EntityManagerProjector implements Event\P
 
     public function onTaskCompleted(Events\TaskCompleted $event) : void
     {
-        /** @var Entity\Task $list */
-        $task = $this->manager->getRepository(Entity\Task::class)->find($event->taskId());
+        /** @var Entity\Task $task */
+        $task = $this->manager->getRepository(Entity\Task::class)->find(['list' => $event->listId(), 'id' => $event->taskId()]);
         $task->complete($event->completedAt());
     }
 
     public function onTaskRemoved(Events\TaskRemoved $event) : void
     {
         /** @var Entity\Task $list */
-        $task = $this->manager->getRepository(Entity\Task::class)->find($event->taskId());
+        $task = $this->manager->getRepository(Entity\Task::class)->find(['list' => $event->listId(), 'id' => $event->taskId()]);
 
         $this->manager->remove($task);
     }

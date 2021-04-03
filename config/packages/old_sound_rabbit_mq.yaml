@@ -1,0 +1,27 @@
+old_sound_rabbit_mq:
+  connections:
+    default:
+      url: '%env(RABBITMQ_URL)%'
+      connection_timeout: 10
+      read_write_timeout: 10
+  producers:
+    integration_events:
+      connection: default
+      service_alias: users.integration_events.producer
+      exchange_options:
+        name: 'integration_events'
+        type: topic
+        durable: true
+        declare: true
+  consumers:
+    productivity_intergation_events_inbox:
+      connection: default
+      queue_options:
+        name: 'productivity.integration_events.inbox'
+        durable: true
+        declare: true
+      callback: productivity.users_events.sensor.rabbitmq_consumer
+  bindings:
+    - { exchange: 'integration_events', destination: 'productivity.integration_events.inbox', routing_key: 'users.*' }
+
+

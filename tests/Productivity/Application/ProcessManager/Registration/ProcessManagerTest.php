@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace Productivity\Application\ProcessManager\Registration;
 
+use Productivity\Application\Event\UserRegistered;
 use Productivity\Application\ProcessManager\Registration;
+use Productivity\Application\Sensor\UsersEvents\Sensor;
 use Productivity\Domain\Command\CreateList;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\Event\Envelope;
 use Streak\Infrastructure\EventStore\InMemoryEventStore;
 use Streak\Infrastructure\Testing\Listener\TestCase;
-use Users\Domain\Event\UserRegistered;
-use Users\Domain\User;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
@@ -46,7 +46,7 @@ final class ProcessManagerTest extends TestCase
         $this
             ->given()
             ->when(
-                new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', new \DateTimeImmutable()),
+                new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', new \DateTimeImmutable()),
             )
             ->then(
                 new CreateList('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b')
@@ -56,10 +56,10 @@ final class ProcessManagerTest extends TestCase
 
     public function testPickingFirstEvent()
     {
-        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
-        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('d7689177-bcbf-4617-a686-dd5f5fc22f10'), 1);
-        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('6973e772-19f1-4334-b1e3-e0f7217a6574'), 1);
-        $event4 = Envelope::new(new UserRegistered('c70a16c7-a43f-4c62-8d4d-03f849661902', 'biglou@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('c70a16c7-a43f-4c62-8d4d-03f849661902'), 1);
+        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', new \DateTimeImmutable()), new Sensor\Id());
+        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', new \DateTimeImmutable()), new Sensor\Id());
+        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', new \DateTimeImmutable()), new Sensor\Id());
+        $event4 = Envelope::new(new UserRegistered('c70a16c7-a43f-4c62-8d4d-03f849661902', 'biglou@example.com', new \DateTimeImmutable()), new Sensor\Id());
 
         $store = new InMemoryEventStore();
         $store->add($event1, $event2, $event3, $event4);

@@ -23,6 +23,7 @@ use ApiPlatform\Core\OpenApi\OpenApi;
  * @see   https://api-platform.com/docs/core/jwt/
  *
  * @codeCoverageIgnore
+ *
  * @noRector \Rector\Privatization\Rector\Class_\RepeatedLiteralToClassConstantRector
  */
 final class JWTAuthenticationDecorator implements OpenApiFactoryInterface

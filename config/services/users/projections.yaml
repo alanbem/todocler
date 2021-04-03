@@ -7,3 +7,7 @@ services:
   Users\Application\Projector\RegisteredUsers\Projector\Factory:
     arguments:
       - '@doctrine.orm.registered_users_projection_entity_manager'
+
+  Users\Application\Projector\Queue\Projector\Factory:
+    arguments:
+      - '@Users\Infrastructure\Queue\RabbitMQQueue'

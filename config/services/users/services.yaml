@@ -22,3 +22,8 @@ services:
   Users\Infrastructure\UsersFacadeForProductivity:
     arguments:
       - '@Streak\Application\QueryBus'
+
+  Users\Infrastructure\Queue\RabbitMQQueue:
+    arguments:
+      - '@users.integration_events.producer'
+      - 'users'

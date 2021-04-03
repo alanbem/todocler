@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Productivity\Application\Projector\Lists\Projector;
 
-use Streak\Domain;
 use Streak\Domain\Event\Listener;
 
 /**
@@ -39,7 +38,7 @@ final class Id implements Listener\Id
         return self::ID;
     }
 
-    public static function fromString(string $id) : Domain\Id
+    public static function fromString(string $id) : self
     {
         return new self();
     }

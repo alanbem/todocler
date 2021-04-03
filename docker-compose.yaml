@@ -16,6 +16,7 @@ services:
       - postgres_registered_users_projections
       - mysql_lists_projections
       - redis
+      - rabbitmq
 
   fpm:
     image: streakphp/php74-fpm:latest
@@ -29,6 +30,8 @@ services:
       - postgres_event_store
       - postgres_registered_users_projections
       - mysql_lists_projections
+      - redis
+      - rabbitmq
  
   nginx:
     image: nginx:latest
@@ -83,6 +86,22 @@ services:
     ports:
       - 3307:3306
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+    volumes:
+      - .:/var/www/project
+      - ./docker/rabbitmq/etc/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./docker/rabbitmq/etc/rabbitmq/conf.d/todocler.conf:/etc/rabbitmq/conf.d/todocler.conf
+      - ./docker/rabbitmq/opt/rabbitmq/plugins/elixir-1.10.4.ez:/opt/rabbitmq/plugins/elixir-1.10.4.ez
+      - ./docker/rabbitmq/opt/rabbitmq/plugins/rabbitmq_message_deduplication-0.5.0.ez:/opt/rabbitmq/plugins/rabbitmq_message_deduplication-0.5.0.ez
+    ports:
+      - 5673:5672
+      - 15673:15672
+
   supervisord:
     build:
       context: .
@@ -92,5 +111,5 @@ services:
       - fpm
     volumes:
       - .:/var/www/project
-      - ./supervisord.conf:/etc/supervisord.conf
+      - ./docker/supervisord/etc/supervisord.conf:/etc/supervisord.conf
       - /var/run/docker.sock:/var/run/docker.sock
