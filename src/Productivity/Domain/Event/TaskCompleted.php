@@ -17,20 +17,24 @@ use Streak\Domain;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Event\TaskCompletedTest
  */
-class TaskCompleted implements Domain\Event
+final class TaskCompleted implements Domain\Event
 {
+    const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
+
     private string $listId;
     private string $taskId;
     private string $userId;
-    private \DateTimeImmutable $createdAt;
+    private string $completedAt;
 
-    public function __construct(string $listId, string $taskId, string $userId, \DateTimeImmutable $createdAt)
+    public function __construct(string $listId, string $taskId, string $userId, \DateTimeImmutable $completedAt)
     {
         $this->listId = $listId;
         $this->taskId = $taskId;
         $this->userId = $userId;
-        $this->createdAt = $createdAt;
+        $this->completedAt = $completedAt->format(self::DATE_FORMAT);
     }
 
     public function listId() : string
@@ -48,8 +52,8 @@ class TaskCompleted implements Domain\Event
         return $this->userId;
     }
 
-    public function createdAt() : \DateTimeImmutable
+    public function completedAt() : \DateTimeImmutable
     {
-        return $this->createdAt;
+        return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->completedAt);
     }
 }

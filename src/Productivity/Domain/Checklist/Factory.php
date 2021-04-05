@@ -20,8 +20,10 @@ use Streak\Domain\Exception\InvalidAggregateIdGiven;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Checklist\FactoryTest
  */
-class Factory implements AggregateRoot\Factory
+final class Factory implements AggregateRoot\Factory
 {
     private Clock $clock;
 

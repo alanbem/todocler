@@ -1,6 +1,7 @@
 /.idea/
 /bin/
 !/bin/console
+/build.local.sh
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -21,3 +22,11 @@
 /.php_cs
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+###> qossmic/deptrac-shim ###
+/.deptrac.cache
+###< qossmic/deptrac-shim ###

@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: true
+    public: false
+
+  Productivity\Application\Projector\Lists\Projector\Factory:
+    arguments:
+      - '@doctrine.orm.lists_projection_entity_manager'

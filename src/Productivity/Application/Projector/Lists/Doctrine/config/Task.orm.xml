@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="Productivity\Application\Projector\Lists\Doctrine\Entity\Task" table="tasks">
+        <id name="list" association-key="true" />
+        <id name="id" type="guid" column="id" />
+        <field name="userId" type="guid" column="user_id"/>
+        <field name="name" column="name"/>
+        <field name="completed" type="boolean" column="is_completed"/>
+        <field name="updatedAt" type="datetimetz_immutable" column="updated_at" precision="6" column-definition="DATETIME(6) NOT NULL COMMENT '(DC2Type:datetimetz_immutable)'"/>
+        <field name="createdAt" type="datetimetz_immutable" column="created_at" precision="6" column-definition="DATETIME(6) NOT NULL COMMENT '(DC2Type:datetimetz_immutable)'"/>
+        <many-to-one field="list" target-entity="Productivity\Application\Projector\Lists\Doctrine\Entity\Checklist" inversed-by="tasks">
+            <join-column name="list_id" nullable="false"/>
+        </many-to-one>
+        <indexes>
+            <index columns="user_id" name="search_by_task_owner"/>
+            <index columns="created_at" name="sort_by_task_creation_time"/>
+        </indexes>
+    </entity>
+</doctrine-mapping>

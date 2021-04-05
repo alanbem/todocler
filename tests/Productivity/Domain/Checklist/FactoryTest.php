@@ -24,7 +24,7 @@ use Streak\Domain\Exception\InvalidAggregateIdGiven;
  *
  * @covers \Productivity\Domain\Checklist\Factory
  */
-class FactoryTest extends TestCase
+final class FactoryTest extends TestCase
 {
     private Clock $clock;
 
@@ -40,7 +40,7 @@ class FactoryTest extends TestCase
 
         $aggregate = $factory->create($id);
 
-        $this->assertEquals(new Checklist($id, $this->clock), $aggregate);
+        self::assertEquals(new Checklist($id, $this->clock), $aggregate);
     }
 
     public function testWrongId()

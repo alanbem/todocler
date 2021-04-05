@@ -1,0 +1,33 @@
+security:
+  encoders:
+    Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser: 'auto'
+  providers:
+    registered_users:
+      entity:
+        class: Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser
+        property: username
+        manager_name: registered_users_projection
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    api:
+      pattern: ^/api
+      stateless: true
+      anonymous: true
+      provider: registered_users
+      guard:
+        authenticators:
+          - lexik_jwt_authentication.jwt_token_authenticator
+    main:
+      anonymous: true
+      json_login:
+        check_path: /auth/token
+        username_path: email
+        password_path: password
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+  access_control:
+    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

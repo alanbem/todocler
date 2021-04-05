@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: true
+    public: false
+
+  Productivity\Application\ProcessManager\Registration\ProcessManager\Factory:
+    arguments:
+      - '@Streak\Application\CommandBus'
+      - '%todocler.first_list.default_name%'

@@ -18,7 +18,7 @@ use Streak\Domain\Entity;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  */
-class Task implements Entity
+final class Task implements Entity
 {
     use Entity\Identification;
     use Entity\Comparison;

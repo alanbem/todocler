@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser" table="registered_users" >
+        <id name="id" type="guid" column="id">
+            <generator strategy="NONE" />
+        </id>
+        <field name="username" column="username"/>
+        <field name="password" column="password"/>
+        <field name="salt" column="salt"/>
+        <field name="registeredAt" type="datetimetz_immutable" column="registered_at" precision="6" column-definition="TIMESTAMP(6) WITH TIME ZONE NOT NULL" />
+        <indexes>
+            <index columns="username" name="search_by_username"/>
+        </indexes>
+    </entity>
+</doctrine-mapping>

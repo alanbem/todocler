@@ -1,0 +1,19 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: true
+    public: false
+
+  Productivity\Interfaces\Console\Symfony\CreateListCommand:
+    arguments:
+      - '@Streak\Application\CommandBus'
+      - '@Productivity\UsersFacade'
+    tags:
+      - console.command
+
+  Productivity\Interfaces\Console\Symfony\CreateTaskCommand:
+    arguments:
+      - '@Streak\Application\CommandBus'
+      - '@Productivity\UsersFacade'
+    tags:
+      - console.command

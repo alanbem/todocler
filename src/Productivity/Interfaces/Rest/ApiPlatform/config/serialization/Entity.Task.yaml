@@ -1,0 +1,38 @@
+Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
+  attributes:
+    id:
+      groups:
+        - 'lists.browse'
+        - 'lists.read'
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'lists.tasks.browse'
+    userId:
+      ignore: ~
+    name:
+      groups:
+        - 'lists.browse'
+        - 'lists.read'
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'lists.tasks.browse'
+    updatedAt:
+      groups:
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'lists.tasks.browse'
+    createdAt:
+      groups:
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'lists.tasks.browse'
+    completed:
+      groups:
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'lists.tasks.browse'
+    list:
+      groups:
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'lists.tasks.browse'

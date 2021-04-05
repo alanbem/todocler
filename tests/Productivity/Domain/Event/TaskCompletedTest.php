@@ -20,15 +20,16 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \Productivity\Domain\Event\TaskCompleted
  */
-class TaskCompletedTest extends TestCase
+final class TaskCompletedTest extends TestCase
 {
     public function testEvent() : void
     {
         $event = new TaskCompleted('list-1', 'task-1', 'user-1', $now = new \DateTimeImmutable());
 
-        $this->assertSame('list-1', $event->listId());
-        $this->assertSame('task-1', $event->taskId());
-        $this->assertSame('user-1', $event->userId());
-        $this->assertSame($now, $event->createdAt());
+        self::assertSame('list-1', $event->listId());
+        self::assertSame('task-1', $event->taskId());
+        self::assertSame('user-1', $event->userId());
+        self::assertEquals($now, $event->completedAt());
+        self::assertNotSame($now, $event->completedAt());
     }
 }

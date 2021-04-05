@@ -13,33 +13,32 @@ declare(strict_types=1);
 
 namespace Productivity\Domain\Exception;
 
-use Productivity\Domain\Checklist;
-use Productivity\Domain\Checklist\Task;
-
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Exception\TaskNotFoundTest
  */
-class TaskNotFound extends \RuntimeException
+final class TaskNotFound extends \RuntimeException
 {
-    private Checklist\Id $listId;
-    private Task\Id $taskId;
+    private string $listId;
+    private string $taskId;
 
-    public function __construct(Checklist\Id $listId, Task\Id $taskId)
+    public function __construct(string $listId, string $taskId)
     {
         $this->listId = $listId;
         $this->taskId = $taskId;
 
-        $message = sprintf('Task "%s" not found.', $this->taskId->toString());
+        $message = sprintf('Task "%s" not found.', $this->taskId);
 
         parent::__construct($message);
     }
 
-    public function listId() : Checklist\Id
+    public function listId() : string
     {
         return $this->listId;
     }
 
-    public function taskId() : Task\Id
+    public function taskId() : string
     {
         return $this->taskId;
     }

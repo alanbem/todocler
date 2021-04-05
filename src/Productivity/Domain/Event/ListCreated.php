@@ -17,23 +17,34 @@ use Streak\Domain;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Event\ListCreatedTest
  */
-class ListCreated implements Domain\Event
+final class ListCreated implements Domain\Event
 {
-    private string $listId;
-    private string $creatorId;
-    private \DateTimeImmutable $createdAt;
+    const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
 
-    public function __construct(string $listId, string $creatorId, \DateTimeImmutable $createdAt)
+    private string $listId;
+    private string $name;
+    private string $creatorId;
+    private string $createdAt;
+
+    public function __construct(string $listId, string $name, string $creatorId, \DateTimeImmutable $createdAt)
     {
         $this->listId = $listId;
+        $this->name = $name;
         $this->creatorId = $creatorId;
-        $this->createdAt = $createdAt;
+        $this->createdAt = $createdAt->format(self::DATE_FORMAT);
     }
 
     public function listId() : string
     {
         return $this->listId;
+    }
+
+    public function name() : string
+    {
+        return $this->name;
     }
 
     public function creatorId() : string
@@ -43,6 +54,6 @@ class ListCreated implements Domain\Event
 
     public function createdAt() : \DateTimeImmutable
     {
-        return $this->createdAt;
+        return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->createdAt);
     }
 }

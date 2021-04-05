@@ -14,25 +14,20 @@ declare(strict_types=1);
 namespace Productivity\Domain\Exception;
 
 use PHPUnit\Framework\TestCase;
-use Productivity\Domain\Checklist;
-use Productivity\Domain\Checklist\Task;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @covers \Productivity\Domain\Exception\TaskAlreadyCompleted
  */
-class TaskAlreadyCompletedTest extends TestCase
+final class TaskAlreadyCompletedTest extends TestCase
 {
     public function testException() : void
     {
-        $listId = new Checklist\Id('list-1');
-        $taskId = new Task\Id('task-1');
+        $exception = new TaskAlreadyCompleted('list-1', 'task-1');
 
-        $exception = new TaskAlreadyCompleted($listId, $taskId);
-
-        $this->assertSame('Task "task-1" already completed.', $exception->getMessage());
-        $this->assertSame($listId, $exception->listId());
-        $this->assertSame($taskId, $exception->taskId());
+        self::assertSame('Task "task-1" already completed.', $exception->getMessage());
+        self::assertSame('list-1', $exception->listId());
+        self::assertSame('task-1', $exception->taskId());
     }
 }

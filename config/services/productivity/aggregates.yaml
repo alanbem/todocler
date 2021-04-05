@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: true
+    public: false
+
+  Productivity\Domain\Checklist\Factory:
+    arguments:
+      - '@Streak\Domain\Clock'

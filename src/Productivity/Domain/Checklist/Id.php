@@ -17,10 +17,12 @@ use Streak\Domain\AggregateRoot;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Productivity\Domain\Checklist\IdTest
  */
-class Id implements AggregateRoot\Id
+final class Id implements AggregateRoot\Id
 {
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {

@@ -1,0 +1,31 @@
+services:
+  Productivity\Interfaces\Rest\ApiPlatform\Messenger\Handler\CommandDispatchingHandler:
+    arguments:
+      - '@Streak\Application\CommandBus'
+    tags:
+      - messenger.message_handler
+
+  messenger.middleware.authenticated_user_to_registered_user:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RegisteredUserMiddleware
+    arguments:
+      - '@Symfony\Component\Security\Core\Security'
+      - '@Productivity\UsersFacade'
+
+  messenger.middleware.transform_create_list_dto_to_command:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateListTransformingMiddleware
+
+  messenger.middleware.transform_remove_list_request_to_command:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RemoveListTransformingMiddleware
+
+  messenger.middleware.transform_rename_list_dto_to_command:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RenameListTransformingMiddleware
+
+  messenger.middleware.transform_create_task_dto_to_command:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateTaskTransformingMiddleware
+
+  messenger.middleware.transform_complete_task_dto_to_command:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CompleteTaskTransformingMiddleware
+
+  messenger.middleware.transform_remove_task_request_to_command:
+    class: Productivity\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RemoveTaskTransformingMiddleware
+

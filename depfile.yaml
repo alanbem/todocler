@@ -1,0 +1,86 @@
+paths:
+  - ./src
+
+layers:
+  - name: Productivity module Interfaces layer
+    collectors:
+      - type: directory
+        regex: Productivity/Interfaces/.*
+  - name: Users module Interfaces layer
+    collectors:
+      - type: directory
+        regex: Users/Interfaces/.*
+  - name: Shared module Interfaces layer
+    collectors:
+      - type: directory
+        regex: Shared/Interfaces/.*
+  - name: Productivity module Infrastructure layer
+    collectors:
+      - type: directory
+        regex: Productivity/Infrastructure/.*
+  - name: Users module Infrastructure layer
+    collectors:
+      - type: directory
+        regex: Users/Infrastructure/.*
+  - name: Shared module Infrastructure layer
+    collectors:
+      - type: directory
+        regex: Shared/Infrastructure/.*
+  - name: Productivity module Application layer
+    collectors:
+      - type: directory
+        regex: Productivity/Application/.*
+  - name: Users module Application layer
+    collectors:
+      - type: directory
+        regex: Users/Application/.*
+  - name: Shared module Application layer
+    collectors:
+      - type: directory
+        regex: Shared/Application/.*
+  - name: Productivity module Domain layer
+    collectors:
+      - type: directory
+        regex: Productivity/Domain/.*
+  - name: Users module Domain layer
+    collectors:
+      - type: directory
+        regex: Users/Domain/.*
+  - name: Shared module Domain layer
+    collectors:
+      - type: directory
+        regex: Shared/Domain/.*
+
+ruleset:
+  # Productivity module
+  Productivity module Interfaces layer:
+    - Productivity module Application layer
+    - Productivity module Domain layer
+  Productivity module Infrastructure layer:
+    - Productivity module Application layer
+    - Productivity module Domain layer
+  Productivity module Application layer:
+    - Productivity module Domain layer
+    - Shared module Application layer
+  Productivity module Domain layer: ~
+  # Users module
+  Users module Interfaces layer:
+    - Users module Application layer
+    - Users module Domain layer
+  Users module Infrastructure layer:
+    - Users module Application layer
+    - Users module Domain layer
+  Users module Application layer:
+    - Users module Domain layer
+    - Shared module Application layer
+  Users module Domain layer: ~
+  # Shared module
+  Shared module Interfaces layer:
+    - Shared module Application layer
+    - Shared module Domain layer
+  Shared module Infrastructure layer:
+    - Shared module Application layer
+    - Shared module Domain layer
+  Shared module Application layer:
+    - Shared module Domain layer
+  Shared module Domain layer: ~

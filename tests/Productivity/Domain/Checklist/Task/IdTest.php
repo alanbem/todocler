@@ -21,15 +21,15 @@ use Streak\Domain;
  *
  * @covers \Productivity\Domain\Checklist\Task\Id
  */
-class IdTest extends TestCase
+final class IdTest extends TestCase
 {
     public function testToString() : void
     {
         $id1 = new Id('id-1');
         $id2 = Id::fromString('id-2');
 
-        $this->assertSame('id-1', $id1->toString());
-        $this->assertSame('id-2', $id2->toString());
+        self::assertSame('id-1', $id1->toString());
+        self::assertSame('id-2', $id2->toString());
     }
 
     public function testEquals()
@@ -37,8 +37,8 @@ class IdTest extends TestCase
         $id1a = new Id('id-1');
         $id1b = Id::fromString('id-1');
 
-        $this->assertTrue($id1a->equals($id1b));
-        $this->assertTrue($id1b->equals($id1a));
+        self::assertTrue($id1a->equals($id1b));
+        self::assertTrue($id1b->equals($id1a));
     }
 
     public function testNotEqual()
@@ -46,8 +46,8 @@ class IdTest extends TestCase
         $id1 = new Id('id-1');
         $id2 = Id::fromString('id-2');
 
-        $this->assertFalse($id1->equals($id2));
-        $this->assertFalse($id2->equals($id1));
-        $this->assertFalse($id1->equals($this->createMock(Domain\Id::class)));
+        self::assertFalse($id1->equals($id2));
+        self::assertFalse($id2->equals($id1));
+        self::assertFalse($id1->equals($this->createMock(Domain\Id::class)));
     }
 }
