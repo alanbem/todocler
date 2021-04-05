@@ -53,29 +53,29 @@ services:
       - 6380:6379
 
   postgres_event_store:
-    image: postgres:9.5-alpine
+    image: postgres:13-alpine
     environment:
       POSTGRES_USER: ${EVENT_STORE_POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${EVENT_STORE_POSTGRES_PASSWORD}
       POSTGRES_DB: ${EVENT_STORE_POSTGRES_DATABASE}
     volumes:
-      - ./docker/postgres/usr/share/postgresql/9.5/postgresql.conf.sample:/usr/share/postgresql/9.5/postgresql.conf.sample
+      - ./docker/postgres/usr/local/share/postgresql/postgresql.conf:/usr/local/share/postgresql/postgresql.conf
     ports:
       - 5433:5432
 
   postgres_registered_users_projections:
-    image: postgres:9.5-alpine
+    image: postgres:13-alpine
     environment:
       POSTGRES_USER: ${REGISTERED_USERS_PROJECTIONS_POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${REGISTERED_USERS_PROJECTIONS_POSTGRES_PASSWORD}
       POSTGRES_DB: ${REGISTERED_USERS_PROJECTIONS_POSTGRES_DATABASE}
     volumes:
-      - ./docker/postgres/usr/share/postgresql/9.5/postgresql.conf.sample:/usr/share/postgresql/9.5/postgresql.conf.sample
+      - ./docker/postgres/usr/local/share/postgresql/postgresql.conf:/usr/local/share/postgresql/postgresql.conf
     ports:
       - 5434:5432
 
   mysql_lists_projections:
-    image: mysql:5.7
+    image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: ${LISTS_PROJECTIONS_MYSQL_PASSWORD}
       MYSQL_DATABASE: ${LISTS_PROJECTIONS_MYSQL_DATABASE}
