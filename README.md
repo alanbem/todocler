@@ -1,5 +1,7 @@
 # TODOcler
 
+[![codecov](https://codecov.io/gh/alanbem/todocler/branch/main/graph/badge.svg?token=O5WFLBW4EZ)](https://codecov.io/gh/alanbem/todocler)
+
 Run `./docker/build.sh`
 
 Open `http://127.0.0.1:8080`
