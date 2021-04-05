@@ -10,7 +10,9 @@ api_platform:
     # enabled formats with hyperlinks
     jsonld:  ['application/ld+json']
     jsonhal: ['application/hal+json']
+    json:    ['application/json']
   patch_formats:
+    json:    ['application/merge-patch+json']
     jsonapi: ['application/vnd.api+json']
   error_formats:
     jsonld:  ['application/ld+json']
@@ -30,3 +32,4 @@ api_platform:
     Productivity\Domain\Exception\TaskNotFound: 404
     Productivity\Domain\Exception\UserNotAllowed: 400
     Productivity\Application\Command\CreateListTest: 400
+    Streak\Domain\Exception\AggregateNotFound: 404

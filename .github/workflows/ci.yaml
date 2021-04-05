@@ -29,11 +29,12 @@ jobs:
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run phpunit
         run: docker-compose run --rm php xphp bin/phpunit --color=always --configuration=phpunit.xml.dist
-      - name: Check coverage
-        uses: johanvanhelden/gha-clover-test-coverage-check@v1
+      - name: Upload coverage report to codecov.io
+        uses: codecov/codecov-action@v1
         with:
-          percentage: "95"
-          filename: "var/phpunit/clover.xml"
+          files: ./var/phpunit/clover.xml
+          fail_ci_if_error: true
+          verbose: true
   run-rector:
     name: rector
     runs-on: ubuntu-latest
