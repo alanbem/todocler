@@ -39,7 +39,7 @@ final class RegisterUserCommand extends Command
         $this->commands = $commands;
         $this->queries = $queries;
 
-        parent::__construct('app:users:register-user');
+        parent::__construct('todocler:users:register-user');
     }
 
     protected function configure()

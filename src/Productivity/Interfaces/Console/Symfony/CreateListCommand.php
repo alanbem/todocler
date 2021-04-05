@@ -38,7 +38,7 @@ final class CreateListCommand extends Command
         $this->bus = $bus;
         $this->users = $users;
 
-        parent::__construct('app:productivity:create-list');
+        parent::__construct('todocler:productivity:create-list');
     }
 
     protected function configure()

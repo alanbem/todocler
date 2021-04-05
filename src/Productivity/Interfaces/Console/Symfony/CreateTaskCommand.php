@@ -38,7 +38,7 @@ final class CreateTaskCommand extends Command
         $this->bus = $bus;
         $this->users = $users;
 
-        parent::__construct('app:productivity:create-task');
+        parent::__construct('todocler:productivity:create-task');
     }
 
     protected function configure()
