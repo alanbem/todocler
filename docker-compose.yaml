@@ -1,12 +1,19 @@
 version: '3'
 services:
 
+  data:
+    image: busybox:latest
+    volumes:
+      - .:/var/www/project
+      - ./docker/fpm/etc/php/7.4/cli/php.ini:/etc/php/7.4/cli/php.ini
+      - ./docker/fpm/etc/php/7.4/fpm/pool.d/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+      - ./docker/fpm/etc/php/7.4/fpm/pool.d/z-overrides.conf:/etc/php/7.4/fpm/pool.d/z-overrides.conf
+
   php:
     image: streakphp/php74-cli:latest
     working_dir: /var/www/project
-    volumes:
-      - .:/var/www/project
-      - ./docker/php/etc/php/7.4/cli/php.ini:/etc/php/7.4/cli/php.ini
+    volumes_from:
+      - data
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       COMPOSER_NO_INTERACTION: 1
@@ -21,11 +28,8 @@ services:
   fpm:
     image: streakphp/php74-fpm:latest
     working_dir: /var/www/project
-    volumes:
-      - .:/var/www/project
-      - ./docker/fpm/etc/php/7.4/cli/php.ini:/etc/php/7.4/cli/php.ini
-      - ./docker/fpm/etc/php/7.4/fpm/pool.d/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
-      - ./docker/fpm/etc/php/7.4/fpm/pool.d/z-overrides.conf:/etc/php/7.4/fpm/pool.d/z-overrides.conf
+    volumes_from:
+      - data
     depends_on:
       - postgres_event_store
       - postgres_registered_users_projections
@@ -107,8 +111,6 @@ services:
       context: .
       dockerfile: docker/supervisord/Dockerfile
     privileged: true
-    depends_on:
-      - fpm
     volumes:
       - .:/var/www/project
       - ./docker/supervisord/etc/supervisord.conf:/etc/supervisord.conf
