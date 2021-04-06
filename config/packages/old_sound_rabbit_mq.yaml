@@ -10,6 +10,16 @@ old_sound_rabbit_mq:
       service_alias: users.integration_events.producer
       exchange_options:
         name: 'integration_events'
+        type: 'x-message-deduplication'
+        durable: true
+        declare: true
+        arguments:
+          x-cache-size: [I, 1000]
+          x-cache-persistence: [S, disk]
+    integration_events.deduplicated:
+      connection: default
+      exchange_options:
+        name: 'integration_events.deduplicated'
         type: topic
         durable: true
         declare: true
@@ -22,6 +32,5 @@ old_sound_rabbit_mq:
         declare: true
       callback: productivity.users_events.sensor.rabbitmq_consumer
   bindings:
-    - { exchange: 'integration_events', destination: 'productivity.integration_events.inbox', routing_key: 'users.*' }
-
-
+    - { exchange: 'integration_events', destination: 'integration_events.deduplicated', destination_is_exchange: true }
+    - { exchange: 'integration_events.deduplicated', destination: 'productivity.integration_events.inbox', routing_key: 'users.*' }
