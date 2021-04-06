@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Shared\Infrastructure\Behat\:
+    resource: '%kernel.project_dir%/src/Shared/Infrastructure/Behat'

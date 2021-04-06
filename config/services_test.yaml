@@ -1,0 +1,4 @@
+services:
+  streak.snapshotter: '@streak.null.snapshotter'
+  streak.subscription_dao: '@streak.in_memory.subscription_dao'
+  streak.event_store: '@streak.in_memory.event_store'
