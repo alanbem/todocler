@@ -28,5 +28,5 @@ interface UsersFacade
     /**
      * Finds user by its email.
      */
-    public function findRegisteredUser($email) : ?object; // instead of object it should be typed DTO tailored for `Productivity` context
+    public function findRegisteredUser(string $email) : ?object; // instead of object it should be typed DTO tailored for `Productivity` context
 }

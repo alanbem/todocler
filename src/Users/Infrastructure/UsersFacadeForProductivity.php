@@ -43,7 +43,7 @@ final class UsersFacadeForProductivity implements Productivity\UsersFacade
         }
     }
 
-    public function findRegisteredUser($email) : ?object
+    public function findRegisteredUser(string $email) : ?object
     {
         try {
             /** @var ?RegisteredUser $user */
