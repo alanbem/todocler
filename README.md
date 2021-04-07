@@ -24,10 +24,10 @@ button (you can find it at the top of the page). Just open the modal and paste `
 ## Architecture overview
 
 This Project is a modular monolith with 2 modules - which in this case aligns with **bounded contexts** - `Productivity` & `Users` and additionally
-a very thin `Shared(Kernel)`. The separation (of logic) between modules is very naive because of simple nature of application itself.
+a very thin `Shared(Kernel)`. The separation (of logic) between modules is very naive because of the simple nature of application itself.
 This architecture ensures that modules could be split into separated (micro-)services at any time without much refactoring needed.
 
-Both modules are event-sourced and layered (DDD-style) while being driven by CQRS. They are loosely coupled, deploying messaging in order to make existing coupling one-directional (think: direct acyclic graph). 
+Both modules are event-sourced and layered (DDD-style) while being driven by CQRS. They are loosely coupled, deploying messaging to make existing coupling one-directional (think: direct acyclic graph). 
 Both modules share the same physical event store, but logically they are separated - it is just a pattern that allows for
 easy debugging, because events coming from different services in the same log (store) are temporally monotonic (ordered).
 
@@ -44,11 +44,11 @@ Thanks to that with little to no effort it was also easy to integrate ([through 
 use it for authentication.
 
 `Users` module has no outside dependencies and in order to make it stay that way it publishes integration events - via [another projection](https://github.com/alanbem/todocler/blob/main/src/Users/Application/Projector/Queue/Projector.php) - to external queue which later can be consumed by downstream clients... meaning other modules.
-Underlying queue mechanism - albeit [abstracted](https://github.com/alanbem/todocler/blob/main/src/Users/Application/Projector/Queue/Projector/Queue.php) - uses [RabbitMQ](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/Queue/RabbitMQQueue.php) which also handles message deduplication (nice to have in at-least-once delivery environment).
+The underlying queue mechanism - albeit [abstracted](https://github.com/alanbem/todocler/blob/main/src/Users/Application/Projector/Queue/Projector/Queue.php) - uses [RabbitMQ](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/Queue/RabbitMQQueue.php) which also handles message deduplication (nice to have in at-least-once delivery environment).
 
-Only single console command [todocler:users:register-user](https://github.com/alanbem/todocler/blob/main/src/Users/Interfaces/Console/Symfony/RegisterUserCommand.php) for registering new users is exposed as an outside interface of this module. Excluding authentication endpoint handled by Symfony.
+Only a single console command [todocler:users:register-user](https://github.com/alanbem/todocler/blob/main/src/Users/Interfaces/Console/Symfony/RegisterUserCommand.php) for registering new users is exposed as an outside interface of this module. Excluding authentication endpoint handled by Symfony.
 
-I considered rewriting this module in a classic ORM-only way and showcase some safe inter-module messaging techniques (e.g. transactional outbox), but due to time constraints I didn't.
+I considered rewriting this module in a classic ORM-only way and showcase some safe inter-module messaging techniques (e.g. transactional outbox), but due to time constraints, I didn't.
 
 ### Productivity module
 This module is responsible for TODO lists and theirs tasks.
@@ -64,44 +64,44 @@ It provides internally:
 - `BrowseTasks` query
 
 Data for those queries is provided by dedicated [`Lists` projection](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Projector/Lists/Projector.php). This projection uses Doctrine ORM for persistence.
-Thanks to that it was possible to [integrate](https://github.com/alanbem/todocler/tree/main/src/Productivity/Interfaces/Rest/ApiPlatform) [ApiPlatform](https://api-platform.com/) with projection entities and expose them as configurable REST interface.
+Thanks to that it was possible to [integrate](https://github.com/alanbem/todocler/tree/main/src/Productivity/Interfaces/Rest/ApiPlatform) [ApiPlatform](https://api-platform.com/) with projection entities and expose them as a configurable REST interface.
 
-`Productivity` module has a dependencies on `Users` module:
+`Productivity` module has a dependency on `Users` module:
 - One of application features is that `Productivity` module must create first "welcoming" list [through process manager](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/ProcessManager/Registration/ProcessManager.php#L56) for the user as soon as possible after registration.
-  I used [dedicated sensor](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Sensor/UsersEvents/Sensor.php) for that - it translates any data into [internal events](https://github.com/alanbem/todocler/tree/main/src/Productivity/Application/Event). In this case its [wrapped around by
+  I used [dedicated sensor](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Sensor/UsersEvents/Sensor.php) for that - it translates any data into [internal events](https://github.com/alanbem/todocler/tree/main/src/Productivity/Application/Event). In this case, it's [wrapped around by
   RabbitMQ consumer](https://github.com/alanbem/todocler/blob/main/config/services/productivity/sensors.yaml#L23) and listens for AMQP messages `Users` module publishes.
 - Sometimes `Productivity` module has to retrieve details of a user or check whether user with given email exists.
   I could use above mentioned integration events from `Users` module and create local projection of registered user, but
   I chose different method: `Productivity` module declares [facade](https://github.com/alanbem/todocler/blob/main/src/Productivity/UsersFacade.php) with tight set of methods it requires from `Users` module.
-  In current [implementation](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/UsersFacadeForProductivity.php) it just runs internal queries, but in case of splitting the modules it could be easily swapped with HTTP implementation.
+  In the current [implementation](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/UsersFacadeForProductivity.php) it just runs internal queries, but in case of splitting the modules it could be easily swapped with HTTP implementation.
   This facade might serve as an anti-corruption layer in the future, when domain concepts (of a user) between our two modules start to noticeably diverge.
 
 Except REST API powered by ApiPlatform this module exposes 2 console commands [todocler:productivity:create-list](https://github.com/alanbem/todocler/blob/main/src/Productivity/Interfaces/Console/Symfony/CreateListCommand.php) and [todocler:productivity:create-task](https://github.com/alanbem/todocler/blob/main/src/Productivity/Interfaces/Console/Symfony/CreateTaskCommand.php) as an outside interface.
 
 ### A word on event sourcing
-Employing event sourcing has some drawbacks - mainly eventual consistency. Usually eventual consistency is not a problem at all,
-it is just different way of thinking about data and its availability. Nevertheless, there are ways of dealing with technical dissonance resulting from EC about which I am happy to talk about.
+Employing event sourcing has some drawbacks - mainly eventual consistency. Usually, eventual consistency is not a problem at all,
+it is just a different way of thinking about data and its availability. Nevertheless, there are ways of dealing with technical dissonance resulting from EC, which I would be happy to discuss.
 
-For event sourcing part in this project I used [Streak](https://github.com/streakphp/streak) - framework supplying all the tools needed to work with
+For event sourcing part of this project, I used [Streak](https://github.com/streakphp/streak) - framework supplying all the tools needed to work with
 event-sourced aggregate roots, sagas/process managers, projections, etc. It helps to alleviate problems of transactions,
 concurrency control, snapshotting and more.
 
 ## Docker
-Everything you need to run this projects with is dockerized. Please refer to [docker-compose.yaml](https://github.com/alanbem/todocler/blob/main/docker-compose.yaml) file and [docker/](https://github.com/alanbem/todocler/tree/main/docker) directory.
+Everything you need to run this project with is dockerized. Please refer to [docker-compose.yaml](https://github.com/alanbem/todocler/blob/main/docker-compose.yaml) file and [docker/](https://github.com/alanbem/todocler/tree/main/docker) directory.
 
 ## Quality enforcing
 Here are the tools I used to achieve the best quality possible.
 
 ### PHPUnit
-Unit tests & their coverage are first and foremost determinant of a quality. Please refer to [phpunit.xml.dist](https://github.com/alanbem/todocler/blob/main/phpunit.xml.dist) file and [tests/](https://github.com/alanbem/todocler/tree/main/tests) directory.
+Unit tests & their coverage are the first and foremost determinants of a quality. Please refer to [phpunit.xml.dist](https://github.com/alanbem/todocler/blob/main/phpunit.xml.dist) file and [tests/](https://github.com/alanbem/todocler/tree/main/tests) directory.
 
 Run phpunit via `docker-compose run --rm php xphp bin/phpunit --color=always`
 ### Rector
-Automated refactoring according to set of configurable rules. Please refer to [rector.php](https://github.com/alanbem/todocler/blob/main/rector.php) file.
+Automated refactoring according to the set of configurable rules. Please refer to [rector.php](https://github.com/alanbem/todocler/blob/main/rector.php) file.
 
 Run via `docker-compose run --rm --no-deps php bin/rector --ansi`
 ### Deptrac
-Validates your top most architecture, looking for dependencies where they should not be. Please refer to [depfile.yaml](https://github.com/alanbem/todocler/blob/main/depfile.yaml) file.
+Validates your topmost architecture, looking for dependencies where they should not be. Please refer to [depfile.yaml](https://github.com/alanbem/todocler/blob/main/depfile.yaml) file.
 
 Run via `docker-compose run --rm --no-deps php bin/deptrac`
 ### PHP-CS-Fixer
@@ -109,11 +109,11 @@ Regulates coding standards. Especially useful for teams. Please refer to [.php_c
 
 Run via `docker-compose run --rm --no-deps php bin/php-cs-fixer fix --diff`
 ### Continuous Integration pipeline
-Runs all the above in tandem. I used Github Actions. Please refer to `.github/workflows/ci.yaml`
+Runs all the above in tandem. I used Github Actions. Please refer to [.github/workflows/ci.yaml](https://github.com/alanbem/todocler/blob/main/.github/workflows/ci.yaml) file.
 
 ## What's missing
 - GraphQL API
-- Better REST API design - current solution due to ApiPlatform shortcomings is good-enough, but IMHO suboptimal.
+- Better REST API design - current solution due to ApiPlatform shortcomings is good enough, but IMHO suboptimal.
 - Strong schema for integration events (protobuf, etc)
 - BDD tests
-- I would change `Checklist` to `Project` - unfortunately `list` is a PHP keyword and can't be used as a class name. `Checklist` was first thing I came up with.
+- I would change `Checklist` to `Project` - unfortunately, `List` is a PHP keyword and can't be used as a class name. `Checklist` was the first thing I came up with.
