@@ -23,17 +23,16 @@ button (you can find it at the top of the page). Just open the modal and paste `
 
 ## Architecture overview
 
-Project is a modular monolith with 2 modules - which in this case aligns with **bounded contexts** - `Productivity` & `Users` and additionally
-very thin `Shared(Kernel)`. The separation (of logic) between modules unfortunately is very naive because of simple nature of application itself.
+This Project is a modular monolith with 2 modules - which in this case aligns with **bounded contexts** - `Productivity` & `Users` and additionally
+a very thin `Shared(Kernel)`. The separation (of logic) between modules is very naive because of simple nature of application itself.
 This architecture ensures that modules could be split into separated (micro-)services at any time without much refactoring needed.
 
-Both modules are event-sourced and layered (DDD-style) while being driven by CQRS. They are loosely coupled although for the
-sake of the showcase some coupling was necessary - fortunately loosening techniques were used.
+Both modules are event-sourced and layered (DDD-style) while being driven by CQRS. They are loosely coupled, deploying messaging in order to make existing coupling one-directional (think: direct acyclic graph). 
 Both modules share the same physical event store, but logically they are separated - it is just a pattern that allows for
-easy debugging, because events coming from different services in the same log (store) are temporally monotonic.
+easy debugging, because events coming from different services in the same log (store) are temporally monotonic (ordered).
 
 ### Users module
-This module is responsible for creating users and indirectly for clients authentication.
+This module is responsible for creating users and indirectly for clients' authentication.
 
 It provides internally:
 - `RegisterUser` command
