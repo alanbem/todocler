@@ -68,9 +68,9 @@ Data for those queries is provided by dedicated [`Lists` projection](https://git
 Thanks to that it was possible to [integrate](https://github.com/alanbem/todocler/tree/main/src/Productivity/Interfaces/Rest/ApiPlatform) [ApiPlatform](https://api-platform.com/) with projection entities and expose them as a configurable REST interface.
 
 `Productivity` module has a dependency on `Users` module:
-- One of application features is that `Productivity` module must create first "welcoming" list [through process manager](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/ProcessManager/Registration/ProcessManager.php#L56) for the user as soon as possible after registration.
-  I used [dedicated sensor](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Sensor/UsersEvents/Sensor.php) for that - it translates any data into [internal events](https://github.com/alanbem/todocler/tree/main/src/Productivity/Application/Event). In this case, it's [wrapped around by
-  RabbitMQ consumer](https://github.com/alanbem/todocler/blob/main/config/services/productivity/sensors.yaml#L23) and listens for AMQP messages `Users` module publishes.
+- One of the features of the application is that `Productivity` module must create first *welcoming* list (through [process manager](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/ProcessManager/Registration/ProcessManager.php#L56)) for the user as soon as possible after registration.
+  I used dedicated [sensor](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Sensor/UsersEvents/Sensor.php) for that - it translates any data into [internal events](https://github.com/alanbem/todocler/tree/main/src/Productivity/Application/Event). In this case, it's [wrapped around by
+  RabbitMQ consumer](https://github.com/alanbem/todocler/blob/main/config/services/productivity/sensors.yaml#L23) and listens for AMQP messages that are published by `Users` module.
 - Sometimes `Productivity` module has to retrieve details of a user or check whether user with given email exists.
   I could use above mentioned integration events from `Users` module and create local projection of registered user, but
   I chose different method: `Productivity` module declares [facade](https://github.com/alanbem/todocler/blob/main/src/Productivity/UsersFacade.php) with tight set of methods it requires from `Users` module.
