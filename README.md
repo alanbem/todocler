@@ -27,9 +27,10 @@ This Project is a modular monolith with 2 modules - which in this case aligns wi
 a very thin `Shared(Kernel)`. The separation (of logic) between modules is very naive because of the simple nature of application itself.
 This architecture ensures that modules could be split into separated (micro-)services at any time without much refactoring needed.
 
-Both modules are event-sourced and layered (DDD-style) while being driven by CQRS. They are loosely coupled, deploying messaging to make existing coupling one-directional (think: direct acyclic graph). 
+Both modules are event-sourced and layered (DDD-style) while being driven by CQRS. They are loosely coupled, deploying **messaging** to make existing coupling one-directional (think: direct acyclic graph). 
 Both modules share the same physical event store, but logically they are separated - it is just a pattern that allows for
 easy debugging, because events coming from different services in the same log (store) are temporally monotonic (ordered).
+Any other storage, besides aforementioned event store & messaging queue, is private to module using it.
 
 ### Users module
 This module is responsible for creating users and indirectly for clients' authentication.
