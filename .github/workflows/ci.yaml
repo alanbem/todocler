@@ -5,28 +5,52 @@ jobs:
     name: composer validate
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull php
+#      - name: Docker build
+#        run: docker-compose build --force-rm
       - name: Run composer validate
         run: docker-compose run --rm --no-deps php composer validate --strict --no-interaction --ansi
   run-php-cs-fixer:
     name: php-cs-fixer
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull php
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
-        run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
+        run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run php-cs-fixer
         run: docker-compose run --rm --no-deps php bin/php-cs-fixer fix --diff --dry-run --ansi --config=.php_cs.dist
   run-phpunit:
     name: phpunit
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
-        run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
+        run: docker-compose run --rm php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run phpunit
         run: docker-compose run --rm php xphp bin/phpunit --color=always --configuration=phpunit.xml.dist
       - name: Upload coverage report to codecov.io
@@ -39,19 +63,39 @@ jobs:
     name: rector
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull php
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
-        run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
+        run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run rector
         run: docker-compose run --rm --no-deps php bin/rector --no-progress-bar --dry-run --ansi
   run-deptrac:
     name: deptrac
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull php
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
-        run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
+        run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run deptrac
         run: docker-compose run --rm --no-deps php bin/deptrac --formatter=github-actions --no-progress --no-interaction
