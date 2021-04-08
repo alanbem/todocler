@@ -5,16 +5,30 @@ jobs:
     name: composer validate
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull php
+#      - name: Docker build
+#        run: docker-compose build --force-rm
       - name: Run composer validate
         run: docker-compose run --rm --no-deps php composer validate --strict --no-interaction --ansi
   run-php-cs-fixer:
     name: php-cs-fixer
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run php-cs-fixer
@@ -23,8 +37,18 @@ jobs:
     name: phpunit
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run phpunit
@@ -39,8 +63,18 @@ jobs:
     name: rector
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run rector
@@ -49,8 +83,18 @@ jobs:
     name: deptrac
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull
+#      - name: Docker build
+#        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./var/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
         run: docker-compose run --rm php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run deptrac
