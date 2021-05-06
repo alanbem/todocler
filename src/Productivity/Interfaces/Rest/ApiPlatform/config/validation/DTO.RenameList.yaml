@@ -1,4 +1,0 @@
-Productivity\Interfaces\Rest\ApiPlatform\DTO\RenameList:
-  properties:
-    name:
-      - NotBlank: ~

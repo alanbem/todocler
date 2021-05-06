@@ -26,13 +26,13 @@ jobs:
       - name: Composer caching
         uses: actions/cache@v2
         with:
-          path: ./var/.composer
+          path: ./build/.composer
           key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
         run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run php-cs-fixer
-        run: docker-compose run --rm --no-deps php bin/php-cs-fixer fix --diff --dry-run --ansi --config=.php_cs.dist
+        run: docker-compose run --rm --no-deps php bin/php-cs-fixer fix --diff --dry-run --ansi --config=.php-cs-fixer.dist.php
   run-phpunit:
     name: phpunit
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
       - name: Composer caching
         uses: actions/cache@v2
         with:
-          path: ./var/.composer
+          path: ./build/.composer
           key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
@@ -56,9 +56,15 @@ jobs:
       - name: Upload coverage report to codecov.io
         uses: codecov/codecov-action@v1
         with:
-          files: ./var/phpunit/clover.xml
+          files: ./build/.phpunit/clover.xml
           fail_ci_if_error: true
           verbose: true
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: PHPUnit Code Coverage
+          path: ./build/.phpunit/code-coverage
+          retention-days: 7
   run-rector:
     name: rector
     runs-on: ubuntu-latest
@@ -72,11 +78,11 @@ jobs:
       - name: Composer caching
         uses: actions/cache@v2
         with:
-          path: ./var/.composer
+          path: ./build/.composer
           key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
-        run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
+        run: docker-compose run --rm --no-deps php composer install --no-interaction --optimize-autoloader --ansi
       - name: Run rector
         run: docker-compose run --rm --no-deps php bin/rector --no-progress-bar --dry-run --ansi
   run-deptrac:
@@ -92,10 +98,10 @@ jobs:
       - name: Composer caching
         uses: actions/cache@v2
         with:
-          path: ./var/.composer
+          path: ./build/.composer
           key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-v1-
       - name: Install dependencies
         run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run deptrac
-        run: docker-compose run --rm --no-deps php bin/deptrac --formatter=github-actions --no-progress --no-interaction
+        run: docker-compose run --rm --no-deps php bin/deptrac --no-progress --no-interaction --cache-file=./build/.deptrac/.deptrac.cache --ansi

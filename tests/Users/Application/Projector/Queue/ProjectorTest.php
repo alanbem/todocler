@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Users\Application\Projector\Queue;
 
-use Monolog\Test\TestCase;
+use PHPUnit\Framework\TestCase;
 use Productivity\Application\Sensor\UsersEvents\Sensor;
 use Streak\Domain\Event;
 use Streak\Domain\Event\Envelope;
-use Streak\Infrastructure\EventStore\InMemoryEventStore;
+use Streak\Infrastructure\Domain\EventStore\InMemoryEventStore;
 use Users\Domain\Event\UserRegistered;
 
 /**
@@ -36,7 +36,7 @@ final class ProjectorTest extends TestCase
 
     public function testProjector() : void
     {
-        $event = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now = new \DateTimeImmutable()), new Sensor\Id());
+        $event = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', $now = new \DateTimeImmutable()), new Sensor\Id());
 
         $this->queue
             ->expects(self::once())
@@ -63,10 +63,10 @@ final class ProjectorTest extends TestCase
 
     public function testPickingFirstEvent()
     {
-        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new Sensor\Id());
-        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new Sensor\Id());
-        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new Sensor\Id());
-        $event4 = Envelope::new(new UserRegistered('c70a16c7-a43f-4c62-8d4d-03f849661902', 'biglou@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new Sensor\Id());
+        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
+        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
+        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
+        $event4 = Envelope::new(new UserRegistered('c70a16c7-a43f-4c62-8d4d-03f849661902', 'biglou@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
 
         $store = new InMemoryEventStore();
         $store->add($event1, $event2, $event3, $event4);
@@ -79,9 +79,9 @@ final class ProjectorTest extends TestCase
 
     public function testFilteringEvents()
     {
-        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new Sensor\Id());
-        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new Sensor\Id());
-        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new Sensor\Id());
+        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
+        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
+        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
         $event4 = Envelope::new($this->createMock(Event::class), new Sensor\Id());
 
         $store = new InMemoryEventStore();

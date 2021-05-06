@@ -58,7 +58,7 @@ final class FactoryTest extends TestCase
     public function testCreatingOnEvent() : void
     {
         $factory = new Projector\Factory($this->queue);
-        $event = Event\Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
+        $event = Event\Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
 
         $projector = $factory->createFor($event);
 

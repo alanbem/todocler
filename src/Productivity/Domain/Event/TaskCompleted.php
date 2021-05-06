@@ -22,7 +22,7 @@ use Streak\Domain;
  */
 final class TaskCompleted implements Domain\Event
 {
-    const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
+    private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
 
     private string $listId;
     private string $taskId;

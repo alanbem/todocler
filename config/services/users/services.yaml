@@ -4,26 +4,18 @@ services:
     autoconfigure: true
     public: false
 
-  Users\Infrastructure\PasswordHasher\SymfonyPasswordHasherAdapter:
+  Users\Infrastructure\Domain\PasswordHasher\SymfonyPasswordHasherAdapter:
     arguments:
-      - '@Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface'
+      - '@security.password_hasher_factory'
       - Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser
 
-  Users\Domain\PasswordHasher: '@Users\Infrastructure\PasswordHasher\SymfonyPasswordHasherAdapter'
-
-  Users\Infrastructure\SaltGenerator\SimpleSaltGenerator:
-
-  Users\Infrastructure\SaltGenerator\FixedSaltGenerator:
-    arguments:
-      - 'salt'
-
-  Users\Domain\SaltGenerator: '@Users\Infrastructure\SaltGenerator\SimpleSaltGenerator'
+  Users\Domain\PasswordHasher: '@Users\Infrastructure\Domain\PasswordHasher\SymfonyPasswordHasherAdapter'
 
   Users\Infrastructure\UsersFacadeForProductivity:
     arguments:
       - '@Streak\Application\QueryBus'
 
-  Users\Infrastructure\Queue\RabbitMQQueue:
+  Users\Infrastructure\Application\Queue\RabbitMQQueue:
     arguments:
       - '@users.integration_events.producer'
       - 'users'

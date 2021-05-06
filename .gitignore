@@ -2,6 +2,7 @@
 /bin/
 !/bin/console
 /build.local.sh
+/build/
 
 ###> symfony/framework-bundle ###
 /.env.local

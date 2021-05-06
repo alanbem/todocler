@@ -10,4 +10,4 @@ services:
 
   Users\Application\Projector\Queue\Projector\Factory:
     arguments:
-      - '@Users\Infrastructure\Queue\RabbitMQQueue'
+      - '@Users\Infrastructure\Application\Queue\RabbitMQQueue'

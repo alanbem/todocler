@@ -7,12 +7,11 @@
         <id name="id" type="guid" column="id">
             <generator strategy="NONE" />
         </id>
-        <field name="username" column="username"/>
+        <field name="email" column="email"/>
         <field name="password" column="password"/>
-        <field name="salt" column="salt"/>
         <field name="registeredAt" type="datetimetz_immutable" column="registered_at" precision="6" column-definition="TIMESTAMP(6) WITH TIME ZONE NOT NULL" />
         <indexes>
-            <index columns="username" name="search_by_username"/>
+            <index columns="email" name="search_by_email"/>
         </indexes>
     </entity>
 </doctrine-mapping>

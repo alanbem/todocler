@@ -1,7 +1,0 @@
-Productivity\Interfaces\Rest\ApiPlatform\DTO\CreateList:
-  properties:
-    listId:
-      - NotBlank: ~
-      - Uuid: ~
-    name:
-      - NotBlank: ~

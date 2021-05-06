@@ -7,5 +7,4 @@ services:
   Users\Domain\User\Factory:
     arguments:
       - '@Users\Domain\PasswordHasher'
-      - '@Users\Domain\SaltGenerator'
       - '@Streak\Domain\Clock'

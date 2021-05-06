@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Users\Domain;
 
-use Streak\Application\Command;
-use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
+use Streak\Domain\Command;
+use Streak\Domain\CommandHandler;
 use Streak\Domain\Event;
 use Users\Domain\Command as Commands;
 use Users\Domain\Event as Events;
@@ -27,21 +27,19 @@ use Webmozart\Assert\Assert;
  */
 final class User implements Event\Sourced\AggregateRoot, CommandHandler
 {
-    use Event\Sourced\AggregateRoot\Identification;
     use AggregateRoot\Comparison;
-    use Event\Sourcing;
     use Command\Handling;
+    use Event\Sourced\AggregateRoot\Identification;
+    use Event\Sourcing;
 
-    private PasswordHasher $encoder;
-    private SaltGenerator $saltshaker;
+    private PasswordHasher $hasher;
     private Clock $clock;
 
-    public function __construct(User\Id $id, PasswordHasher $encoder, SaltGenerator $saltshaker, Clock $clock)
+    public function __construct(User\Id $id, PasswordHasher $encoder, Clock $clock)
     {
         $this->identifyBy($id);
 
-        $this->encoder = $encoder;
-        $this->saltshaker = $saltshaker;
+        $this->hasher = $encoder;
         $this->clock = $clock;
     }
 
@@ -58,10 +56,9 @@ final class User implements Event\Sourced\AggregateRoot, CommandHandler
         Assert::email($command->email(), 'Email is missing.');
         Assert::notEmpty($command->password(), 'Password is missing.');
 
-        $salt = $this->saltshaker->generate();
-        $hash = $this->encoder->encode($command->password(), $salt);
+        $hashedPassword = $this->hasher->hash($command->password());
 
-        $this->apply(new Events\UserRegistered($this->userId(), $command->email(), $hash, $salt, $this->clock->now()));
+        $this->apply(new Events\UserRegistered($this->userId(), $command->email(), $hashedPassword, $this->clock->now()));
     }
 
     /**

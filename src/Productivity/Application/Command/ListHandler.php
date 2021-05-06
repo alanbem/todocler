@@ -15,9 +15,9 @@ namespace Productivity\Application\Command;
 
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Command\CreateList;
-use Streak\Application\Command;
-use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
+use Streak\Domain\Command;
+use Streak\Domain\CommandHandler;
 use Streak\Domain\Exception;
 
 /**
@@ -54,6 +54,6 @@ final class ListHandler implements CommandHandler
 
         $this->repository->add($list);
 
-        $list->handle($command); // this aggregate is command handler, so we can pass $command directly
+        $list->handleCommand($command); // this aggregate is command handler, so we can pass $command directly
     }
 }

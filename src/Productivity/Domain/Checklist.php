@@ -17,10 +17,10 @@ use Productivity\Domain\Checklist\Task;
 use Productivity\Domain\Command as Commands;
 use Productivity\Domain\Event as Events;
 use Productivity\Domain\Exception as Exceptions;
-use Streak\Application\Command;
-use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
+use Streak\Domain\Command;
+use Streak\Domain\CommandHandler;
 use Streak\Domain\Event;
 use Webmozart\Assert\Assert;
 
@@ -38,10 +38,10 @@ use Webmozart\Assert\Assert;
  */
 final class Checklist implements Event\Sourced\AggregateRoot, CommandHandler
 {
-    use Event\Sourced\AggregateRoot\Identification;
     use AggregateRoot\Comparison;
-    use Event\Sourcing;
     use Command\Handling;
+    use Event\Sourced\AggregateRoot\Identification;
+    use Event\Sourcing;
 
     private Clock $clock;
 

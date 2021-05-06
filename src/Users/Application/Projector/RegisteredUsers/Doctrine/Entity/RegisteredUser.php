@@ -27,17 +27,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class RegisteredUser implements UserInterface
 {
     private string $id;
-    private string $username;
+    private string $email;
     private string $password;
-    private string $salt;
     private \DateTimeImmutable $registeredAt;
 
-    public function __construct(string $id, string $username, string $password, string $salt, \DateTimeImmutable $registeredAt)
+    public function __construct(string $id, string $email, string $password, \DateTimeImmutable $registeredAt)
     {
         $this->id = $id;
-        $this->username = $username;
+        $this->email = $email;
         $this->password = $password;
-        $this->salt = $salt;
         $this->registeredAt = $registeredAt;
     }
 
@@ -46,9 +44,9 @@ class RegisteredUser implements UserInterface
         return $this->id;
     }
 
-    public function getUsername() : string
+    public function getEmail() : string
     {
-        return $this->username;
+        return $this->email;
     }
 
     public function getPassword() : string
@@ -68,12 +66,21 @@ class RegisteredUser implements UserInterface
 
     public function getSalt() : string
     {
-        return $this->salt;
+        return '';
+    }
+
+    public function getUserIdentifier() : string
+    {
+        return $this->email;
+    }
+
+    public function getUsername() : string
+    {
+        return $this->email;
     }
 
     public function eraseCredentials() : void
     {
         $this->password = '';
-        $this->salt = '';
     }
 }

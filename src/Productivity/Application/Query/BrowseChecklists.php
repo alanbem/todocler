@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Productivity\Application\Query;
 
 use Productivity\Application\Projector\Lists;
-use Streak\Application\Query;
 use Streak\Domain\Event\Listener;
+use Streak\Domain\Query;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

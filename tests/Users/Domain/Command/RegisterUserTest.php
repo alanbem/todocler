@@ -13,18 +13,16 @@ declare(strict_types=1);
 
 namespace Users\Domain\Command;
 
-use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
+use Streak\Domain\CommandHandler;
 use Streak\Domain\Exception\AggregateAlreadyExists;
-use Streak\Infrastructure\FixedClock;
-use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
+use Streak\Infrastructure\Domain\Clock\FixedClock;
+use Streak\Infrastructure\Domain\Testing\AggregateRoot\TestCase;
 use Users\Application\Command\RegisterUserHandler;
 use Users\Domain\Event\UserRegistered;
 use Users\Domain\PasswordHasher;
-use Users\Domain\SaltGenerator;
 use Users\Domain\User;
-use Users\Infrastructure\SaltGenerator\FixedSaltGenerator;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
@@ -36,13 +34,11 @@ use Users\Infrastructure\SaltGenerator\FixedSaltGenerator;
 final class RegisterUserTest extends TestCase
 {
     private PasswordHasher $encoder;
-    private SaltGenerator $saltshaker;
     private Clock $clock;
 
     protected function setUp() : void
     {
         $this->encoder = $this->createMock(PasswordHasher::class);
-        $this->saltshaker = new FixedSaltGenerator('salt');
         $this->clock = new FixedClock(new \DateTimeImmutable('2021-03-25 17:49:00'));
     }
 
@@ -50,7 +46,7 @@ final class RegisterUserTest extends TestCase
     {
         $this->encoder
             ->expects(self::once())
-            ->method('encode')
+            ->method('hash')
             ->with('password')
             ->willReturn('hash');
 
@@ -61,7 +57,7 @@ final class RegisterUserTest extends TestCase
                 new RegisterUser('user-1', 'alan.bem@example.com', 'password'),
             )
             ->then(
-                new UserRegistered('user-1', 'alan.bem@example.com', 'hash', 'salt', $this->clock->now()),
+                new UserRegistered('user-1', 'alan.bem@example.com', 'hash', $this->clock->now()),
             );
     }
 
@@ -78,7 +74,7 @@ final class RegisterUserTest extends TestCase
         $this
             ->for(new User\Id('user-1'))
             ->given(
-                new UserRegistered('user-1', 'alan.bem@example.com', 'hash', 'salt', $this->clock->now()),
+                new UserRegistered('user-1', 'alan.bem@example.com', 'hash', $this->clock->now()),
             )
             ->when(
                 new RegisterUser('user-1', 'alan.bem@example.com', 'password'),
@@ -97,7 +93,7 @@ final class RegisterUserTest extends TestCase
 
     protected function createFactory() : AggregateRoot\Factory
     {
-        return new User\Factory($this->encoder, $this->saltshaker, $this->clock);
+        return new User\Factory($this->encoder, $this->clock);
     }
 
     protected function createHandler(AggregateRoot\Factory $factory, AggregateRoot\Repository $repository) : CommandHandler

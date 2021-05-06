@@ -21,8 +21,8 @@ use Productivity\Domain\Exception\ListNotFound;
 use Productivity\Domain\Exception\UserNotAllowed;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
-use Streak\Infrastructure\FixedClock;
-use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
+use Streak\Infrastructure\Domain\Clock\FixedClock;
+use Streak\Infrastructure\Domain\Testing\AggregateRoot\TestCase;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Users\Domain\Command;
 
-use Streak\Application\Command;
+use Streak\Domain\Command;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

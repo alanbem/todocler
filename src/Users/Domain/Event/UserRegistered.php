@@ -22,20 +22,18 @@ use Streak\Domain;
  */
 final class UserRegistered implements Domain\Event
 {
-    const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
+    private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
 
     private string $userId;
     private string $email;
     private string $passwordHash;
-    private string $salt;
     private string $registeredAt;
 
-    public function __construct(string $userId, string $email, string $passwordHash, string $salt, \DateTimeImmutable $registeredAt)
+    public function __construct(string $userId, string $email, string $passwordHash, \DateTimeImmutable $registeredAt)
     {
         $this->userId = $userId;
         $this->email = $email;
         $this->passwordHash = $passwordHash;
-        $this->salt = $salt;
         $this->registeredAt = $registeredAt->format(self::DATE_FORMAT);
     }
 
@@ -52,11 +50,6 @@ final class UserRegistered implements Domain\Event
     public function passwordHash() : string
     {
         return $this->passwordHash;
-    }
-
-    public function salt() : string
-    {
-        return $this->salt;
     }
 
     public function registeredAt() : \DateTimeImmutable
