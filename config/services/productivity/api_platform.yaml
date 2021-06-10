@@ -1,6 +1,6 @@
 services:
   productivity.filters.filter_by_authenticated_user:
-    class: Productivity\Interfaces\Rest\ApiPlatform\Doctrine\Orm\Extension\AuthenticatedUserExtension
+    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Doctrine\Orm\Extension\AuthenticatedUserExtension
     arguments:
       - '@Symfony\Component\Security\Core\Security'
       - '@Productivity\UsersFacade'
@@ -57,8 +57,8 @@ services:
       - api_platform.filter
 
   productivity.openapi.decorator:
-    class: Productivity\Interfaces\Rest\ApiPlatform\OpenApi\JWTAuthenticationDecorator
+    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\OpenApi\JWTAuthenticationDecorator
     arguments:
-      - '@productivity.openapi.decorator.inner'
+      - '@.inner'
       - '/auth/token'
-    decorates: 'api_platform.openapi.factory'
+    decorates: api_platform.openapi.factory

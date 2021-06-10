@@ -19,10 +19,10 @@ use Productivity\Application\Projector\Lists\Doctrine\Entity;
 use Productivity\Application\Query as Queries;
 use Productivity\Domain\Event as Events;
 use Shared\Application\Projector\Doctrine;
-use Streak\Application\Query;
-use Streak\Application\QueryHandler;
 use Streak\Domain\Event;
 use Streak\Domain\EventStore;
+use Streak\Domain\Query;
+use Streak\Domain\QueryHandler;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

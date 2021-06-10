@@ -24,7 +24,7 @@ use Productivity\Domain\Event\TaskCompleted;
 use Productivity\Domain\Event\TaskCreated;
 use Productivity\Domain\Event\TaskRemoved;
 use Streak\Domain\Event\Envelope;
-use Streak\Infrastructure\EventStore\InMemoryEventStore;
+use Streak\Infrastructure\Domain\EventStore\InMemoryEventStore;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**

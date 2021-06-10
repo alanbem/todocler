@@ -2,18 +2,6 @@ paths:
   - ./src
 
 layers:
-  - name: Productivity module Interfaces layer
-    collectors:
-      - type: directory
-        regex: Productivity/Interfaces/.*
-  - name: Users module Interfaces layer
-    collectors:
-      - type: directory
-        regex: Users/Interfaces/.*
-  - name: Shared module Interfaces layer
-    collectors:
-      - type: directory
-        regex: Shared/Interfaces/.*
   - name: Productivity module Infrastructure layer
     collectors:
       - type: directory
@@ -50,37 +38,58 @@ layers:
     collectors:
       - type: directory
         regex: Shared/Domain/.*
+  - name: Framework Domain layer
+    collectors:
+      - type: className
+        regex: Streak\\Domain\\.*
+  - name: Framework Application layer
+    collectors:
+      - type: className
+        regex: Streak\\Application\\.*
+  - name: Framework Infrastructure layer
+    collectors:
+      - type: className
+        regex: Streak\\Infrastructure\\.*
 
 ruleset:
   # Productivity module
-  Productivity module Interfaces layer:
-    - Productivity module Application layer
-    - Productivity module Domain layer
   Productivity module Infrastructure layer:
     - Productivity module Application layer
     - Productivity module Domain layer
+    - Framework Infrastructure layer
+    - Framework Application layer
+    - Framework Domain layer
   Productivity module Application layer:
     - Productivity module Domain layer
     - Shared module Application layer
-  Productivity module Domain layer: ~
+    - Framework Application layer
+    - Framework Domain layer
+  Productivity module Domain layer:
+    - Framework Domain layer
   # Users module
-  Users module Interfaces layer:
-    - Users module Application layer
-    - Users module Domain layer
   Users module Infrastructure layer:
     - Users module Application layer
     - Users module Domain layer
+    - Framework Infrastructure layer
+    - Framework Application layer
+    - Framework Domain layer
   Users module Application layer:
     - Users module Domain layer
     - Shared module Application layer
-  Users module Domain layer: ~
+    - Framework Application layer
+    - Framework Domain layer
+  Users module Domain layer:
+    - Framework Domain layer
   # Shared module
-  Shared module Interfaces layer:
-    - Shared module Application layer
-    - Shared module Domain layer
   Shared module Infrastructure layer:
     - Shared module Application layer
     - Shared module Domain layer
+    - Framework Infrastructure layer
+    - Framework Application layer
+    - Framework Domain layer
   Shared module Application layer:
     - Shared module Domain layer
-  Shared module Domain layer: ~
+    - Framework Application layer
+    - Framework Domain layer
+  Shared module Domain layer:
+    - Framework Domain layer

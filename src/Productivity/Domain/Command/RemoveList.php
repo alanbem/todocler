@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Productivity\Domain\Command;
 
 use Productivity\Domain\Checklist;
-use Streak\Application\Command;
 use Streak\Domain\AggregateRoot;
+use Streak\Domain\Command;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

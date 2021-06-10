@@ -15,7 +15,7 @@ namespace Users\Application\Projector\RegisteredUsers;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Streak\Domain\Event\Envelope;
-use Streak\Infrastructure\EventStore\InMemoryEventStore;
+use Streak\Infrastructure\Domain\EventStore\InMemoryEventStore;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Users\Application\Projector\RegisteredUsers;
 use Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser;
@@ -53,32 +53,32 @@ final class ProjectorTest extends KernelTestCase
         self::assertFalse($exists);
 
         // freshly registered user
-        $event = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now = new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+        $event = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', $now = new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $this->projector->on($event);
 
         $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
         $user = $this->projector->handleQuery(new FindUser('alan.bem@example.com'));
 
         self::assertTrue($exists);
-        self::assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
+        self::assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', $now), $user);
 
         // check protection for 1 in a million chance of registration of same user/email
-        $event = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'alan.bem@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
+        $event = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'alan.bem@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'));
         $this->projector->on($event);
 
         $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
         $user = $this->projector->handleQuery(new FindUser('alan.bem@example.com'));
 
         self::assertTrue($exists);
-        self::assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', 'salt', $now), $user);
+        self::assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', $now), $user);
     }
 
     public function testPickingFirstEvent()
     {
-        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
-        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('d7689177-bcbf-4617-a686-dd5f5fc22f10'), 1);
-        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('6973e772-19f1-4334-b1e3-e0f7217a6574'), 1);
-        $event4 = Envelope::new(new UserRegistered('c70a16c7-a43f-4c62-8d4d-03f849661902', 'biglou@example.com', 'another-hash', 'salt', new \DateTimeImmutable()), new User\Id('c70a16c7-a43f-4c62-8d4d-03f849661902'), 1);
+        $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
+        $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('d7689177-bcbf-4617-a686-dd5f5fc22f10'), 1);
+        $event3 = Envelope::new(new UserRegistered('6973e772-19f1-4334-b1e3-e0f7217a6574', 'ebassi@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('6973e772-19f1-4334-b1e3-e0f7217a6574'), 1);
+        $event4 = Envelope::new(new UserRegistered('c70a16c7-a43f-4c62-8d4d-03f849661902', 'biglou@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('c70a16c7-a43f-4c62-8d4d-03f849661902'), 1);
 
         $store = new InMemoryEventStore();
         $store->add($event1, $event2, $event3, $event4);

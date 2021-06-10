@@ -20,8 +20,8 @@ use Streak\Domain\Entity;
  */
 final class Task implements Entity
 {
-    use Entity\Identification;
     use Entity\Comparison;
+    use Entity\Identification;
 
     private string $name;
     private \DateTimeImmutable $createdAt;

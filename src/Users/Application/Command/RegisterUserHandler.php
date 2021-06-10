@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Users\Application\Command;
 
-use Streak\Application\Command;
-use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
+use Streak\Domain\Command;
+use Streak\Domain\CommandHandler;
 use Streak\Domain\Exception;
 use Users\Domain\Command\RegisterUser;
 use Users\Domain\User;
@@ -55,6 +55,6 @@ final class RegisterUserHandler implements CommandHandler
 
         $this->repository->add($user);
 
-        $user->handle($command); // this aggregate is command handler, so we can pass $command directly
+        $user->handleCommand($command); // this aggregate is command handler, so we can pass $command directly
     }
 }

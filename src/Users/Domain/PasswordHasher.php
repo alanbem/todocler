@@ -18,5 +18,5 @@ namespace Users\Domain;
  */
 interface PasswordHasher
 {
-    public function encode(string $password, string $salt) : string;
+    public function hash(string $password) : string;
 }

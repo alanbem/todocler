@@ -5,7 +5,7 @@ api_platform:
     enabled: true
   mapping:
     paths:
-      - '%kernel.project_dir%/src/Productivity/Interfaces/Rest/ApiPlatform/config/resources'
+      - '%kernel.project_dir%/src/Productivity/Infrastructure/Interfaces/Rest/ApiPlatform/config/resources'
   formats:
     # enabled formats with hyperlinks
     jsonld:  ['application/ld+json']

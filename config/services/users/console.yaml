@@ -4,7 +4,7 @@ services:
     autoconfigure: true
     public: false
 
-  Users\Interfaces\Console\Symfony\RegisterUserCommand:
+  Users\Infrastructure\Interfaces\Console\Symfony\RegisterUserCommand:
     arguments:
       - '@Streak\Application\CommandBus'
       - '@Streak\Application\QueryBus'

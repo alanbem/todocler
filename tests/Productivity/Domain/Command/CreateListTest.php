@@ -16,12 +16,12 @@ namespace Productivity\Domain\Command;
 use Productivity\Application\Command\ListHandler;
 use Productivity\Domain\Checklist;
 use Productivity\Domain\Event\ListCreated;
-use Streak\Application\CommandHandler;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
+use Streak\Domain\CommandHandler;
 use Streak\Domain\Exception\AggregateAlreadyExists;
-use Streak\Infrastructure\FixedClock;
-use Streak\Infrastructure\Testing\AggregateRoot\TestCase;
+use Streak\Infrastructure\Domain\Clock\FixedClock;
+use Streak\Infrastructure\Domain\Testing\AggregateRoot\TestCase;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

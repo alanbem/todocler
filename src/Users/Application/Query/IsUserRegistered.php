@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Users\Application\Query;
 
-use Streak\Application\Query;
 use Streak\Domain\Event\Listener;
+use Streak\Domain\Query;
 use Users\Application\Projector\RegisteredUsers;
 
 /**

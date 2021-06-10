@@ -4,14 +4,14 @@ services:
     autoconfigure: true
     public: false
 
-  Productivity\Interfaces\Console\Symfony\CreateListCommand:
+  Productivity\Infrastructure\Interfaces\Console\Symfony\CreateListCommand:
     arguments:
       - '@Streak\Application\CommandBus'
       - '@Productivity\UsersFacade'
     tags:
       - console.command
 
-  Productivity\Interfaces\Console\Symfony\CreateTaskCommand:
+  Productivity\Infrastructure\Interfaces\Console\Symfony\CreateTaskCommand:
     arguments:
       - '@Streak\Application\CommandBus'
       - '@Productivity\UsersFacade'

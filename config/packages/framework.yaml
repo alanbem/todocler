@@ -20,10 +20,10 @@ framework:
     enabled: true
     mapping:
       paths:
-        - '%kernel.project_dir%/src/Productivity/Interfaces/Rest/ApiPlatform/config/serialization'
+        - '%kernel.project_dir%/src/Productivity/Infrastructure/Interfaces/Rest/ApiPlatform/config/serialization'
 
   validation:
     enabled: true
     mapping:
       paths:
-        - '%kernel.project_dir%/src/Productivity/Interfaces/Rest/ApiPlatform/config/validation'
+        - '%kernel.project_dir%/src/Productivity/Infrastructure/Interfaces/Rest/ApiPlatform/config/validation'

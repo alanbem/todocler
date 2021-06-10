@@ -16,7 +16,7 @@ namespace Productivity\Application\Sensor\UsersEvents;
 use Productivity\Application\Event\UserRegistered;
 use Productivity\Application\Sensor\UsersEvents\Sensor\Factory;
 use Streak\Application\Sensor;
-use Streak\Infrastructure\Testing\Sensor\TestCase;
+use Streak\Infrastructure\Application\Testing\Sensor\TestCase;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

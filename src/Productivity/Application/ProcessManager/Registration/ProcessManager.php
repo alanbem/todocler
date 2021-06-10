@@ -27,13 +27,11 @@ use Streak\Domain\EventStore;
  */
 final class ProcessManager implements Event\Listener, Event\Picker, Event\Filterer
 {
+    use Event\Listener\Filtering;
     use Event\Listener\Identifying;
     use Event\Listener\Listening;
-    use Event\Listener\Filtering;
-    use Event\Listener\Commanding {
-        Event\Listener\Commanding::muteCommands as disableSideEffects;
-        Event\Listener\Commanding::unmuteCommands as enableSideEffects;
-    }
+
+    private CommandBus $bus;
 
     /**
      * Name of the first list.
@@ -43,8 +41,8 @@ final class ProcessManager implements Event\Listener, Event\Picker, Event\Filter
     public function __construct(Registration\ProcessManager\Id $id, CommandBus $bus, string $name)
     {
         $this->identifyBy($id);
-        $this->dispatchCommandsVia($bus);
 
+        $this->bus = $bus;
         $this->name = $name;
     }
 

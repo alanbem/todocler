@@ -23,9 +23,9 @@ use Streak\Domain\Event;
  */
 abstract class EntityManagerProjector implements Event\Listener, Event\Listener\Resettable, Event\Filterer
 {
+    use Event\Listener\Filtering;
     use Event\Listener\Identifying;
     use Event\Listener\Listening;
-    use Event\Listener\Filtering;
 
     protected EntityManagerInterface $manager;
 

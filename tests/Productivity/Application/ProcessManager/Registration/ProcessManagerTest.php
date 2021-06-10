@@ -20,8 +20,8 @@ use Productivity\Domain\Command\CreateList;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\Event\Envelope;
-use Streak\Infrastructure\EventStore\InMemoryEventStore;
-use Streak\Infrastructure\Testing\Listener\TestCase;
+use Streak\Infrastructure\Domain\EventStore\InMemoryEventStore;
+use Streak\Infrastructure\Domain\Testing\Listener\TestCase;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>

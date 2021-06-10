@@ -59,7 +59,7 @@ final class UsersFacadeForProductivity implements Productivity\UsersFacade
 
         return (object) [
             'id' => $user->getId(),
-            'email' => $user->getUsername(),
+            'email' => $user->getEmail(),
         ];
     }
 }

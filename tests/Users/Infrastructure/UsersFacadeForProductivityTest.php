@@ -78,7 +78,7 @@ final class UsersFacadeForProductivityTest extends TestCase
             )
             ->willReturnOnConsecutiveCalls(
                 null,
-                new RegisteredUser('03913d93-4ea0-4718-a4e5-0c26b4607617', 'jane.doe@example.com', 'password', 'salt', new \DateTimeImmutable()),
+                new RegisteredUser('03913d93-4ea0-4718-a4e5-0c26b4607617', 'jane.doe@example.com', 'password', new \DateTimeImmutable()),
             );
 
         self::assertNull($facade->findRegisteredUser('john.doe@example.com'));

@@ -15,10 +15,10 @@ namespace Users\Application\Projector\RegisteredUsers;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Shared\Application\Projector\Doctrine;
-use Streak\Application\Query;
-use Streak\Application\QueryHandler;
 use Streak\Domain\Event;
 use Streak\Domain\EventStore;
+use Streak\Domain\Query;
+use Streak\Domain\QueryHandler;
 use Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser;
 use Users\Application\Query as Queries;
 use Users\Domain\Event as Events;
@@ -45,7 +45,7 @@ final class Projector extends Doctrine\EntityManagerProjector implements Event\P
             return; // user already exists, we could write that uuid & email to some kind of reporting table with conflicts
         }
 
-        $user = new RegisteredUser($event->userId(), $event->email(), $event->passwordHash(), $event->salt(), $event->registeredAt());
+        $user = new RegisteredUser($event->userId(), $event->email(), $event->passwordHash(), $event->registeredAt());
 
         $this->manager->persist($user);
     }
@@ -54,7 +54,7 @@ final class Projector extends Doctrine\EntityManagerProjector implements Event\P
     {
         $repository = $this->manager->getRepository(RegisteredUser::class);
 
-        return $repository->findOneBy(['username' => $query->email()]);
+        return $repository->findOneBy(['email' => $query->email()]);
     }
 
     public function handleIsUserRegistered(Queries\IsUserRegistered $query) : bool

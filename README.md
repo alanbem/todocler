@@ -47,7 +47,7 @@ use it for authentication.
 `Users` module has no outside dependencies and in order to make it stay that way it publishes integration events - via [another projection](https://github.com/alanbem/todocler/blob/main/src/Users/Application/Projector/Queue/Projector.php) - to external queue which later can be consumed by downstream clients... meaning other modules.
 The underlying queue mechanism - albeit [abstracted](https://github.com/alanbem/todocler/blob/main/src/Users/Application/Projector/Queue/Projector/Queue.php) - uses [RabbitMQ](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/Queue/RabbitMQQueue.php) which also handles message deduplication (nice to have in at-least-once delivery environment).
 
-Only a single console command [todocler:users:register-user](https://github.com/alanbem/todocler/blob/main/src/Users/Interfaces/Console/Symfony/RegisterUserCommand.php) for registering new users is exposed as an outside interface of this module. Excluding authentication endpoint handled by Symfony.
+Only a single console command [todocler:users:register-user](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/Interfaces/Console/Symfony/RegisterUserCommand.php) for registering new users is exposed as an outside interface of this module. Excluding authentication endpoint handled by Symfony.
 
 I considered rewriting this module in a classic ORM-only way and showcase some safe inter-module messaging techniques (e.g. transactional outbox), but due to time constraints, I didn't.
 
@@ -65,7 +65,7 @@ It provides internally:
 - `BrowseTasks` query
 
 Data for those queries is provided by dedicated [`Lists` projection](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Projector/Lists/Projector.php). This projection uses Doctrine ORM for persistence.
-Thanks to that it was possible to [integrate](https://github.com/alanbem/todocler/tree/main/src/Productivity/Interfaces/Rest/ApiPlatform) [ApiPlatform](https://api-platform.com/) with projection entities and expose them as a configurable REST interface.
+Thanks to that it was possible to [integrate](https://github.com/alanbem/todocler/tree/main/src/Productivity/Infrastructure/Interfaces/Rest/ApiPlatform) [ApiPlatform](https://api-platform.com/) with projection entities and expose them as a configurable REST interface.
 
 `Productivity` module has a dependency on `Users` module:
 - One of the features of the application is that `Productivity` module must create first *welcoming* list (through [process manager](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/ProcessManager/Registration/ProcessManager.php#L56)) for the user as soon as possible after registration.
@@ -77,7 +77,7 @@ Thanks to that it was possible to [integrate](https://github.com/alanbem/todocle
   In the current [implementation](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/UsersFacadeForProductivity.php) it just runs internal queries, but in case of splitting the modules it could be easily swapped with HTTP implementation.
   This facade might serve as an anti-corruption layer in the future, when domain concepts (of a user) between our two modules start to noticeably diverge.
 
-Except REST API powered by ApiPlatform this module exposes 2 console commands [todocler:productivity:create-list](https://github.com/alanbem/todocler/blob/main/src/Productivity/Interfaces/Console/Symfony/CreateListCommand.php) and [todocler:productivity:create-task](https://github.com/alanbem/todocler/blob/main/src/Productivity/Interfaces/Console/Symfony/CreateTaskCommand.php) as an outside interface.
+Except REST API powered by ApiPlatform this module exposes 2 console commands [todocler:productivity:create-list](https://github.com/alanbem/todocler/blob/main/src/Productivity/Infrastructure/Interfaces/Console/Symfony/CreateListCommand.php) and [todocler:productivity:create-task](https://github.com/alanbem/todocler/blob/main/src/Productivity/Infrastructure/Interfaces/Console/Symfony/CreateTaskCommand.php) as an outside interface.
 
 ### A word on event sourcing
 Employing event sourcing has some drawbacks - mainly eventual consistency. Usually, eventual consistency is not a problem at all,

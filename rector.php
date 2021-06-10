@@ -17,23 +17,21 @@ use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SymfonySetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $configurator) : void {
     // get parameters
-    $parameters = $containerConfigurator->parameters();
+    $parameters = $configurator->parameters();
 
     // Define what rule sets will be applied
-    $parameters->set(Option::SETS, [
-        PHPUnitSetList::PHPUNIT_91,
-        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-        PHPUnitSetList::PHPUNIT_EXCEPTION,
-        PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD,
-        PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD,
-        PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER,
-        SetList::EARLY_RETURN,
-        SetList::PHP_74,
-        SetList::PRIVATIZATION,
-        SymfonySetList::SYMFONY_52,
-    ]);
+    $configurator->import(PHPUnitSetList::PHPUNIT_91);
+    $configurator->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
+    $configurator->import(PHPUnitSetList::PHPUNIT_EXCEPTION);
+    $configurator->import(PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD);
+    $configurator->import(PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD);
+    $configurator->import(PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER);
+    $configurator->import(SetList::EARLY_RETURN);
+    $configurator->import(SetList::PHP_74);
+    $configurator->import(SetList::PRIVATIZATION);
+    $configurator->import(SymfonySetList::SYMFONY_52);
 
     $parameters->set(Option::SKIP, [
     ]);
@@ -49,4 +47,8 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
 
 //    // skip root namespace classes, like \DateTime or \Exception [default: true]
     $parameters->set(Option::IMPORT_SHORT_CLASSES, true);
+
+    // Run Rector only on changed files
+    $parameters->set(Option::ENABLE_CACHE, true);
+    $parameters->set(Option::CACHE_DIR, __DIR__.'/build/.rector');
 };
