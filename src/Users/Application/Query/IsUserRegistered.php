@@ -24,11 +24,8 @@ use Users\Application\Projector\RegisteredUsers;
  */
 final class IsUserRegistered implements Query\EventListenerQuery
 {
-    private string $email;
-
-    public function __construct(string $email)
+    public function __construct(private string $email)
     {
-        $this->email = $email;
     }
 
     public function email() : string

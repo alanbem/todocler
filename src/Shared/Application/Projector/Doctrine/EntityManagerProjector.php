@@ -15,7 +15,6 @@ namespace Shared\Application\Projector\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\ORM\Tools\ToolsException;
 use Streak\Domain\Event;
 
 /**
@@ -38,23 +37,11 @@ abstract class EntityManagerProjector implements Event\Listener, Event\Listener\
 
     public function reset() : void
     {
-        $this->manager->beginTransaction();
-
         $tool = new SchemaTool($this->manager);
         $meta = $this->manager->getMetadataFactory()->getAllMetadata();
 
-        try {
-            $tool->dropSchema($meta);
-            $tool->createSchema($meta);
-            // @codeCoverageIgnoreStart
-        } catch (ToolsException $e) {
-            $this->manager->rollback();
-
-            throw $e;
-        }
-        // @codeCoverageIgnoreStop
-
-        $this->manager->commit();
+        $tool->dropSchema($meta);
+        $tool->createSchema($meta);
     }
 
     protected function preEvent(Event $event) : void
@@ -69,8 +56,10 @@ abstract class EntityManagerProjector implements Event\Listener, Event\Listener\
         $this->manager->commit();
     }
 
+    // @codeCoverageIgnoreStart
     protected function onException(\Throwable $exception) : void
     {
         $this->manager->rollBack();
     }
+    // @codeCoverageIgnoreStop
 }

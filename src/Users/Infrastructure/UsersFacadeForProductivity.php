@@ -26,18 +26,15 @@ use Users\Application\Query\IsUserRegistered;
  */
 final class UsersFacadeForProductivity implements Productivity\UsersFacade
 {
-    private QueryBus $bus;
-
-    public function __construct(QueryBus $bus)
+    public function __construct(private QueryBus $bus)
     {
-        $this->bus = $bus;
     }
 
     public function isUserRegistered(string $email) : bool
     {
         try {
             return $this->bus->dispatch(new IsUserRegistered($email));
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             // projection does not exist yet
             return false;
         }
@@ -48,7 +45,7 @@ final class UsersFacadeForProductivity implements Productivity\UsersFacade
         try {
             /** @var ?RegisteredUser $user */
             $user = $this->bus->dispatch(new FindUser($email));
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             // projection does not exists yet
             return null;
         }

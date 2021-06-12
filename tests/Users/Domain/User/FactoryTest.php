@@ -46,7 +46,7 @@ final class FactoryTest extends TestCase
         self::assertEquals(new User($id, $this->encoder, $this->clock), $aggregate);
     }
 
-    public function testWrongId()
+    public function testWrongId() : void
     {
         $factory = new User\Factory($this->encoder, $this->clock);
         $id = $this->createMock(AggregateRoot\Id::class);

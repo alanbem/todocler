@@ -23,17 +23,10 @@ use Streak\Domain;
 final class TaskCompleted implements Domain\Event
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
-
-    private string $listId;
-    private string $taskId;
-    private string $userId;
     private string $completedAt;
 
-    public function __construct(string $listId, string $taskId, string $userId, \DateTimeImmutable $completedAt)
+    public function __construct(private string $listId, private string $taskId, private string $userId, \DateTimeImmutable $completedAt)
     {
-        $this->listId = $listId;
-        $this->taskId = $taskId;
-        $this->userId = $userId;
         $this->completedAt = $completedAt->format(self::DATE_FORMAT);
     }
 

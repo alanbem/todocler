@@ -24,13 +24,8 @@ use Streak\Domain\Command;
  */
 final class RemoveList implements Command\AggregateRootCommand
 {
-    private string $listId;
-    private string $removerId;
-
-    public function __construct(string $listId, string $removerId)
+    public function __construct(private string $listId, private string $removerId)
     {
-        $this->listId = $listId;
-        $this->removerId = $removerId;
     }
 
     public function listId() : string

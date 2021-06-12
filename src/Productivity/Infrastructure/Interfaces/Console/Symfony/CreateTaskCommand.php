@@ -30,18 +30,12 @@ use Webmozart\Assert\Assert;
  */
 final class CreateTaskCommand extends Command
 {
-    private CommandBus $bus;
-    private UsersFacade $users;
-
-    public function __construct(CommandBus $bus, UsersFacade $users)
+    public function __construct(private CommandBus $bus, private UsersFacade $users)
     {
-        $this->bus = $bus;
-        $this->users = $users;
-
         parent::__construct('todocler:productivity:create-task');
     }
 
-    protected function configure()
+    protected function configure() : void
     {
         $this->setDescription('Create task.');
         $this->setDefinition(new InputDefinition([

@@ -45,7 +45,7 @@ final class ProjectorTest extends KernelTestCase
         $this->projector->reset(); // reset database on every test
     }
 
-    public function testProjector()
+    public function testProjector() : void
     {
         // no user
         $exists = $this->projector->handleQuery(new IsUserRegistered('alan.bem@example.com'));
@@ -73,7 +73,7 @@ final class ProjectorTest extends KernelTestCase
         self::assertEquals(new RegisteredUser('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', 'hash', $now), $user);
     }
 
-    public function testPickingFirstEvent()
+    public function testPickingFirstEvent() : void
     {
         $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
         $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', new \DateTimeImmutable()), new User\Id('d7689177-bcbf-4617-a686-dd5f5fc22f10'), 1);

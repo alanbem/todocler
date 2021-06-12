@@ -24,7 +24,7 @@ use Productivity\Application\Projector\Lists\Doctrine\Entity\Task;
  */
 final class TaskTest extends TestCase
 {
-    public function testTask()
+    public function testTask() : void
     {
         $list = new Checklist('f45a75db-670c-4116-bf97-b8cd07eb09d0', 'List #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', new \DateTimeImmutable(), new \DateTimeImmutable());
         $task = new Task($list, '1d3db856-d874-4bc5-a41e-4268007bf6cd', 'Task #1', '4cf1d6b1-4437-46a2-881f-3d6bc39b716c', $updated = new \DateTimeImmutable(), $created = new \DateTimeImmutable());

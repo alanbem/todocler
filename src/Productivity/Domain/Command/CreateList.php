@@ -22,15 +22,8 @@ use Streak\Domain\Command;
  */
 final class CreateList implements Command
 {
-    private string $listId;
-    private string $name;
-    private string $creatorId;
-
-    public function __construct(string $listId, string $name, string $creatorId)
+    public function __construct(private string $listId, private string $name, private string $creatorId)
     {
-        $this->listId = $listId;
-        $this->name = $name;
-        $this->creatorId = $creatorId;
     }
 
     public function listId() : string

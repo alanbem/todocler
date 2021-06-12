@@ -22,11 +22,8 @@ use Streak\Domain\Entity;
  */
 final class Id implements Entity\Id
 {
-    private string $value;
-
-    public function __construct(string $value)
+    public function __construct(private string $value)
     {
-        $this->value = $value;
     }
 
     public function equals($id) : bool

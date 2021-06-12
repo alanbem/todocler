@@ -23,17 +23,10 @@ use Streak\Domain;
 final class ListRenamed implements Domain\Event
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
-
-    private string $listId;
-    private string $name;
-    private string $editorId;
     private string $modifiedAt;
 
-    public function __construct(string $listId, string $name, string $creatorId, \DateTimeImmutable $modifiedAt)
+    public function __construct(private string $listId, private string $name, private string $editorId, \DateTimeImmutable $modifiedAt)
     {
-        $this->listId = $listId;
-        $this->name = $name;
-        $this->editorId = $creatorId;
         $this->modifiedAt = $modifiedAt->format(self::DATE_FORMAT);
     }
 

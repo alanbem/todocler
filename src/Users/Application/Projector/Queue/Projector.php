@@ -26,13 +26,9 @@ final class Projector implements Event\Listener, Event\Filterer
 {
     use Event\Listener\Identifying;
 
-    private Projector\Queue $queue;
-
-    public function __construct(Projector\Id $id, Projector\Queue $queue)
+    public function __construct(Projector\Id $id, private Projector\Queue $queue)
     {
         $this->identifyBy($id);
-
-        $this->queue = $queue;
     }
 
     /**

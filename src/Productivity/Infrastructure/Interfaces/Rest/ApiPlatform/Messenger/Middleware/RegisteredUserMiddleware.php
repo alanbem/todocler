@@ -28,13 +28,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class RegisteredUserMiddleware implements MiddlewareInterface
 {
-    private Security $security;
-    private UsersFacade $users;
-
-    public function __construct(Security $security, UsersFacade $users)
+    public function __construct(private Security $security, private UsersFacade $users)
     {
-        $this->security = $security;
-        $this->users = $users;
     }
 
     public function handle(Envelope $envelope, StackInterface $stack) : Envelope

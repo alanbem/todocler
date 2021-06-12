@@ -20,6 +20,8 @@ $config
             '@PSR12:risky' => true,
             '@PHP70Migration' => true,
             '@PHP70Migration:risky' => true,
+            '@PHP80Migration' => true,
+            '@PHP80Migration:risky' => true,
             '@Symfony:risky' => true,
             'no_unused_imports' => true,
             'ordered_imports' => true,

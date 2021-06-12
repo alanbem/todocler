@@ -20,12 +20,8 @@ namespace Productivity\Domain\Exception;
  */
 final class UserNotAllowed extends \RuntimeException
 {
-    private string $userId;
-
-    public function __construct(string $userId)
+    public function __construct(private string $userId)
     {
-        $this->userId = $userId;
-
         $message = sprintf('User "%s" is not allowed.', $this->userId);
 
         parent::__construct($message);

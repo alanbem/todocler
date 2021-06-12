@@ -24,15 +24,8 @@ use Streak\Domain\Command;
  */
 final class RenameList implements Command\AggregateRootCommand
 {
-    private string $listId;
-    private string $name;
-    private string $editorId;
-
-    public function __construct(string $listId, string $name, string $editorId)
+    public function __construct(private string $listId, private string $name, private string $editorId)
     {
-        $this->listId = $listId;
-        $this->name = $name;
-        $this->editorId = $editorId;
     }
 
     public function listId() : string

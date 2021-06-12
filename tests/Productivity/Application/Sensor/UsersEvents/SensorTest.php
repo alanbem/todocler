@@ -25,7 +25,7 @@ use Streak\Infrastructure\Application\Testing\Sensor\TestCase;
  */
 final class SensorTest extends TestCase
 {
-    public function testSensor()
+    public function testSensor() : void
     {
         $this
             ->given(
@@ -36,7 +36,7 @@ final class SensorTest extends TestCase
             );
     }
 
-    public function testSensorProcessingIncompleteMessage1()
+    public function testSensorProcessingIncompleteMessage1() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('[name] field is missing.'));
 
@@ -47,7 +47,7 @@ final class SensorTest extends TestCase
             ->then();
     }
 
-    public function testSensorProcessingIncompleteMessage2()
+    public function testSensorProcessingIncompleteMessage2() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('[body] field is missing.'));
 
@@ -58,7 +58,7 @@ final class SensorTest extends TestCase
             ->then();
     }
 
-    public function testSensorProcessingIncompleteMessage3()
+    public function testSensorProcessingIncompleteMessage3() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('[body][user_id] field is missing.'));
 
@@ -69,7 +69,7 @@ final class SensorTest extends TestCase
             ->then();
     }
 
-    public function testSensorProcessingIncompleteMessage4()
+    public function testSensorProcessingIncompleteMessage4() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('[body][email] field is missing.'));
 
@@ -80,7 +80,7 @@ final class SensorTest extends TestCase
             ->then();
     }
 
-    public function testSensorProcessingIncompleteMessage5()
+    public function testSensorProcessingIncompleteMessage5() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('[body][registered_at] field is missing.'));
 
@@ -91,7 +91,7 @@ final class SensorTest extends TestCase
             ->then();
     }
 
-    public function testSensorProcessingWrongMessage1()
+    public function testSensorProcessingWrongMessage1() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('Message not supported.'));
 
@@ -102,7 +102,7 @@ final class SensorTest extends TestCase
             ->then();
     }
 
-    public function testSensorProcessingText()
+    public function testSensorProcessingText() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('Message not supported.'));
 
@@ -113,7 +113,7 @@ final class SensorTest extends TestCase
             ->then();
     }
 
-    public function testSensorProcessingObject()
+    public function testSensorProcessingObject() : void
     {
         $this->expectExceptionObject(new \InvalidArgumentException('Message not supported.'));
 

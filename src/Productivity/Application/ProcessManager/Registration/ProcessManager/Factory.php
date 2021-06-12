@@ -26,13 +26,8 @@ use Streak\Domain\Exception\InvalidIdGiven;
  */
 final class Factory implements Listener\Factory
 {
-    private CommandBus $bus;
-    private string $name;
-
-    public function __construct(CommandBus $bus, string $name)
+    public function __construct(private CommandBus $bus, private string $name)
     {
-        $this->bus = $bus;
-        $this->name = $name;
     }
 
     public function create(Event\Listener\Id $id) : Event\Listener

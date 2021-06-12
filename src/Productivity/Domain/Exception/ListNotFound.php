@@ -20,12 +20,8 @@ namespace Productivity\Domain\Exception;
  */
 final class ListNotFound extends \RuntimeException
 {
-    private string $listId;
-
-    public function __construct(string $listId)
+    public function __construct(private string $listId)
     {
-        $this->listId = $listId;
-
         $message = sprintf('List "%s" not found.', $this->listId);
 
         parent::__construct($message);

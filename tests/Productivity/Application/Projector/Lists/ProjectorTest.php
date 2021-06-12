@@ -211,7 +211,7 @@ final class ProjectorTest extends KernelTestCase
         self::assertCount(0, $tasks);
     }
 
-    public function testPickingFirstEvent()
+    public function testPickingFirstEvent() : void
     {
         $event1 = Envelope::new(new ListCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
         $event2 = Envelope::new(new ListRenamed('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My edited name', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 2);

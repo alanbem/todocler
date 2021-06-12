@@ -23,17 +23,10 @@ use Streak\Domain;
 final class TaskRemoved implements Domain\Event
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
-
-    private string $listId;
-    private string $taskId;
-    private string $removerId;
     private string $removedAt;
 
-    public function __construct(string $listId, string $taskId, string $creatorId, \DateTimeImmutable $createdAt)
+    public function __construct(private string $listId, private string $taskId, private string $removerId, \DateTimeImmutable $createdAt)
     {
-        $this->listId = $listId;
-        $this->taskId = $taskId;
-        $this->removerId = $creatorId;
         $this->removedAt = $createdAt->format(self::DATE_FORMAT);
     }
 

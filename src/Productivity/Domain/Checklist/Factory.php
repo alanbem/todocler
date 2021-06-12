@@ -25,11 +25,8 @@ use Streak\Domain\Exception\InvalidAggregateIdGiven;
  */
 final class Factory implements AggregateRoot\Factory
 {
-    private Clock $clock;
-
-    public function __construct(Clock $clock)
+    public function __construct(private Clock $clock)
     {
-        $this->clock = $clock;
     }
 
     public function create(AggregateRoot\Id $id) : AggregateRoot
