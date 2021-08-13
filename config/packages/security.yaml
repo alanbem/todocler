@@ -1,7 +1,10 @@
 security:
+  # https://symfony.com/doc/current/security/experimental_authenticators.html
   enable_authenticator_manager: true
-  encoders:
+  # https://symfony.com/doc/current/security.html#c-hashing-passwords
+  password_hashers:
     Users\Application\Projector\RegisteredUsers\Doctrine\Entity\RegisteredUser: 'auto'
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
   providers:
     registered_users:
       entity:
@@ -27,6 +30,8 @@ security:
         success_handler: lexik_jwt_authentication.handler.authentication_success
         failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/, roles: PUBLIC_ACCESS }
     - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

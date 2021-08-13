@@ -31,19 +31,9 @@ final class ProcessManager implements Event\Listener, Event\Picker, Event\Filter
     use Event\Listener\Identifying;
     use Event\Listener\Listening;
 
-    private CommandBus $bus;
-
-    /**
-     * Name of the first list.
-     */
-    private string $name;
-
-    public function __construct(Registration\ProcessManager\Id $id, CommandBus $bus, string $name)
+    public function __construct(Registration\ProcessManager\Id $id, private CommandBus $bus, private string $name)
     {
         $this->identifyBy($id);
-
-        $this->bus = $bus;
-        $this->name = $name;
     }
 
     /**

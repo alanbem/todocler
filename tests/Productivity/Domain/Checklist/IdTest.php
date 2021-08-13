@@ -32,7 +32,7 @@ final class IdTest extends TestCase
         self::assertSame('id-2', $id2->toString());
     }
 
-    public function testEquals()
+    public function testEquals() : void
     {
         $id1a = new Id('id-1');
         $id1b = Id::fromString('id-1');
@@ -41,7 +41,7 @@ final class IdTest extends TestCase
         self::assertTrue($id1b->equals($id1a));
     }
 
-    public function testNotEqual()
+    public function testNotEqual() : void
     {
         $id1 = new Id('id-1');
         $id2 = Id::fromString('id-2');

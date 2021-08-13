@@ -24,15 +24,8 @@ use Streak\Domain\Command;
  */
 final class CompleteTask implements Command\AggregateRootCommand
 {
-    private string $listId;
-    private string $taskId;
-    private string $userId;
-
-    public function __construct(string $listId, string $taskId, string $creatorId)
+    public function __construct(private string $listId, private string $taskId, private string $userId)
     {
-        $this->listId = $listId;
-        $this->taskId = $taskId;
-        $this->userId = $creatorId;
     }
 
     public function listId() : string

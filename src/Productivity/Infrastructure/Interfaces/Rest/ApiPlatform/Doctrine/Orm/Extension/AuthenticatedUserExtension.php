@@ -34,15 +34,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class AuthenticatedUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    private const USER_ID_PROPERTY_NAME = 'userId'; // @TODO: parametrize
+    private const USER_ID_PROPERTY_NAME = 'userId';
 
-    private Security $security;
-    private UsersFacade $users;
-
-    public function __construct(Security $security, UsersFacade $users)
+    public function __construct(private Security $security, private UsersFacade $users)
     {
-        $this->security = $security;
-        $this->users = $users;
     }
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null) : void

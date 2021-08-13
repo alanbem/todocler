@@ -26,13 +26,8 @@ use Users\Domain\User;
  */
 final class Factory implements AggregateRoot\Factory
 {
-    private PasswordHasher $encoder;
-    private Clock $clock;
-
-    public function __construct(PasswordHasher $encoder, Clock $clock)
+    public function __construct(private PasswordHasher $encoder, private Clock $clock)
     {
-        $this->encoder = $encoder;
-        $this->clock = $clock;
     }
 
     public function create(AggregateRoot\Id $id) : AggregateRoot

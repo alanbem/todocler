@@ -8,6 +8,7 @@
          bootstrap="tests/bootstrap.php"
 >
     <php>
+        <ini name="display_errors" value="1" />
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
@@ -23,8 +24,8 @@
         <env name="LISTS_PROJECTIONS_DATABASE_URL" value="mysql://docker:docker@mysql_lists_projections:3306/lists_projections?charset=utf8"/>
         <!-- ###- doctrine/doctrine-bundle ### -->
     </php>
-    
-    <coverage>
+
+    <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">src</directory>
         </include>

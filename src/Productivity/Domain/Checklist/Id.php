@@ -22,11 +22,8 @@ use Streak\Domain\AggregateRoot;
  */
 final class Id implements AggregateRoot\Id
 {
-    private string $value;
-
-    public function __construct(string $value)
+    public function __construct(private string $value)
     {
-        $this->value = $value;
     }
 
     public function equals(object $id) : bool

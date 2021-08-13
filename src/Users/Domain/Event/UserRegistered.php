@@ -23,17 +23,10 @@ use Streak\Domain;
 final class UserRegistered implements Domain\Event
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
-
-    private string $userId;
-    private string $email;
-    private string $passwordHash;
     private string $registeredAt;
 
-    public function __construct(string $userId, string $email, string $passwordHash, \DateTimeImmutable $registeredAt)
+    public function __construct(private string $userId, private string $email, private string $passwordHash, \DateTimeImmutable $registeredAt)
     {
-        $this->userId = $userId;
-        $this->email = $email;
-        $this->passwordHash = $passwordHash;
         $this->registeredAt = $registeredAt->format(self::DATE_FORMAT);
     }
 

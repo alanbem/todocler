@@ -24,11 +24,8 @@ use Streak\Domain\Query;
  */
 final class BrowseChecklists implements Query\EventListenerQuery
 {
-    private ?string $ownerId;
-
-    public function __construct(?string $ownerId = null)
+    public function __construct(private ?string $ownerId = null)
     {
-        $this->ownerId = $ownerId;
     }
 
     public function ownerId() : ?string

@@ -31,18 +31,12 @@ use Webmozart\Assert\Assert;
  */
 final class RegisterUserCommand extends Command
 {
-    private CommandBus $commands;
-    private QueryBus $queries;
-
-    public function __construct(CommandBus $commands, QueryBus $queries)
+    public function __construct(private CommandBus $commands, private QueryBus $queries)
     {
-        $this->commands = $commands;
-        $this->queries = $queries;
-
         parent::__construct('todocler:users:register-user');
     }
 
-    protected function configure()
+    protected function configure() : void
     {
         $this->setDescription('Register new user.');
         $this->setDefinition(new InputDefinition([
@@ -64,7 +58,7 @@ final class RegisterUserCommand extends Command
 
         try {
             $registered = $this->queries->dispatch(new Queries\IsUserRegistered($email));
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             // possibly projection does not exists yet
             $registered = false;
         }

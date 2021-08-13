@@ -26,11 +26,8 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
  */
 final class CommandDispatchingHandler implements MessageHandlerInterface
 {
-    private CommandBus $bus;
-
-    public function __construct(CommandBus $bus)
+    public function __construct(private CommandBus $bus)
     {
-        $this->bus = $bus;
     }
 
     public function __invoke(Command $command) : void

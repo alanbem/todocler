@@ -22,15 +22,8 @@ use Streak\Domain\Command;
  */
 final class RegisterUser implements Command
 {
-    private string $userId;
-    private string $email;
-    private string $password;
-
-    public function __construct(string $userId, string $email, string $password)
+    public function __construct(private string $userId, private string $email, private string $password)
     {
-        $this->userId = $userId;
-        $this->email = $email;
-        $this->password = $password;
     }
 
     public function userId() : string

@@ -41,7 +41,7 @@ final class ProcessManagerTest extends TestCase
         $this->manager = new Registration\ProcessManager(new Registration\ProcessManager\Id(), $this->bus, self::DEFAULT_NAME);
     }
 
-    public function testCreatingListForFreshlyRegisteredUser()
+    public function testCreatingListForFreshlyRegisteredUser() : void
     {
         $this
             ->given()
@@ -54,7 +54,7 @@ final class ProcessManagerTest extends TestCase
             ->assert();
     }
 
-    public function testPickingFirstEvent()
+    public function testPickingFirstEvent() : void
     {
         $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', new \DateTimeImmutable()), new Sensor\Id());
         $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', new \DateTimeImmutable()), new Sensor\Id());

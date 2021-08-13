@@ -24,13 +24,8 @@ use Users\Application\Projector\Queue\Projector\Queue;
  */
 final class RabbitMQQueue implements Queue
 {
-    private ProducerInterface $producer;
-    private string $module;
-
-    public function __construct(ProducerInterface $producer, string $module)
+    public function __construct(private ProducerInterface $producer, private string $module)
     {
-        $this->producer = $producer;
-        $this->module = $module;
     }
 
     /**

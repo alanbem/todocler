@@ -26,17 +26,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class RegisteredUser implements UserInterface
 {
-    private string $id;
-    private string $email;
-    private string $password;
-    private \DateTimeImmutable $registeredAt;
-
-    public function __construct(string $id, string $email, string $password, \DateTimeImmutable $registeredAt)
+    public function __construct(private string $id, private string $email, private string $password, private \DateTimeImmutable $registeredAt)
     {
-        $this->id = $id;
-        $this->email = $email;
-        $this->password = $password;
-        $this->registeredAt = $registeredAt;
     }
 
     public function getId() : string

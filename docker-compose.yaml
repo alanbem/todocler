@@ -5,12 +5,12 @@ services:
     image: busybox:latest
     volumes:
       - .:/var/www/project
-      - ./docker/fpm/etc/php/7.4/cli/php.ini:/etc/php/7.4/cli/php.ini
-      - ./docker/fpm/etc/php/7.4/fpm/pool.d/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
-      - ./docker/fpm/etc/php/7.4/fpm/pool.d/z-overrides.conf:/etc/php/7.4/fpm/pool.d/z-overrides.conf
+      - ./docker/fpm/etc/php/8.0/cli/php.ini:/etc/php/8.0/cli/php.ini
+      - ./docker/fpm/etc/php/8.0/fpm/pool.d/www.conf:/etc/php/8.0/fpm/pool.d/www.conf
+      - ./docker/fpm/etc/php/8.0/fpm/pool.d/z-overrides.conf:/etc/php/8.0/fpm/pool.d/z-overrides.conf
 
   php:
-    image: streakphp/php74-cli:latest
+    image: streakphp/php80-cli:latest
     working_dir: /var/www/project
     volumes_from:
       - data
@@ -18,7 +18,7 @@ services:
       COMPOSER_ALLOW_SUPERUSER: 1
       COMPOSER_NO_INTERACTION: 1
       COMPOSER_CACHE_DIR: /var/www/project/build/.composer
-      XDEBUG_MODE: 'develop,debug,coverage'
+      XDEBUG_MODE: 'develop,coverage'
     depends_on:
       - postgres_event_store
       - postgres_registered_users_projections
@@ -27,10 +27,15 @@ services:
       - rabbitmq
 
   fpm:
-    image: streakphp/php74-fpm:latest
+    image: streakphp/php80-fpm:latest
     working_dir: /var/www/project
     volumes_from:
       - data
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+      COMPOSER_NO_INTERACTION: 1
+      COMPOSER_CACHE_DIR: /var/www/project/build/.composer
+      XDEBUG_MODE: 'develop,coverage'
     depends_on:
       - postgres_event_store
       - postgres_registered_users_projections
@@ -92,7 +97,7 @@ services:
       - 3307:3306
 
   rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.8-management-alpine # version 3.9 and above do not support docker environment variables specified below
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}

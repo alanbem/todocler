@@ -25,11 +25,8 @@ use Users\Application\Projector\Queue\Projector;
  */
 final class Factory implements Event\Listener\Factory
 {
-    private Projector\Queue $queue;
-
-    public function __construct(Projector\Queue $queue)
+    public function __construct(private Projector\Queue $queue)
     {
-        $this->queue = $queue;
     }
 
     public function create(Event\Listener\Id $id) : Event\Listener

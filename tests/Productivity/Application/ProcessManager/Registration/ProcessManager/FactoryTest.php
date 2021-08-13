@@ -46,7 +46,7 @@ final class FactoryTest extends TestCase
         self::assertEquals(new ProcessManager($id, $this->bus, 'name'), $aggregate);
     }
 
-    public function testWrongId()
+    public function testWrongId() : void
     {
         $factory = new ProcessManager\Factory($this->bus, 'name');
         $id = $this->createMock(Listener\Id::class);

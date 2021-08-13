@@ -61,7 +61,7 @@ final class ProjectorTest extends TestCase
         self::assertFalse($projector->on($event));
     }
 
-    public function testPickingFirstEvent()
+    public function testPickingFirstEvent() : void
     {
         $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
         $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
@@ -77,7 +77,7 @@ final class ProjectorTest extends TestCase
         self::assertTrue($picked->equals($event1));
     }
 
-    public function testFilteringEvents()
+    public function testFilteringEvents() : void
     {
         $event1 = Envelope::new(new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'milton@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());
         $event2 = Envelope::new(new UserRegistered('d7689177-bcbf-4617-a686-dd5f5fc22f10', 'jaxweb@example.com', 'another-hash', new \DateTimeImmutable()), new Sensor\Id());

@@ -22,11 +22,8 @@ use Symfony\Component\Messenger\Stamp\StampInterface;
  */
 final class RegisteredUserStamp implements StampInterface
 {
-    private object $user;
-
-    public function __construct(object $user)
+    public function __construct(private object $user)
     {
-        $this->user = $user;
     }
 
     public function user() : object

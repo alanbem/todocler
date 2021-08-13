@@ -25,11 +25,8 @@ use Users\Application\Projector\RegisteredUsers;
  */
 final class Factory implements Event\Listener\Factory
 {
-    private EntityManagerInterface $manager;
-
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(private EntityManagerInterface $manager)
     {
-        $this->manager = $manager;
     }
 
     public function create(Event\Listener\Id $id) : Event\Listener

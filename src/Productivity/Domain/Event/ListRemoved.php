@@ -23,15 +23,10 @@ use Streak\Domain;
 final class ListRemoved implements Domain\Event
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
-
-    private string $listId;
-    private string $removerId;
     private string $removedAt;
 
-    public function __construct(string $listId, string $removerId, \DateTimeImmutable $modifiedAt)
+    public function __construct(private string $listId, private string $removerId, \DateTimeImmutable $modifiedAt)
     {
-        $this->listId = $listId;
-        $this->removerId = $removerId;
         $this->removedAt = $modifiedAt->format(self::DATE_FORMAT);
     }
 

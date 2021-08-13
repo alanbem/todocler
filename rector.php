@@ -30,6 +30,7 @@ return static function (ContainerConfigurator $configurator) : void {
     $configurator->import(PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER);
     $configurator->import(SetList::EARLY_RETURN);
     $configurator->import(SetList::PHP_74);
+    $configurator->import(SetList::PHP_80);
     $configurator->import(SetList::PRIVATIZATION);
     $configurator->import(SymfonySetList::SYMFONY_52);
 

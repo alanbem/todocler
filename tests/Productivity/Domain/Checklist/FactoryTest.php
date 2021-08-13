@@ -43,7 +43,7 @@ final class FactoryTest extends TestCase
         self::assertEquals(new Checklist($id, $this->clock), $aggregate);
     }
 
-    public function testWrongId()
+    public function testWrongId() : void
     {
         $factory = new Checklist\Factory($this->clock);
         $id = $this->createMock(AggregateRoot\Id::class);

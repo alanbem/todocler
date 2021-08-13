@@ -45,7 +45,7 @@ final class FactoryTest extends TestCase
         self::assertEquals(new Projector($id, $this->queue), $aggregate);
     }
 
-    public function testWrongId()
+    public function testWrongId() : void
     {
         $factory = new Projector\Factory($this->queue);
         $id = $this->createMock(Listener\Id::class);
