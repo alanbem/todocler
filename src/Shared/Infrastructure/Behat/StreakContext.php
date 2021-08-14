@@ -55,11 +55,11 @@ final class StreakContext implements Context
             $filter = Subscription\Repository\Filter::nothing()->ignoreCompletedSubscriptions();
             $subscriptions = $this->subscriptions->all($filter);
             $processed = [];
-            foreach ($subscriptions as $index => $subscription) {
+            foreach ($subscriptions as $subscription) {
                 foreach ($subscription->subscribeTo($this->store) as $event) {
                     $processed[] = $event;
                 }
             }
-        } while (0 !== count($processed)); // process subscriptions until no more events are left
+        } while (0 !== \count($processed)); // process subscriptions until no more events are left
     }
 }

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Productivity\Infrastructure\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 
 /**
@@ -29,7 +28,6 @@ final class RestContext implements Context
      */
     public function iAmSignedInWithEmailAndPassword(string $email, string $password) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -37,7 +35,6 @@ final class RestContext implements Context
      */
     public function iCreateNewList(string $name) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -45,7 +42,6 @@ final class RestContext implements Context
      */
     public function iCanSeeListNamed(string $name) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -53,7 +49,6 @@ final class RestContext implements Context
      */
     public function listHasNoTasksYet(string $name) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -61,7 +56,6 @@ final class RestContext implements Context
      */
     public function iCreateNewTaskUnderList(string $task, string $list) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -69,7 +63,6 @@ final class RestContext implements Context
      */
     public function listHasTaskAssigned(string $list, string $task) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -77,7 +70,6 @@ final class RestContext implements Context
      */
     public function taskUnderListIsNotYetCompleted(string $task, string $list) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -85,7 +77,6 @@ final class RestContext implements Context
      */
     public function iMarkTaskUnderListAsCompleted(string $task, string $list) : void
     {
-        throw new PendingException();
     }
 
     /**
@@ -93,22 +84,19 @@ final class RestContext implements Context
      */
     public function taskUnderListIsCompleted(string $task, string $list) : void
     {
-        throw new PendingException();
     }
 
     /**
      * @Given there are users registered in system:
      */
-    public function thereAreUsersRegisteredInSystem(TableNode $users)
+    public function thereAreUsersRegisteredInSystem(TableNode $users) : void
     {
-        throw new PendingException();
     }
 
     /**
      * @Then I can't see any other list than list :name
      */
-    public function iCantSeeAnyOtherListThanList($name)
+    public function iCantSeeAnyOtherListThanList($name) : void
     {
-        throw new PendingException();
     }
 }

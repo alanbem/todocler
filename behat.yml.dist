@@ -5,7 +5,6 @@ default:
         - features/productivity
       contexts:
         - Productivity\Infrastructure\Behat\DomainContext
-        - Shared\Infrastructure\Behat\StreakContext
     rest:
       paths:
         - features/productivity
