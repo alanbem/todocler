@@ -124,4 +124,4 @@ jobs:
       - name: Install dependencies
         run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run behat
-        run: docker-compose run --rm php xphp bin/behat --format=progress --no-interaction --colors --strict
+        run: docker-compose run --rm php bin/behat --format=progress --no-interaction --colors --strict
