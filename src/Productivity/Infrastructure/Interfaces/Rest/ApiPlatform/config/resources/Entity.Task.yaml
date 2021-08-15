@@ -1,4 +1,4 @@
-Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
+Productivity\Application\Projector\Projects\Doctrine\Entity\Task:
   attributes:
     order:
       createdAt: asc
@@ -7,7 +7,7 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
       - productivity.filters.order_by_created_at
       - productivity.filters.filter_by_completed
       - productivity.filters.filter_by_created_at
-      - productivity.filters.filter_by_list_id
+      - productivity.filters.filter_by_project_id
   collectionOperations:
     get:
       method: GET
@@ -27,7 +27,7 @@ Productivity\Application\Projector\Lists\Doctrine\Entity\Task:
       write: true
       serialize: true
       openapi_context:
-        summary: Create new list
+        summary: Creates new task
   itemOperations:
     get:
       method: GET

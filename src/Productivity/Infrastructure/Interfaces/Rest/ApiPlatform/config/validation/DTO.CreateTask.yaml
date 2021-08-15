@@ -1,6 +1,6 @@
 Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\DTO\CreateTask:
   properties:
-    listId:
+    projectId:
       - NotBlank: ~
       - Uuid: ~
     taskId:

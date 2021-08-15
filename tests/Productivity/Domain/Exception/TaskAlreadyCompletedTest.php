@@ -24,10 +24,10 @@ final class TaskAlreadyCompletedTest extends TestCase
 {
     public function testException() : void
     {
-        $exception = new TaskAlreadyCompleted('list-1', 'task-1');
+        $exception = new TaskAlreadyCompleted('project-1', 'task-1');
 
         self::assertSame('Task "task-1" already completed.', $exception->getMessage());
-        self::assertSame('list-1', $exception->listId());
+        self::assertSame('project-1', $exception->projectId());
         self::assertSame('task-1', $exception->taskId());
     }
 }

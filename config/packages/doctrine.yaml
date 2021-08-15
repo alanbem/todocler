@@ -1,14 +1,14 @@
 doctrine:
   dbal:
-    default_connection: lists_projection
+    default_connection: projects_projection
     connections:
       event_store:
         url: '%env(resolve:EVENT_STORE_DATABASE_URL)%'
       registered_users_projection:
         url: '%env(resolve:REGISTERED_USERS_PROJECTIONS_DATABASE_URL)%'
         platform_service: Shared\Infrastructure\Doctrine\DBAL\Platforms\PostgreSqlPlatform
-      lists_projection:
-        url: '%env(resolve:LISTS_PROJECTIONS_DATABASE_URL)%'
+      projects_projection:
+        url: '%env(resolve:PROJECTS_PROJECTIONS_DATABASE_URL)%'
         platform_service: Shared\Infrastructure\Doctrine\DBAL\Platforms\MySQLPlatform
 
   orm:
@@ -27,12 +27,12 @@ doctrine:
             dir: "%kernel.project_dir%/src/Users/Application/Projector/RegisteredUsers/Doctrine/config"
             alias: RegisteredUsers
             is_bundle: false
-      lists_projection:
-        connection: lists_projection
+      projects_projection:
+        connection: projects_projection
         mappings:
           custom_mapping:
             type: xml
-            prefix: Productivity\Application\Projector\Lists\Doctrine\Entity
-            dir: "%kernel.project_dir%/src/Productivity/Application/Projector/Lists/Doctrine/config"
-            alias: Lists
+            prefix: Productivity\Application\Projector\Projects\Doctrine\Entity
+            dir: "%kernel.project_dir%/src/Productivity/Application/Projector/Projects/Doctrine/config"
+            alias: Projects
             is_bundle: false

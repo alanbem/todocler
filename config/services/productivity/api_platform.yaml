@@ -42,7 +42,7 @@ services:
     tags:
       - api_platform.filter
 
-  productivity.filters.filter_by_list_id:
+  productivity.filters.filter_by_project_id:
     class: ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter
     arguments:
       - '@Doctrine\Common\Persistence\ManagerRegistry'
@@ -50,7 +50,7 @@ services:
       - '@api_platform.iri_converter'
       - '@api_platform.property_accessor'
       - '@Psr\Log\LoggerInterface'
-      - { list.id: ~ }
+      - { project.id: ~ }
       - '@api_platform.identifiers_extractor'
       - '@api_platform.name_converter'
     tags:

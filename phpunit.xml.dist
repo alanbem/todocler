@@ -21,7 +21,7 @@
         <!-- ###+ doctrine/doctrine-bundle ### -->
         <env name="EVENT_STORE_DATABASE_URL" value="pgsql://docker:docker@postgres_event_store:5432/event_store?charset=utf8"/>
         <env name="REGISTERED_USERS_PROJECTIONS_DATABASE_URL" value="pgsql://docker:docker@postgres_registered_users_projections:5432/registered_users_projections?charset=utf8"/>
-        <env name="LISTS_PROJECTIONS_DATABASE_URL" value="mysql://docker:docker@mysql_lists_projections:3306/lists_projections?charset=utf8"/>
+        <env name="PROJECTS_PROJECTIONS_DATABASE_URL" value="mysql://docker:docker@mysql_projects_projections:3306/projects_projections?charset=utf8"/>
         <!-- ###- doctrine/doctrine-bundle ### -->
     </php>
 

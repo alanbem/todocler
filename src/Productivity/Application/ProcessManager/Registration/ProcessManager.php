@@ -15,7 +15,7 @@ namespace Productivity\Application\ProcessManager\Registration;
 
 use Productivity\Application\Event as Events;
 use Productivity\Application\ProcessManager\Registration;
-use Productivity\Domain\Command\CreateList;
+use Productivity\Domain\Command\CreateProject;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\EventStore;
@@ -24,6 +24,7 @@ use Streak\Domain\EventStore;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Productivity\Application\ProcessManager\Registration\ProcessManagerTest
+ * @see \Productivity\Application\ProcessManager\Registration\ProcessManager\Factory
  */
 final class ProcessManager implements Event\Listener, Event\Picker, Event\Filterer
 {
@@ -37,11 +38,11 @@ final class ProcessManager implements Event\Listener, Event\Picker, Event\Filter
     }
 
     /**
-     * Creates first list for newly registered user.
+     * Creates first project for newly registered user.
      */
     public function onUserRegistered(Events\UserRegistered $event) : void
     {
-        $this->bus->dispatch(new CreateList($event->userId(), $this->name, $event->userId()));
+        $this->bus->dispatch(new CreateProject($event->userId(), $this->name, $event->userId()));
     }
 
     public function pick(EventStore $store) : Event\Envelope

@@ -24,10 +24,10 @@ final class TaskAlreadyExistsTest extends TestCase
 {
     public function testException() : void
     {
-        $exception = new TaskAlreadyExists('list-1', 'task-1');
+        $exception = new TaskAlreadyExists('project-1', 'task-1');
 
         self::assertSame('Task "task-1" already exist.', $exception->getMessage());
-        self::assertSame('list-1', $exception->listId());
+        self::assertSame('project-1', $exception->projectId());
         self::assertSame('task-1', $exception->taskId());
     }
 }

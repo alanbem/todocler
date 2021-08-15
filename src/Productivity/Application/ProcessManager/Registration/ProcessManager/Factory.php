@@ -23,6 +23,7 @@ use Streak\Domain\Exception\InvalidIdGiven;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Productivity\Application\ProcessManager\Registration\ProcessManager\FactoryTest
+ * @see \Productivity\Application\ProcessManager\Registration\ProcessManager
  */
 final class Factory implements Listener\Factory
 {

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware;
 
 use ApiPlatform\Core\Bridge\Symfony\Messenger\RemoveStamp;
-use Productivity\Application\Projector\Lists\Doctrine\Entity;
+use Productivity\Application\Projector\Projects\Doctrine\Entity;
 use Productivity\Domain\Command;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\StackInterface;
@@ -49,7 +49,7 @@ final class RemoveTaskTransformingMiddleware extends TransformingMiddleware
         }
 
         $command = new Command\RemoveTask(
-            $resource->getList()->getId(),
+            $resource->getProject()->getId(),
             $resource->getId(),
             $user->id,
         );

@@ -42,7 +42,7 @@ final class CreateTaskTransformingMiddleware extends TransformingMiddleware
         }
 
         $command = new Command\CreateTask(
-            $dto->listId,
+            $dto->projectId,
             $dto->taskId,
             $dto->name,
             $user->id,

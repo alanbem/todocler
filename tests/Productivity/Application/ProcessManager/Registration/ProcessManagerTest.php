@@ -16,7 +16,7 @@ namespace Productivity\Application\ProcessManager\Registration;
 use Productivity\Application\Event\UserRegistered;
 use Productivity\Application\ProcessManager\Registration;
 use Productivity\Application\Sensor\UsersEvents\Sensor;
-use Productivity\Domain\Command\CreateList;
+use Productivity\Domain\Command\CreateProject;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\Event\Envelope;
@@ -30,7 +30,7 @@ use Streak\Infrastructure\Domain\Testing\Listener\TestCase;
  */
 final class ProcessManagerTest extends TestCase
 {
-    private const DEFAULT_NAME = 'My first list';
+    private const DEFAULT_NAME = 'My first project';
 
     private CommandBus $bus;
     private Registration\ProcessManager $manager;
@@ -49,7 +49,7 @@ final class ProcessManagerTest extends TestCase
                 new UserRegistered('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'alan.bem@example.com', new \DateTimeImmutable()),
             )
             ->then(
-                new CreateList('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b')
+                new CreateProject('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first project', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b')
             )
             ->assert();
     }

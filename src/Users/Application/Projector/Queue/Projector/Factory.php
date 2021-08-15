@@ -20,8 +20,8 @@ use Users\Application\Projector\Queue\Projector;
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
- * @see \Users\Application\Projector\RegisteredUsers\Projector\FactoryTest
  * @see \Users\Application\Projector\Queue\Projector\FactoryTest
+ * @see \Users\Application\Projector\Queue\Projector
  */
 final class Factory implements Event\Listener\Factory
 {

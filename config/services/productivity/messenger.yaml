@@ -11,14 +11,14 @@ services:
       - '@Symfony\Component\Security\Core\Security'
       - '@Productivity\UsersFacade'
 
-  messenger.middleware.transform_create_list_dto_to_command:
-    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateListTransformingMiddleware
+  messenger.middleware.transform_create_project_dto_to_command:
+    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateProjectTransformingMiddleware
 
-  messenger.middleware.transform_remove_list_request_to_command:
-    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RemoveListTransformingMiddleware
+  messenger.middleware.transform_remove_project_request_to_command:
+    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RemoveProjectTransformingMiddleware
 
-  messenger.middleware.transform_rename_list_dto_to_command:
-    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RenameListTransformingMiddleware
+  messenger.middleware.transform_rename_project_dto_to_command:
+    class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware\RenameProjectTransformingMiddleware
 
   messenger.middleware.transform_create_task_dto_to_command:
     class: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware\CreateTaskTransformingMiddleware

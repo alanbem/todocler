@@ -6,9 +6,9 @@ framework:
         middleware:
           - validation
           - authenticated_user_to_registered_user
-          - transform_create_list_dto_to_command
-          - transform_rename_list_dto_to_command
-          - transform_remove_list_request_to_command
+          - transform_create_project_dto_to_command
+          - transform_rename_project_dto_to_command
+          - transform_remove_project_request_to_command
           - transform_create_task_dto_to_command
           - transform_complete_task_dto_to_command
           - transform_remove_task_request_to_command

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Productivity\Domain\Command;
 
-use Productivity\Domain\Checklist;
+use Productivity\Domain\Project;
 use Streak\Domain\AggregateRoot;
 use Streak\Domain\Command;
 
@@ -24,13 +24,13 @@ use Streak\Domain\Command;
  */
 final class CreateTask implements Command\AggregateRootCommand
 {
-    public function __construct(private string $listId, private string $taskId, private string $name, private string $creatorId)
+    public function __construct(private string $projectId, private string $taskId, private string $name, private string $creatorId)
     {
     }
 
-    public function listId() : string
+    public function projectId() : string
     {
-        return $this->listId;
+        return $this->projectId;
     }
 
     public function taskId() : string
@@ -50,6 +50,6 @@ final class CreateTask implements Command\AggregateRootCommand
 
     public function aggregateRootId() : AggregateRoot\Id
     {
-        return new Checklist\Id($this->listId);
+        return new Project\Id($this->projectId);
     }
 }

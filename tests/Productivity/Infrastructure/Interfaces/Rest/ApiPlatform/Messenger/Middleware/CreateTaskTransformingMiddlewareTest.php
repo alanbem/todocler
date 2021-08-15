@@ -53,7 +53,7 @@ final class CreateTaskTransformingMiddlewareTest extends TestCase
     {
         $middleware = new CreateTaskTransformingMiddleware();
         $message = new DTOs\CreateTask();
-        $message->listId = '62fafb74-f550-4780-a527-37cb0b1e08ae';
+        $message->projectId = '62fafb74-f550-4780-a527-37cb0b1e08ae';
         $message->taskId = '8b89a300-a95b-40af-b235-87ddf9e47309';
         $message->name = 'name';
 
@@ -87,7 +87,7 @@ final class CreateTaskTransformingMiddlewareTest extends TestCase
         $middleware = new CreateTaskTransformingMiddleware();
 
         $message = new DTOs\CreateTask();
-        $message->listId = '62fafb74-f550-4780-a527-37cb0b1e08ae';
+        $message->projectId = '62fafb74-f550-4780-a527-37cb0b1e08ae';
         $message->taskId = '8b89a300-a95b-40af-b235-87ddf9e47309';
         $message->name = 'name';
 

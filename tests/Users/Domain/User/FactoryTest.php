@@ -39,7 +39,7 @@ final class FactoryTest extends TestCase
     public function testFactory() : void
     {
         $factory = new User\Factory($this->encoder, $this->clock);
-        $id = new User\Id('list-1');
+        $id = new User\Id('user-1');
 
         $aggregate = $factory->create($id);
 

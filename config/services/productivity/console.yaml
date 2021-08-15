@@ -4,7 +4,7 @@ services:
     autoconfigure: true
     public: false
 
-  Productivity\Infrastructure\Interfaces\Console\Symfony\CreateListCommand:
+  Productivity\Infrastructure\Interfaces\Console\Symfony\CreateProjectCommand:
     arguments:
       - '@Streak\Application\CommandBus'
       - '@Productivity\UsersFacade'

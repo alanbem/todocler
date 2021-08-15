@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Middleware;
 
-use Productivity\Application\Projector\Lists\Doctrine\Entity;
+use Productivity\Application\Projector\Projects\Doctrine\Entity;
 use Productivity\Domain\Command;
 use Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\DTO;
 use Symfony\Component\Messenger\Envelope;
@@ -49,7 +49,7 @@ final class CompleteTaskTransformingMiddleware extends TransformingMiddleware
         }
 
         $command = new Command\CompleteTask(
-            $resource->getList()->getId(),
+            $resource->getProject()->getId(),
             $resource->getId(),
             $user->id,
         );

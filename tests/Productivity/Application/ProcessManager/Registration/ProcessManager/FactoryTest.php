@@ -15,8 +15,8 @@ namespace Productivity\Application\ProcessManager\Registration\ProcessManager;
 
 use PHPUnit\Framework\TestCase;
 use Productivity\Application\ProcessManager\Registration\ProcessManager;
-use Productivity\Domain\Checklist;
-use Productivity\Domain\Event\ListCreated;
+use Productivity\Domain\Event\ProjectCreated;
+use Productivity\Domain\Project;
 use Streak\Application\CommandBus;
 use Streak\Domain\Event;
 use Streak\Domain\Event\Listener;
@@ -59,7 +59,7 @@ final class FactoryTest extends TestCase
     public function testCreatingOnEvent() : void
     {
         $factory = new ProcessManager\Factory($this->bus, 'name');
-        $event = Event\Envelope::new(new ListCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first list', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Checklist\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
+        $event = Event\Envelope::new(new ProjectCreated('8e5ebf2b-f78c-430d-b15f-0f3e710b284b', 'My first project', '8e5ebf2b-f78c-430d-b15f-0f3e710b284b', new \DateTimeImmutable()), new Project\Id('8e5ebf2b-f78c-430d-b15f-0f3e710b284b'), 1);
 
         $projector = $factory->createFor($event);
 

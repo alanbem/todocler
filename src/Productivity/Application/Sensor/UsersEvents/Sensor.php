@@ -23,6 +23,7 @@ use Streak\Application\Sensor as Sensors;
  * @noRector \Rector\Privatization\Rector\Class_\RepeatedLiteralToClassConstantRector
  *
  * @see \Productivity\Application\Sensor\UsersEvents\SensorTest
+ * @see \Productivity\Application\Sensor\UsersEvents\Sensor\Factory
  */
 final class Sensor implements Application\Sensor
 {

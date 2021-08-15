@@ -24,9 +24,9 @@ final class TaskCompletedTest extends TestCase
 {
     public function testEvent() : void
     {
-        $event = new TaskCompleted('list-1', 'task-1', 'user-1', $now = new \DateTimeImmutable());
+        $event = new TaskCompleted('project-1', 'task-1', 'user-1', $now = new \DateTimeImmutable());
 
-        self::assertSame('list-1', $event->listId());
+        self::assertSame('project-1', $event->projectId());
         self::assertSame('task-1', $event->taskId());
         self::assertSame('user-1', $event->userId());
         self::assertEquals($now, $event->completedAt());

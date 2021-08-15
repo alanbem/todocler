@@ -52,19 +52,19 @@ Only a single console command [todocler:users:register-user](https://github.com/
 I considered rewriting this module in a classic ORM-only way and showcase some safe inter-module messaging techniques (e.g. transactional outbox), but due to time constraints, I didn't.
 
 ### Productivity module
-This module is responsible for TODO lists and theirs tasks.
+This module is responsible for TODO projects and theirs tasks.
 
 It provides internally:
-- `CreateList` command
-- `RenameList` command
-- `RemoveList` command
+- `CreateProject` command
+- `RenameProject` command
+- `RemoveProject` command
 - `CreateTask` command
 - `CompleteTask` command
 - `RemoveTask` command
-- `BrowseChecklists` query
+- `BrowseProjects` query
 - `BrowseTasks` query
 
-Data for those queries is provided by dedicated [`Lists` projection](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Projector/Lists/Projector.php). This projection uses Doctrine ORM for persistence.
+Data for those queries is provided by dedicated [`Projects` projection](https://github.com/alanbem/todocler/blob/main/src/Productivity/Application/Projector/Projects/Projector.php). This projection uses Doctrine ORM for persistence.
 Thanks to that it was possible to [integrate](https://github.com/alanbem/todocler/tree/main/src/Productivity/Infrastructure/Interfaces/Rest/ApiPlatform) [ApiPlatform](https://api-platform.com/) with projection entities and expose them as a configurable REST interface.
 
 `Productivity` module has a dependency on `Users` module:
@@ -77,7 +77,7 @@ Thanks to that it was possible to [integrate](https://github.com/alanbem/todocle
   In the current [implementation](https://github.com/alanbem/todocler/blob/main/src/Users/Infrastructure/UsersFacadeForProductivity.php) it just runs internal queries, but in case of splitting the modules it could be easily swapped with HTTP implementation.
   This facade might serve as an anti-corruption layer in the future, when domain concepts (of a user) between our two modules start to noticeably diverge.
 
-Except REST API powered by ApiPlatform this module exposes 2 console commands [todocler:productivity:create-list](https://github.com/alanbem/todocler/blob/main/src/Productivity/Infrastructure/Interfaces/Console/Symfony/CreateListCommand.php) and [todocler:productivity:create-task](https://github.com/alanbem/todocler/blob/main/src/Productivity/Infrastructure/Interfaces/Console/Symfony/CreateTaskCommand.php) as an outside interface.
+Except REST API powered by ApiPlatform this module exposes 2 console commands [todocler:productivity:create-project](https://github.com/alanbem/todocler/blob/main/src/Productivity/Infrastructure/Interfaces/Console/Symfony/CreateProjectCommand.php) and [todocler:productivity:create-task](https://github.com/alanbem/todocler/blob/main/src/Productivity/Infrastructure/Interfaces/Console/Symfony/CreateTaskCommand.php) as an outside interface.
 
 ### A word on event sourcing
 Employing event sourcing has some drawbacks - mainly eventual consistency. Usually, eventual consistency is not a problem at all,
@@ -117,4 +117,3 @@ Runs all the above in tandem. I used Github Actions. Please refer to [.github/wo
 - Better REST API design - current solution due to ApiPlatform shortcomings is good enough, but IMHO suboptimal.
 - Strong schema for integration events (protobuf, etc)
 - BDD tests
-- I would change `Checklist` to `Project` - unfortunately, `List` is a PHP keyword and can't be used as a class name. `Checklist` was the first thing I came up with.

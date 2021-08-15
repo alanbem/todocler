@@ -1,0 +1,32 @@
+Productivity\Application\Projector\Projects\Doctrine\Entity\Project:
+  attributes:
+    id:
+      groups:
+        - 'projects.browse'
+        - 'projects.read'
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'projects.tasks.browse'
+    userId:
+      ignore: ~
+    name:
+      groups:
+        - 'projects.browse'
+        - 'projects.read'
+        - 'tasks.browse'
+        - 'tasks.read'
+        - 'projects.tasks.browse'
+    updatedAt:
+      groups:
+        - 'projects.browse'
+        - 'projects.read'
+    createdAt:
+      groups:
+        - 'projects.browse'
+        - 'projects.read'
+        - 'projects.edit'
+    tasks:
+      groups:
+        - 'projects.browse'
+        - 'projects.read'
+        - 'projects.edit'

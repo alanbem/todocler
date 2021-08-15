@@ -1,0 +1,63 @@
+Productivity\Application\Projector\Projects\Doctrine\Entity\Project:
+  shortName: 'Project'
+  attributes:
+    order:
+      createdAt: desc
+      tasks.createdAt: desc
+    pagination_items_per_page: 25
+    filters:
+      - productivity.filters.order_by_created_at
+      - productivity.filters.filter_by_created_at
+  collectionOperations:
+    get:
+      method: GET
+      normalization_context:
+        groups: [ 'projects.browse' ]
+      openapi_context:
+        summary: Retrieves the list of projects
+    post:
+      method: POST
+      status: 202
+      messenger: input
+      input: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\DTO\CreateProject
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      serialize: true
+      openapi_context:
+        summary: Creates new project
+  itemOperations:
+    get:
+      method: GET
+      normalization_context:
+        groups: [ 'projects.read' ]
+      openapi_context:
+        summary: Retrieves the project
+    rename:
+      method: PATCH
+      status: 202
+      messenger: input
+      input: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\DTO\RenameProject
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      serialize: true
+      openapi_context:
+        summary: Renames the project
+    delete:
+      method: DELETE
+      status: 202
+      messenger: input
+      # input option is not working with DELETE - api platform sends resource object with delete-stamp instead
+      input: Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\DTO\RemoveProject
+      output: false
+      read: true
+      deserialize: true
+      validate: true
+      write: true
+      openapi_context:
+        summary: Removes the project

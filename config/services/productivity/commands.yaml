@@ -4,7 +4,7 @@ services:
     autoconfigure: true
     public: false
 
-  Productivity\Application\Command\ListHandler:
+  Productivity\Application\Command\ProjectHandler:
     arguments:
       - '@Streak\Domain\AggregateRoot\Factory'
       - '@Streak\Domain\AggregateRoot\Repository'
