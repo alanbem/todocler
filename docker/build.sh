@@ -10,8 +10,7 @@ set -x # show commands
 
 docker-compose down --remove-orphans
 docker-compose up -d nginx postgres_event_store postgres_registered_users_projections mysql_projects_projections redis
-printf "\033[0;34mwaiting...\033[0m\n"
-sleep 15
+sleep 5
 docker-compose run --rm php composer install -o -a --ansi
 docker-compose run --rm php bin/console cache:warmup
 docker-compose run --rm php bin/console streak:snapshots:storage:reset
@@ -22,6 +21,7 @@ docker-compose up -d supervisord
 # setup users
 docker-compose run --rm php bin/console todocler:users:register-user 8e5ebf2b-f78c-430d-b15f-0f3e710b284b adam@example.com password
 docker-compose run --rm php bin/console todocler:users:register-user 0f50a722-e1bf-4d6b-bc5d-acce50386a79 john@example.com password
+sleep 5
 # setup projects
 docker-compose run --rm php bin/console todocler:productivity:create-project 09adf1dc-ed73-46ab-95b8-1f475fb19c13 "My Project #2 - adam@example.com" adam@example.com
 docker-compose run --rm php bin/console todocler:productivity:create-project fb72c276-0902-4494-9d34-4d192864cfbf "My Project #3 - adam@example.com" adam@example.com

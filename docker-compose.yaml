@@ -120,4 +120,5 @@ services:
     volumes:
       - .:/var/www/project
       - ./docker/supervisord/etc/supervisord.conf:/etc/supervisord.conf
+      - ./docker/supervisord/etc/subscriptions.sh:/etc/subscriptions.sh
       - /var/run/docker.sock:/var/run/docker.sock
