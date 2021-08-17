@@ -24,9 +24,9 @@ final class TaskCreatedTest extends TestCase
 {
     public function testEvent() : void
     {
-        $event = new TaskCreated('list-1', 'task-1', 'Task name', 'creator-1', $now = new \DateTimeImmutable());
+        $event = new TaskCreated('project-1', 'task-1', 'Task name', 'creator-1', $now = new \DateTimeImmutable());
 
-        self::assertSame('list-1', $event->listId());
+        self::assertSame('project-1', $event->projectId());
         self::assertSame('task-1', $event->taskId());
         self::assertSame('Task name', $event->name());
         self::assertSame('creator-1', $event->creatorId());

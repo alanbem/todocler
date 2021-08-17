@@ -19,6 +19,6 @@ namespace Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\DTO;
 final class CreateTask
 {
     public string $taskId;
-    public string $listId;
+    public string $projectId;
     public string $name;
 }

@@ -24,6 +24,8 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * @see \Users\Domain\User\Factory
  */
 final class User implements Event\Sourced\AggregateRoot, CommandHandler
 {

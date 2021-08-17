@@ -1,0 +1,4 @@
+Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\DTO\RenameProject:
+  properties:
+    name:
+      - NotBlank: ~

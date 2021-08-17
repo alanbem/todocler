@@ -25,14 +25,14 @@ final class TaskCompleted implements Domain\Event
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
     private string $completedAt;
 
-    public function __construct(private string $listId, private string $taskId, private string $userId, \DateTimeImmutable $completedAt)
+    public function __construct(private string $projectId, private string $taskId, private string $userId, \DateTimeImmutable $completedAt)
     {
         $this->completedAt = $completedAt->format(self::DATE_FORMAT);
     }
 
-    public function listId() : string
+    public function projectId() : string
     {
-        return $this->listId;
+        return $this->projectId;
     }
 
     public function taskId() : string

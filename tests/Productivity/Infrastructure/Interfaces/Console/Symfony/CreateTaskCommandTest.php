@@ -53,7 +53,7 @@ final class CreateTaskCommandTest extends TestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'task-id' => 'd95a3219-b15b-480a-835d-d15c0d9414b2',
-            'list-id' => '21b80428-b0b7-4dab-8a07-d008fe32fe1f',
+            'project-id' => '21b80428-b0b7-4dab-8a07-d008fe32fe1f',
             'name' => 'Task name',
             'email' => 'alan.bem@example.com',
         ]);
@@ -80,8 +80,8 @@ final class CreateTaskCommandTest extends TestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'task-id' => 'd95a3219-b15b-480a-835d-d15c0d9414b2',
-            'list-id' => '21b80428-b0b7-4dab-8a07-d008fe32fe1f',
-            'name' => 'List name',
+            'project-id' => '21b80428-b0b7-4dab-8a07-d008fe32fe1f',
+            'name' => 'Project name',
             'email' => 'alan.bem@example.com',
         ]);
     }

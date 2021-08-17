@@ -27,6 +27,7 @@ use Users\Domain\Event as Events;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Users\Application\Projector\RegisteredUsers\ProjectorTest
+ * @see \Users\Application\Projector\RegisteredUsers\Projector\Factory
  */
 final class Projector extends Doctrine\EntityManagerProjector implements Event\Picker, QueryHandler
 {

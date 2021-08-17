@@ -15,7 +15,7 @@ namespace Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Midd
 
 use ApiPlatform\Core\Bridge\Symfony\Messenger\RemoveStamp;
 use PHPUnit\Framework\TestCase;
-use Productivity\Application\Projector\Lists\Doctrine\Entity as Entities;
+use Productivity\Application\Projector\Projects\Doctrine\Entity as Entities;
 use Productivity\Domain\Command as Commands;
 use Productivity\Infrastructure\Interfaces\Rest\ApiPlatform\Messenger\Stamp\RegisteredUserStamp;
 use Symfony\Component\Messenger\Envelope;
@@ -54,7 +54,7 @@ final class RemoveTaskTransformingMiddlewareTest extends TestCase
     {
         $middleware = new RemoveTaskTransformingMiddleware();
 
-        $message = new Entities\Task(new Entities\Checklist('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable()), '8b89a300-a95b-40af-b235-87ddf9e47309', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
+        $message = new Entities\Task(new Entities\Project('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable()), '8b89a300-a95b-40af-b235-87ddf9e47309', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
 
         $envelope = Envelope::wrap($message);
         $envelope = $envelope->with(new RegisteredUserStamp((object) ['id' => '6b244a62-0e1a-45ec-ac01-eb0f805432d9', 'john.doe@example.com']));
@@ -72,7 +72,7 @@ final class RemoveTaskTransformingMiddlewareTest extends TestCase
     {
         $middleware = new RemoveTaskTransformingMiddleware();
 
-        $message = new Entities\Checklist('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
+        $message = new Entities\Project('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
 
         $envelope = Envelope::wrap($message);
         $envelope = $envelope->with(new RegisteredUserStamp((object) ['id' => '6b244a62-0e1a-45ec-ac01-eb0f805432d9', 'john.doe@example.com']));
@@ -87,7 +87,7 @@ final class RemoveTaskTransformingMiddlewareTest extends TestCase
     {
         $middleware = new RemoveTaskTransformingMiddleware();
 
-        $message = new Entities\Task(new Entities\Checklist('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable()), '8b89a300-a95b-40af-b235-87ddf9e47309', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
+        $message = new Entities\Task(new Entities\Project('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable()), '8b89a300-a95b-40af-b235-87ddf9e47309', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
 
         $envelope = Envelope::wrap($message);
         $envelope = $envelope->with(new RegisteredUserStamp((object) ['id' => '6b244a62-0e1a-45ec-ac01-eb0f805432d9', 'john.doe@example.com']));
@@ -101,7 +101,7 @@ final class RemoveTaskTransformingMiddlewareTest extends TestCase
     {
         $middleware = new RemoveTaskTransformingMiddleware();
 
-        $message = new Entities\Task(new Entities\Checklist('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable()), '8b89a300-a95b-40af-b235-87ddf9e47309', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
+        $message = new Entities\Task(new Entities\Project('62fafb74-f550-4780-a527-37cb0b1e08ae', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable()), '8b89a300-a95b-40af-b235-87ddf9e47309', 'old name', '1a9d8b27-5896-4d50-b540-0d92b1708747', new \DateTimeImmutable(), new \DateTimeImmutable());
 
         $envelope = Envelope::wrap($message);
         $envelope = $envelope->with(new RemoveStamp());

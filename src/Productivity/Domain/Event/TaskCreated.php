@@ -25,14 +25,14 @@ final class TaskCreated implements Domain\Event
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
     private string $createdAt;
 
-    public function __construct(private string $listId, private string $taskId, private string $name, private string $creatorId, \DateTimeImmutable $createdAt)
+    public function __construct(private string $projectId, private string $taskId, private string $name, private string $creatorId, \DateTimeImmutable $createdAt)
     {
         $this->createdAt = $createdAt->format(self::DATE_FORMAT);
     }
 
-    public function listId() : string
+    public function projectId() : string
     {
-        return $this->listId;
+        return $this->projectId;
     }
 
     public function taskId() : string

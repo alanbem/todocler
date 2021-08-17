@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Productivity\Application\Query;
 
-use Productivity\Application\Projector\Lists;
+use Productivity\Application\Projector\Projects;
 use Streak\Domain\Event\Listener;
 use Streak\Domain\Query;
 
@@ -35,6 +35,6 @@ final class BrowseTasks implements Query\EventListenerQuery
 
     public function listenerId() : Listener\Id
     {
-        return new Lists\Projector\Id();
+        return new Projects\Projector\Id();
     }
 }

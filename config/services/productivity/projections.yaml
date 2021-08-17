@@ -4,6 +4,6 @@ services:
     autoconfigure: true
     public: false
 
-  Productivity\Application\Projector\Lists\Projector\Factory:
+  Productivity\Application\Projector\Projects\Projector\Factory:
     arguments:
-      - '@doctrine.orm.lists_projection_entity_manager'
+      - '@doctrine.orm.projects_projection_entity_manager'

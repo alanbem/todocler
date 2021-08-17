@@ -26,10 +26,11 @@ api_platform:
   enable_swagger_ui: false
   enable_re_doc: false
   exception_to_status:
-    Productivity\Domain\Exception\ListNotFound: 404
+    Productivity\Domain\Exception\ProjectNotFound: 404
     Productivity\Domain\Exception\TaskAlreadyCompleted: 400
     Productivity\Domain\Exception\TaskAlreadyExists: 400
     Productivity\Domain\Exception\TaskNotFound: 404
     Productivity\Domain\Exception\UserNotAllowed: 400
-    Productivity\Application\Command\CreateListTest: 400
+    Productivity\Application\Command\CreateProjectTest: 400
     Streak\Domain\Exception\AggregateNotFound: 404
+    Streak\Domain\Exception\AggregateAlreadyExists: 400

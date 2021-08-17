@@ -24,9 +24,9 @@ final class TaskRemovedTest extends TestCase
 {
     public function testEvent() : void
     {
-        $event = new TaskRemoved('list-1', 'task-1', 'user-1', $now = new \DateTimeImmutable());
+        $event = new TaskRemoved('project-1', 'task-1', 'user-1', $now = new \DateTimeImmutable());
 
-        self::assertSame('list-1', $event->listId());
+        self::assertSame('project-1', $event->projectId());
         self::assertSame('task-1', $event->taskId());
         self::assertSame('user-1', $event->removerId());
         self::assertEquals($now, $event->removedAt());

@@ -21,6 +21,7 @@ use Users\Domain\Event as Events;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Users\Application\Projector\Queue\ProjectorTest
+ * @see \Users\Application\Projector\Queue\Projector\Factory
  */
 final class Projector implements Event\Listener, Event\Filterer
 {

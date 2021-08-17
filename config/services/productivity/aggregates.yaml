@@ -4,6 +4,6 @@ services:
     autoconfigure: true
     public: false
 
-  Productivity\Domain\Checklist\Factory:
+  Productivity\Domain\Project\Factory:
     arguments:
       - '@Streak\Domain\Clock'

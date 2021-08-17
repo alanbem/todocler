@@ -23,6 +23,7 @@ use Users\Domain\User;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Users\Domain\User\FactoryTest
+ * @see \Users\Domain\User
  */
 final class Factory implements AggregateRoot\Factory
 {

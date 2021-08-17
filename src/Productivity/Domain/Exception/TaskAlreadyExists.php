@@ -20,16 +20,16 @@ namespace Productivity\Domain\Exception;
  */
 final class TaskAlreadyExists extends \RuntimeException
 {
-    public function __construct(private string $listId, private string $taskId)
+    public function __construct(private string $projectId, private string $taskId)
     {
         $message = sprintf('Task "%s" already exist.', $this->taskId);
 
         parent::__construct($message);
     }
 
-    public function listId() : string
+    public function projectId() : string
     {
-        return $this->listId;
+        return $this->projectId;
     }
 
     public function taskId() : string

@@ -1,5 +1,5 @@
 parameters:
-  todocler.first_list.default_name: 'My first list'
+  todocler.first_project.default_name: 'My first project'
 
 imports:
   - { resource: 'services/productivity/*.yaml' }

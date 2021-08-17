@@ -22,6 +22,7 @@ use Users\Application\Projector\RegisteredUsers;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Users\Application\Projector\RegisteredUsers\Projector\FactoryTest
+ * @see \Users\Application\Projector\RegisteredUsers\Projector
  */
 final class Factory implements Event\Listener\Factory
 {

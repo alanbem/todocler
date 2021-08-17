@@ -20,6 +20,7 @@ use Streak\Application\Sensor;
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Productivity\Application\Sensor\UsersEvents\Sensor\FactoryTest
+ * @see \Productivity\Application\Sensor\UsersEvents\Sensor
  */
 final class Factory implements Sensor\Factory
 {

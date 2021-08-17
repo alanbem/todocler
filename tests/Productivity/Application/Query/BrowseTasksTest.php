@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Productivity\Application\Query;
 
 use PHPUnit\Framework\TestCase;
-use Productivity\Application\Projector\Lists;
+use Productivity\Application\Projector\Projects;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
@@ -28,11 +28,11 @@ final class BrowseTasksTest extends TestCase
         $query = new BrowseTasks(null);
 
         self::assertNull($query->ownerId());
-        self::assertEquals($query->listenerId(), new Lists\Projector\Id());
+        self::assertEquals($query->listenerId(), new Projects\Projector\Id());
 
         $query = new BrowseTasks('user-1');
 
         self::assertSame('user-1', $query->ownerId());
-        self::assertEquals($query->listenerId(), new Lists\Projector\Id());
+        self::assertEquals($query->listenerId(), new Projects\Projector\Id());
     }
 }

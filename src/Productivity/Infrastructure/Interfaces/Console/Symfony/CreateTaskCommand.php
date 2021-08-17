@@ -39,7 +39,7 @@ final class CreateTaskCommand extends Command
     {
         $this->setDescription('Create task.');
         $this->setDefinition(new InputDefinition([
-            new InputArgument('list-id', InputArgument::REQUIRED, 'Define an id of a list that this task belongs to.'),
+            new InputArgument('project-id', InputArgument::REQUIRED, 'Define an id of a project that this task belongs to.'),
             new InputArgument('task-id', InputArgument::REQUIRED, 'Define an id of a task.'),
             new InputArgument('name', InputArgument::REQUIRED, 'Define a name of a task.'),
             new InputArgument('email', InputArgument::REQUIRED, 'Define an email of a user owning this task.'),
@@ -48,21 +48,21 @@ final class CreateTaskCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $listId = $input->getArgument('list-id');
+        $projectId = $input->getArgument('project-id');
         $taskId = $input->getArgument('task-id');
         $name = $input->getArgument('name');
         $email = $input->getArgument('email');
 
-        Assert::uuid($listId, 'List id must be an UUID.');
+        Assert::uuid($projectId, 'Project id must be an UUID.');
         Assert::uuid($taskId, 'Task id must be an UUID.');
-        Assert::notEmpty($name, 'Invalid list name given.');
+        Assert::notEmpty($name, 'Invalid project name given.');
         Assert::email($email, 'Invalid email given.');
 
         $user = $this->users->findRegisteredUser($email);
 
         Assert::notNull($user, 'User with given email not found.');
 
-        $this->bus->dispatch(new CreateTask($listId, $taskId, $name, $user->id));
+        $this->bus->dispatch(new CreateTask($projectId, $taskId, $name, $user->id));
 
         $output->writeln(sprintf('<info>Task "%s" created successfully for "%s".</info>', $name, $email));
 
