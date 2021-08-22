@@ -54,6 +54,7 @@
         "bin-dir": "bin",
         "optimize-autoloader": true,
         "preferred-install": {
+            "streak/*": "source",
             "*": "dist"
         },
         "sort-packages": true

@@ -17,7 +17,7 @@ use Streak\Domain\AggregateRoot;
 use Streak\Domain\Clock;
 use Streak\Domain\Command;
 use Streak\Domain\CommandHandler;
-use Streak\Domain\Event;
+use Streak\Domain\Event\Sourced as EventSourced;
 use Users\Domain\Command as Commands;
 use Users\Domain\Event as Events;
 use Webmozart\Assert\Assert;
@@ -27,12 +27,12 @@ use Webmozart\Assert\Assert;
  *
  * @see \Users\Domain\User\Factory
  */
-final class User implements Event\Sourced\AggregateRoot, CommandHandler
+final class User implements EventSourced\AggregateRoot, CommandHandler
 {
     use AggregateRoot\Comparison;
+    use AggregateRoot\EventSourcing;
+    use AggregateRoot\Identification;
     use Command\Handling;
-    use Event\Sourced\AggregateRoot\Identification;
-    use Event\Sourcing;
 
     private PasswordHasher $hasher;
     private Clock $clock;
@@ -47,7 +47,7 @@ final class User implements Event\Sourced\AggregateRoot, CommandHandler
 
     public function userId() : string
     {
-        return $this->aggregateRootId()->toString();
+        return $this->id()->toString();
     }
 
     /**
