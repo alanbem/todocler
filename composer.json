@@ -21,7 +21,7 @@
         "nelmio/cors-bundle": "^2.1",
         "php-amqplib/rabbitmq-bundle": "^2.8",
         "phpdocumentor/reflection-docblock": "^5.2",
-        "streak/streak-bundle": "dev-master as 1.0",
+        "streak/streak-bundle": "dev-event-sourced-aggregates-and-entities as 1.0",
         "symfony/asset": "^5.3",
         "symfony/console": "^5.3",
         "symfony/dotenv": "^5.3",
@@ -54,6 +54,7 @@
         "bin-dir": "bin",
         "optimize-autoloader": true,
         "preferred-install": {
+            "streak/*": "source",
             "*": "dist"
         },
         "sort-packages": true

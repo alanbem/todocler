@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Productivity\Domain\Event;
 
-use Streak\Domain;
+use Productivity\Domain\Project\Task;
+use Streak\Domain\Event;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Productivity\Domain\Event\TaskCompletedTest
  */
-final class TaskCompleted implements Domain\Event
+final class TaskCompleted implements Event, Event\EntityEvent
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
     private string $completedAt;
@@ -48,5 +49,10 @@ final class TaskCompleted implements Domain\Event
     public function completedAt() : \DateTimeImmutable
     {
         return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->completedAt);
+    }
+
+    public function entityId() : Task\Id
+    {
+        return new Task\Id($this->taskId);
     }
 }
