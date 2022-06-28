@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Productivity\Domain\Event;
 
-use Streak\Domain;
+use Productivity\Domain\Project\Task;
+use Streak\Domain\Event;
 
 /**
  * @author Alan Gabriel Bem <alan.bem@gmail.com>
  *
  * @see \Productivity\Domain\Event\TaskRemovedTest
  */
-final class TaskRemoved implements Domain\Event
+final class TaskRemoved implements Event\EntityEvent
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s.u P'; // microsecond precision
     private string $removedAt;
@@ -48,5 +49,10 @@ final class TaskRemoved implements Domain\Event
     public function removedAt() : \DateTimeImmutable
     {
         return \DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $this->removedAt);
+    }
+
+    public function entityId() : Task\Id
+    {
+        return new Task\Id($this->taskId);
     }
 }

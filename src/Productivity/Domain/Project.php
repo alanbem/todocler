@@ -38,11 +38,9 @@ use Webmozart\Assert\Assert;
 final class Project implements Event\Sourced\AggregateRoot, CommandHandler
 {
     use AggregateRoot\Comparison;
+    use AggregateRoot\EventSourcing;
+    use AggregateRoot\Identification;
     use Command\Handling;
-    use Event\Sourced\AggregateRoot\Identification;
-    use Event\Sourcing;
-
-    private Clock $clock;
 
     private string $name;
     private string $creatorId;
@@ -54,16 +52,14 @@ final class Project implements Event\Sourced\AggregateRoot, CommandHandler
      */
     private array $tasks = [];
 
-    public function __construct(Project\Id $id, Clock $clock)
+    public function __construct(Project\Id $id, private Clock $clock)
     {
         $this->identifyBy($id);
-
-        $this->clock = $clock;
     }
 
     public function projectId() : string
     {
-        return $this->aggregateRootId()->toString();
+        return $this->id()->toString();
     }
 
     /**
@@ -144,9 +140,6 @@ final class Project implements Event\Sourced\AggregateRoot, CommandHandler
         $this->apply(new Events\TaskCreated($this->projectId(), $command->taskId(), $command->name(), $command->creatorId(), $this->clock->now()));
     }
 
-    /**
-     * @see Project::applyTaskCompleted()
-     */
     public function handleCompleteTask(Commands\CompleteTask $command) : void
     {
         Assert::notEmpty($command->userId(), 'User id is missing.');
@@ -166,11 +159,7 @@ final class Project implements Event\Sourced\AggregateRoot, CommandHandler
             throw new Exceptions\TaskNotFound($this->projectId(), $command->taskId());
         }
 
-        if (true === $task->completed()) {
-            throw new Exceptions\TaskAlreadyCompleted($this->projectId(), $command->taskId());
-        }
-
-        $this->apply(new Events\TaskCompleted($this->projectId(), $command->taskId(), $command->userId(), $this->clock->now()));
+        $task->complete($command->userId());
     }
 
     /**
@@ -195,7 +184,7 @@ final class Project implements Event\Sourced\AggregateRoot, CommandHandler
             throw new Exceptions\TaskNotFound($this->projectId(), $command->taskId());
         }
 
-        $this->apply(new Events\TaskRemoved($this->projectId(), $command->taskId(), $command->removerId(), $this->clock->now()));
+        $task->remove($command->removerId());
     }
 
     private function findTask(Task\Id $id) : ?Task
@@ -240,16 +229,7 @@ final class Project implements Event\Sourced\AggregateRoot, CommandHandler
      */
     private function applyTaskCreated(Events\TaskCreated $event) : void
     {
-        $this->tasks[] = new Task(new Task\Id($event->taskId()), $event->name(), $event->createdAt());
-    }
-
-    /**
-     * @see Project::handleCompleteTask()
-     */
-    private function applyTaskCompleted(Events\TaskCompleted $event) : void
-    {
-        $task = $this->findTask(new Task\Id($event->taskId()));
-        $task->complete();
+        $this->tasks[] = new Task($this, new Task\Id($event->taskId()), $event->name(), $this->clock);
     }
 
     /**
