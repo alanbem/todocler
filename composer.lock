@@ -167,16 +167,16 @@
         },
         {
             "name": "brick/math",
-            "version": "0.9.2",
+            "version": "0.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "dff976c2f3487d42c1db75a3b180e2b9f0e72ce0"
+                "reference": "ca57d18f028f84f777b2168cd1911b0dee2343ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/dff976c2f3487d42c1db75a3b180e2b9f0e72ce0",
-                "reference": "dff976c2f3487d42c1db75a3b180e2b9f0e72ce0",
+                "url": "https://api.github.com/repos/brick/math/zipball/ca57d18f028f84f777b2168cd1911b0dee2343ae",
+                "reference": "ca57d18f028f84f777b2168cd1911b0dee2343ae",
                 "shasum": ""
             },
             "require": {
@@ -186,7 +186,7 @@
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.2",
                 "phpunit/phpunit": "^7.5.15 || ^8.5 || ^9.0",
-                "vimeo/psalm": "4.3.2"
+                "vimeo/psalm": "4.9.2"
             },
             "type": "library",
             "autoload": {
@@ -211,15 +211,19 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.9.2"
+                "source": "https://github.com/brick/math/tree/0.9.3"
             },
             "funding": [
+                {
+                    "url": "https://github.com/BenMorel",
+                    "type": "github"
+                },
                 {
                     "url": "https://tidelift.com/funding/github/packagist/brick/math",
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-20T22:51:39+00:00"
+            "time": "2021-08-15T20:50:18+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -3311,12 +3315,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/streakphp/streak.git",
-                "reference": "6281b92d376fed0349e61fd624063dce45238168"
+                "reference": "fdd483f23a0fa70b05e2743a102b12071f70b9c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/streakphp/streak/zipball/6281b92d376fed0349e61fd624063dce45238168",
-                "reference": "6281b92d376fed0349e61fd624063dce45238168",
+                "url": "https://api.github.com/repos/streakphp/streak/zipball/fdd483f23a0fa70b05e2743a102b12071f70b9c0",
+                "reference": "fdd483f23a0fa70b05e2743a102b12071f70b9c0",
                 "shasum": ""
             },
             "require": {
@@ -3334,7 +3338,7 @@
                 "php-amqplib/rabbitmq-bundle": "^2.6.0",
                 "phpunit/phpunit": "^9.5.4",
                 "qossmic/deptrac-shim": "^0.13.0",
-                "rector/rector": "^0.10.19",
+                "rector/rector": "0.12.18",
                 "roave/security-advisories": "dev-latest"
             },
             "default-branch": true,
@@ -3374,7 +3378,7 @@
                 "issues": "https://github.com/streakphp/streak/issues",
                 "source": "https://github.com/streakphp/streak/tree/master"
             },
-            "time": "2021-07-03T22:11:33+00:00"
+            "time": "2022-11-19T02:47:05+00:00"
         },
         {
             "name": "streak/streak-bundle",
@@ -3382,12 +3386,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/streakphp/streak-bundle.git",
-                "reference": "2fd69efc46eedf69f8233f998398909e19f3fb89"
+                "reference": "78650937ff9398f9de7d6d3c9c2e83f082082cd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/streakphp/streak-bundle/zipball/2fd69efc46eedf69f8233f998398909e19f3fb89",
-                "reference": "2fd69efc46eedf69f8233f998398909e19f3fb89",
+                "url": "https://api.github.com/repos/streakphp/streak-bundle/zipball/78650937ff9398f9de7d6d3c9c2e83f082082cd2",
+                "reference": "78650937ff9398f9de7d6d3c9c2e83f082082cd2",
                 "shasum": ""
             },
             "require": {
@@ -3447,7 +3451,7 @@
                 "issues": "https://github.com/streakphp/streak-bundle/issues",
                 "source": "https://github.com/streakphp/streak-bundle/tree/master"
             },
-            "time": "2021-07-03T22:14:48+00:00"
+            "time": "2022-11-19T02:53:41+00:00"
         },
         {
             "name": "symfony/amqp-messenger",
@@ -4779,16 +4783,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.13.4",
+            "version": "v1.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "d81196c3f3b544e32997b67e955fb8291fdfe770"
+                "reference": "d1a692369be53445af6e391170b509d7f5d026cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/d81196c3f3b544e32997b67e955fb8291fdfe770",
-                "reference": "d81196c3f3b544e32997b67e955fb8291fdfe770",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/d1a692369be53445af6e391170b509d7f5d026cf",
+                "reference": "d1a692369be53445af6e391170b509d7f5d026cf",
                 "shasum": ""
             },
             "require": {
@@ -4797,16 +4801,13 @@
             },
             "require-dev": {
                 "composer/composer": "^1.0.2|^2.0",
-                "symfony/dotenv": "^4.4|^5.0",
-                "symfony/filesystem": "^4.4|^5.0",
-                "symfony/phpunit-bridge": "^4.4|^5.0",
-                "symfony/process": "^3.4|^4.4|^5.0"
+                "symfony/dotenv": "^4.4|^5.0|^6.0",
+                "symfony/filesystem": "^4.4|^5.0|^6.0",
+                "symfony/phpunit-bridge": "^4.4.12|^5.0|^6.0",
+                "symfony/process": "^4.4|^5.0|^6.0"
             },
             "type": "composer-plugin",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.13-dev"
-                },
                 "class": "Symfony\\Flex\\Flex"
             },
             "autoload": {
@@ -4827,7 +4828,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.13.4"
+                "source": "https://github.com/symfony/flex/tree/v1.19.2"
             },
             "funding": [
                 {
@@ -4843,7 +4844,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-03T08:14:48+00:00"
+            "time": "2022-06-14T21:13:39+00:00"
         },
         {
             "name": "symfony/form",
@@ -13291,5 +13292,5 @@
         "ext-redis": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
