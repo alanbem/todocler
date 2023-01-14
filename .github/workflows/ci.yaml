@@ -9,8 +9,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Docker pull
         run: docker-compose pull php
-#      - name: Docker build
-#        run: docker-compose build --force-rm
+      #      - name: Docker build
+      #        run: docker-compose build --force-rm
       - name: Run composer validate
         run: docker-compose run --rm --no-deps php composer validate --strict --no-interaction --ansi
   run-php-cs-fixer:
@@ -21,8 +21,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Docker pull
         run: docker-compose pull php
-#      - name: Docker build
-#        run: docker-compose build --force-rm
+      #      - name: Docker build
+      #        run: docker-compose build --force-rm
       - name: Composer caching
         uses: actions/cache@v2
         with:
@@ -41,8 +41,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Docker pull
         run: docker-compose pull
-#      - name: Docker build
-#        run: docker-compose build --force-rm
+      #      - name: Docker build
+      #        run: docker-compose build --force-rm
       - name: Composer caching
         uses: actions/cache@v2
         with:
@@ -73,8 +73,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Docker pull
         run: docker-compose pull php
-#      - name: Docker build
-#        run: docker-compose build --force-rm
+      #      - name: Docker build
+      #        run: docker-compose build --force-rm
       - name: Composer caching
         uses: actions/cache@v2
         with:
@@ -93,8 +93,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Docker pull
         run: docker-compose pull php
-#      - name: Docker build
-#        run: docker-compose build --force-rm
+      #      - name: Docker build
+      #        run: docker-compose build --force-rm
       - name: Composer caching
         uses: actions/cache@v2
         with:
@@ -105,3 +105,43 @@ jobs:
         run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
       - name: Run deptrac
         run: docker-compose run --rm --no-deps php bin/deptrac --no-progress --no-interaction --cache-file=./build/.deptrac/.deptrac.cache --ansi
+  run-behat-domain:
+    name: behat (domain)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull php
+      #      - name: Docker build
+      #        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./build/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
+      - name: Install dependencies
+        run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
+      - name: Run behat
+        run: docker-compose run --rm php bin/behat --suite=domain --format=progress --no-interaction --colors --strict
+  run-behat-rest:
+    name: behat (REST)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Docker pull
+        run: docker-compose pull php
+      #      - name: Docker build
+      #        run: docker-compose build --force-rm
+      - name: Composer caching
+        uses: actions/cache@v2
+        with:
+          path: ./build/.composer
+          key: ${{ runner.os }}-composer-v1-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-v1-
+      - name: Install dependencies
+        run: docker-compose run --rm --no-deps php composer install --no-scripts --no-interaction --optimize-autoloader --ansi
+      - name: Run behat
+        run: docker-compose run --rm php bin/behat --suite=rest --format=progress --no-interaction --colors --strict

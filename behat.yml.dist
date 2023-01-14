@@ -1,0 +1,21 @@
+default:
+  suites:
+    domain:
+      paths:
+        - features/productivity
+      contexts:
+        - Productivity\Infrastructure\Behat\DomainContext
+    rest:
+      paths:
+        - features/productivity
+      contexts:
+        - Productivity\Infrastructure\Behat\RestContext
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/bootstrap.php # reused bootstrap of phpunit
+      kernel:
+        class: Kernel
+        path: ~
+        environment: ~
+        debug: ~
