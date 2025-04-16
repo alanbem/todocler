@@ -31,3 +31,6 @@
 ###> qossmic/deptrac-shim ###
 /.deptrac.cache
 ###< qossmic/deptrac-shim ###
+
+# OSX files
+.DS_Store
